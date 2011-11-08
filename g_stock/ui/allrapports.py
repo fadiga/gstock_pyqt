@@ -12,6 +12,7 @@ from data_helper import current_period
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from gestionrapports import G_rapportViewWidget
 
+
 class AllrapportsViewWidget(F_Widget, F_PeriodHolder):
 
     def __init__(self, parent=0, *args, **kwargs):
@@ -19,7 +20,7 @@ class AllrapportsViewWidget(F_Widget, F_PeriodHolder):
         super(AllrapportsViewWidget, self).__init__(parent=parent, *args, **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
-        self.title = F_PageTitle(_(u"eeeeeeee."))
+        self.title = F_PageTitle(_(u"Tout les rapport"))
 
         self.table = RapportTableWidget(parent=self, period=self.main_period)
 
@@ -55,7 +56,7 @@ class RapportTableWidget(F_TableWidget):
 
         self.set_data_for(period)
 
-        #~ self.refresh(True)
+        self.refresh(True)
 
     def refresh_period(self, period):
         self.main_period = period

@@ -78,7 +78,7 @@ def quarter_dates(quarter, year):
         s, e = (1, 1), (3, 31)
     if quarter == 2:
         s, e = (4, 1), (6, 30)
-    if quarter == 3:
+    if quarter == 3: 
         s, e = (7, 1), (9, 30)
     if quarter == 4:
         s, e = (10, 1), (12, 31)

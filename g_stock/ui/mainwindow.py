@@ -33,7 +33,7 @@ class MainWindow(QtGui.QMainWindow):
         self.change_context(DashbordViewWidget)
 
     def goto_help(self):
-        mbox = QtGui.QMessageBox.about(self, _(u"About Debt-M"), \
+        mbox = QtGui.QMessageBox.about(self, _(u"About gestion de stock"), \
                           _(u"G_stock gestion de stock\n\n" \
                             "Developpeur: Ibrahima Fadiga, \n"\
                             u"© 2011 fad service s.à.r.l\n" \
