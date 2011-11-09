@@ -47,25 +47,24 @@ class RapportTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Account No."), _(u"Name"), \
-                        _(u"Budget"), _(u"Balance"), \
-                        _(u"Go")]
+        self.header = [_(u"Magasin No."), _(u"Produit"), \
+                        _(u"Nombre dde carton")]
 
         self.setDisplayTotal(True, column_totals={2: None, 3: None}, \
                              label=_(u"TOTALS"))
 
         self.set_data_for(period)
 
-        self.refresh(True)
+        #~ self.refresh(True)
 
     def refresh_period(self, period):
         self.main_period = period
         self.set_data_for(period)
         self.refresh()
 
-    def set_data_for(self, period=current_period()):
-        self.data = [account
-                for account in session.query(Rapport).all()]
+    def set_data_for(self, period):
+        self.data = [(rap.magasin, rap.produit,rap.nbr_carton)
+                for rap in session.query(Rapport).all()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == self.data[0].__len__() - 1:

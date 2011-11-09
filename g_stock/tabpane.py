@@ -4,7 +4,14 @@
 
 
 from PyQt4 import QtGui
-from ui.common import TabPane
+
+class TabPane(QtGui.QScrollArea):
+
+    def __init__(self, parent=None):
+        super(TabPane, self).__init__(parent)
+
+    def addBox(self, box):
+        self.setLayout(box)
 
 
 def tabbox(*args):

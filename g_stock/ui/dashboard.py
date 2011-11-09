@@ -7,9 +7,9 @@ from sqlalchemy import desc
 
 from utils import get_temp_filename, formatted_number
 from database import Magasin, Produit, Rapport, session
-from tabpane import (tabbox)
-from common import (F_Widget, F_PageTitle, F_TableWidget,
-                                                F_BoxTitle)
+from tabpane import tabbox
+from common import F_Widget, F_PageTitle, F_TableWidget, \
+                                                F_BoxTitle
 
 
 class DashbordViewWidget(F_Widget):
