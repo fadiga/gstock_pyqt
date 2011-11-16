@@ -16,7 +16,7 @@ from utils import raise_success, raise_error
 
 class ProduitViewWidget(F_Widget):
 
-    def __init__(self, parent=0, *args, **kwargs):
+    def __init__(self, produit="", parent=0, *args, **kwargs):
         super(ProduitViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
         self.setWindowTitle((u"Produits"))
@@ -35,7 +35,7 @@ class ProduitViewWidget(F_Widget):
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(u"Add produit"))
-        
+
         editbox.addWidget(QtGui.QLabel((_(u"Designation"))), 0, 0)
         editbox.addWidget(self.libelle, 1, 0)
         editbox.addWidget(QtGui.QLabel((_(u"Nbre de piece"))), 0, 1)
@@ -52,15 +52,18 @@ class ProduitViewWidget(F_Widget):
     def add_operation(self):
         ''' add operation '''
         if unicode(self.libelle.text()) != "":
-            produit = Produit(unicode(self.libelle.text()), \
-                              int(self.nbre_piece.text()))
-            session.add(produit)
-            session.commit()
-            self.libelle.clear()
-            self.nbre_piece.clear()
-            self.refresh()
-            self.change_main_context(ProduitViewWidget)
-            raise_success(_(u"Confirmation"), _(u"Registered opération"))
+            if unicode(self.nbre_piece.text()) != "":
+                produit = Produit(unicode(self.libelle.text()), \
+                                  int(self.nbre_piece.text()))
+                session.add(produit)
+                session.commit()
+                self.libelle.clear()
+                self.nbre_piece.clear()
+                self.refresh()
+                self.change_main_context(ProduitViewWidget)
+                raise_success(_(u"Confirmation"), _(u"Registered opération"))
+            else:
+                raise_error(_(u"error"), _(u"Donnez le nombre de pièce dans le carton"))
         else:
             raise_error(_(u"error"), _(u"Donnez le nom du produit"))
 

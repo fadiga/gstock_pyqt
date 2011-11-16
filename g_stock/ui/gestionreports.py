@@ -13,11 +13,16 @@ from common import (F_Widget, F_PageTitle, F_TableWidget,
                                                 F_BoxTitle)
 from utils import raise_success, raise_error
 from data_helper import remaining
+from magasins import MagasinViewWidget
+from produits import ProduitViewWidget
+from deleteview import deleteViewWidget
+from allreports import AllreportsViewWidget
 
-class G_rapportViewWidget(F_Widget):
+
+class G_reportViewWidget(F_Widget):
 
     def __init__(self, parent=0, *args, **kwargs):
-        super(G_rapportViewWidget, self).__init__(parent=parent,\
+        super(G_reportViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
         self.setWindowTitle((u"Gestion des rapports"))
         vbox = QtGui.QVBoxLayout()
@@ -102,7 +107,7 @@ class G_rapportViewWidget(F_Widget):
                 session.commit()
                 self.nbre_carton.clear()
                 self.refresh()
-                self.change_main_context(G_rapportViewWidget)
+                self.change_main_context(G_reportViewWidget)
                 raise_success(_(u"Confirmation"), _(u"Registered opération"))
         else:
             raise_error(_(u"error"), _(u"Donnez le nbre de carton"))
@@ -112,13 +117,53 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"), _(u"Magasins"), _(u"Produits"), \
-                        _(u"Nbre de carton"), _(u"Restant"), _(u"Date")]
+        self.header = [_(u"Type"),_(u"Magasin No."), _(u"Produit"), \
+                       _(u"Nombre de carton"), _(u"Carto Restant"), \
+                       _(u"Date"), _(u"modification"), _(u"Suppresion")]
         self.set_data_for()
         self.refresh(True)
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
-                        rap.nbr_carton, rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn')) \
+                        rap.nbr_carton, rap.restant, \
+                        rap.date_rapp, "", "") \
                         for rap in session.query(Rapport).\
                         order_by(desc(Rapport.id)).all()]
+
+    def _item_for_data(self, row, column, data, context=None):
+        if column == 0 and self.data[row][0] == "Entre":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
+                                          _(u""))
+        if column == 0 and self.data[row][0] == "Sortie":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
+                                          _(u""))
+        if column == 7:
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), \
+                                          _(u""))
+        if column == 6:
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), \
+                                          _(u""))
+        return super(MagasinTableWidget, self)\
+                                            ._item_for_data(row, column, \
+                                                        data, context)
+
+    def click_item(self, row, column, *args):
+        magsin_column = 1
+        produit_column = 2
+        modified_column = 6
+        del_column = 7
+        if column == magsin_column:
+            self.parent.change_main_context(MagasinViewWidget, \
+                                    magasin=self.data[row][magsin_column])
+        if column == produit_column:
+            self.parent.change_main_context(ProduitViewWidget, \
+                                    produit=self.data[row][produit_column] )
+        if column == modified_column:
+            self.parent.change_main_context(AllreportsViewWidget)
+        if column == del_column:
+            self.open_dialog(deleteViewWidget, modal=True,\
+                             report= session.query(Rapport).\
+                             filter(Rapport.date_rapp==self. \
+                             data[row][5]).all()[0])
+        else:
+            return

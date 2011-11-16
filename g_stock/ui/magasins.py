@@ -16,7 +16,7 @@ from utils import raise_success, raise_error
 
 class MagasinViewWidget(F_Widget):
 
-    def __init__(self, parent=0, *args, **kwargs):
+    def __init__(self, magasin="", parent=0, *args, **kwargs):
         super(MagasinViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
         self.setWindowTitle((u"Magasins"))
@@ -34,7 +34,7 @@ class MagasinViewWidget(F_Widget):
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(u"Add opertion"))
-        
+
         editbox.addWidget(QtGui.QLabel((_(u"Designation"))), 0, 0)
         editbox.addWidget(self.name, 1, 0)
         editbox.addWidget(QtGui.QLabel((_(u"Adresse du magasin"))), 0, 1)

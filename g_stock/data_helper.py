@@ -170,42 +170,4 @@ def get_time_pagination(year, duration, duration_number):
             todays_date, todays_date_is_before, todays_date_is_after)
 
 
-def get_duration_pagination(year, duration,
-                            duration_number, url,
-                            additional_args=()):
-    """
-    navigation entre les dates: année, mois, week """
-    # la date d'aujourd'hui
-    week_date_url, month_date_url, year_date_url = "", "", ""
 
-    if duration == "week":
-        # l'adresse pour afficher le mois
-        month = get_week_boundaries(year, duration_number)[0].month
-
-        month_date_url = reverse(url, \
-                            args=additional_args + (year, "month", month))
-
-        # l'adresse pour afficher l'année
-        year_date_url = reverse(url, args=additional_args + (year,))
-
-    elif duration == "month":
-
-        year, week, day = date(year, duration_number, 1).isocalendar()
-
-        # l'adresse pour afficher la semaine
-        week_date_url = reverse(url, args=additional_args + (year,
-                                                            "week",
-                                                             week))
-
-        # l'adresse pour afficher l'année
-        year_date_url = reverse(url, args=additional_args + (year,))
-
-    else:
-        # l'adresse pour afficher la semaine
-        week_numbers = date.today().isocalendar()
-        week_date_url = reverse(url, args=additional_args + \
-                                        (year, "week", week_numbers[1]))
-        # l'adresse pour afficher le mois
-        month_date_url = reverse(url, args=additional_args + \
-                                    (year, "month", date.today().month))
-    return (week_date_url, month_date_url, year_date_url)

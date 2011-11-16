@@ -10,8 +10,8 @@ from database import *
 from dashboard import DashbordViewWidget
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
-from gestionrapports import G_rapportViewWidget
-from allrapports import AllrapportsViewWidget
+from gestionreports import G_reportViewWidget
+from allreports import AllreportsViewWidget
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self):
@@ -58,11 +58,11 @@ class MainWindow(QtGui.QMainWindow):
 
     def goto_all_rapport(self):
         self.setWindowTitle(u"Tous les Rapports")
-        self.change_context(AllrapportsViewWidget)
+        self.change_context(AllreportsViewWidget)
 
     def goto_gestion_rapport(self):
         self.setWindowTitle(u"Gestion Rapports")
-        self.change_context(G_rapportViewWidget)
+        self.change_context(G_reportViewWidget)
 
 
     def change_context(self, context_widget, *args, **kwargs):
@@ -72,3 +72,8 @@ class MainWindow(QtGui.QMainWindow):
 
         # attach context to window
         self.setCentralWidget(self.view_widget)
+
+    def open_dialog(self, dialog, modal=False, *args, **kwargs):
+        d = dialog(parent=self, *args, **kwargs)
+        d.setModal(modal)
+        d.exec_()
