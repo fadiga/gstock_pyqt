@@ -35,7 +35,7 @@ class DashbordViewWidget(F_Widget):
         vbox.addWidget(self.title)
         table_alert.addWidget(self.title_alert)
         table_alert.addWidget(self.table_alert)
-        
+
         tablebox_dern_op.addWidget(self.title_dern_op)
         tablebox_dern_op.addWidget(self.table_dern_op)
         tab_widget = tabbox((table_alert, u"Alerte sur les produits"), \
@@ -64,6 +64,18 @@ class Dern_opTableWidget(F_TableWidget):
                         for op in session.query(Rapport)\
                         .order_by(desc(Rapport.date_rapp)).all()]
 
+    def _item_for_data(self, row, column, data, context=None):
+        if column == 0 and self.data[row][0] == "Entre":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
+                                          _(u""))
+        if column == 0 and self.data[row][0] == "Sortie":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
+                                          _(u""))
+        return super(Dern_opTableWidget, self)\
+                                            ._item_for_data(row, column, \
+                                                        data, context)
+
+
 
 class Alert_TableWidget(F_TableWidget):
 
@@ -84,3 +96,13 @@ class Alert_TableWidget(F_TableWidget):
                         for op in session.query(Rapport)\
                         .order_by(desc(Rapport.date_rapp)).all()]
 
+    def _item_for_data(self, row, column, data, context=None):
+        if column == 0 and self.data[row][0] == "Entre":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
+                                          _(u""))
+        if column == 0 and self.data[row][0] == "Sortie":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
+                                          _(u""))
+        return super(Alert_TableWidget, self)\
+                                            ._item_for_data(row, column, \
+                                                        data, context)

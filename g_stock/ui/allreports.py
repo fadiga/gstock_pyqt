@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # maintainer: Fad
@@ -10,9 +9,8 @@ from PyQt4.QtCore import Qt
 from database import *
 from data_helper import current_period
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
-from magasins import MagasinViewWidget
-from produits import ProduitViewWidget
-from deleteview import deleteViewWidget
+from for_magasin import For_magasinViewWidget
+from for_produit import For_produitViewWidget
 
 
 class AllreportsViewWidget(F_Widget, F_PeriodHolder):
@@ -81,15 +79,10 @@ class RapportTableWidget(F_TableWidget):
         magsin_column = 1
         produit_column = 2
         if column == magsin_column:
-            self.parent.change_main_context(MagasinViewWidget, \
+            self.parent.change_main_context(For_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])
         if column == produit_column:
-            self.parent.change_main_context(ProduitViewWidget, \
-                                    produit=self.data[row][produit_column] )
-        #~ if column == del_column:
-            #~ self.open_dialog(deleteViewWidget, modal=True,\
-                             #~ report= session.query(Rapport).\
-                             #~ filter(Rapport.date_rapp==self. \
-                             #~ data[row][4]).all()[0])
+            self.parent.change_main_context(For_produitViewWidget, \
+                                    produit=self.data[row][produit_column])
         else:
             return
