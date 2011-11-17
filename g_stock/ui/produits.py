@@ -63,7 +63,8 @@ class ProduitViewWidget(F_Widget):
                 self.change_main_context(ProduitViewWidget)
                 raise_success(_(u"Confirmation"), _(u"Registered opération"))
             else:
-                raise_error(_(u"error"), _(u"Donnez le nombre de pièce dans le carton"))
+                raise_error(_(u"error"), \
+                            _(u"Donnez le nombre de pièce dans le carton"))
         else:
             raise_error(_(u"error"), _(u"Donnez le nom du produit"))
 
@@ -77,5 +78,6 @@ class MagasinTableWidget(F_TableWidget):
         self.refresh(True)
 
     def set_data_for(self):
-        self.data = [(prod.libelle, prod.nbr_piece) for prod in session.query(Produit).\
-                        order_by(desc(Produit.id)).all()]
+        self.data = [(prod.libelle, prod.nbr_piece) \
+                                    for prod in session.query(Produit).\
+                                        order_by(desc(Produit.id)).all()]

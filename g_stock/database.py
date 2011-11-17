@@ -48,7 +48,7 @@ metadata.create_all(engine)
 class Magasin(object):
     def __init__(self, name, adresse=""):
         self.name = name
-        self.adresse =  adresse
+        self.adresse = adresse
 
     def __repr__(self):
         return (u"Magasin (%(magasin)s %(adresse)s)") %\
@@ -75,7 +75,8 @@ class Produit(object):
 
 
 class Rapport(object):
-    def __init__(self, type_, nbr_carton, date_rapp, remaining=0, magasin=None, produit=None):
+    def __init__(self, type_, nbr_carton, date_rapp, remaining=0, \
+                                        magasin=None, produit=None):
         self.type_ = type_
         self.magasin = magasin
         self.produit = produit
@@ -85,14 +86,16 @@ class Rapport(object):
         self.registered_on = datetime.now()
 
     def __repr__(self):
-        return ("Rapport('%(type_)s','%(date_rapp)s','%(produit)s','%(nbr_carton)s)") \
-                 % {'type_':self.type_,'date_rapp': self.date_rapp, \
+        return ("Rapport('%(type_)s','%(date_rapp)s',\
+                '%(produit)s','%(nbr_carton)s)") \
+                 % {'type_': self.type_, 'date_rapp': self.date_rapp, \
                  'nbr_carton': self.nbr_carton, 'produit': self.produit}
 
     def __unicode__(self):
         return (u"%(type_)s %(date_rapp)s %(produit)s: %(magasin)s") \
-               % {'type_':self.type_, 'date_rapp': self.date_rapp.strftime('%F'), \
-                  'produit': self.produit, 'magasin': self.magasin}
+               % {'type_': self.type_, \
+                'date_rapp': self.date_rapp.strftime('%F'), \
+                'produit': self.produit, 'magasin': self.magasin}
 
 
 mapper(Produit, produits_table, properties={

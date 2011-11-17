@@ -16,10 +16,10 @@ from database import *
 def last_rapport(magasin, produit):
     """ last Rapport
     prams: magasin_id et produit_id"""
-    last_rapp = session.query(Rapport)\
-                       .filter(Rapport.magasin_id==magasin)\
-                       .filter(Rapport.produit_id==produit)\
-                       .order_by(desc(Rapport.date_rapp)).first()
+    last_rapp = session.query(Rapport).filter(Rapport.magasin_id == magasin)\
+                                      .filter(Rapport.produit_id == produit)\
+                                      .order_by(desc(Rapport.date_rapp))\
+                                      .first()
     return last_rapp
 
 
@@ -32,7 +32,8 @@ def remaining(type_,  nbr_carton, magasin, produit):
             restant = int(previous_rapp.restant) - int(nbr_carton)
             if restant < 0:
                 return [None, u"Vous ne pouvez pas effectie cette operation \n"
-                        u" Car " + str(previous_rapp.restant) + " < "+ str(nbr_carton)]
+                        u" Car " + str(previous_rapp.restant) + " < " \
+                                + str(nbr_carton)]
             return [restant, u""]
         except AttributeError:
             return [None, u"IL n'y eu aucun  entre pour ce produit "]
@@ -168,6 +169,3 @@ def get_time_pagination(year, duration, duration_number):
 
     return (previous_date_, current_date_, next_date_,
             todays_date, todays_date_is_before, todays_date_is_after)
-
-
-

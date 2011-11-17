@@ -139,7 +139,7 @@ def write_xls_inventaire(rapport):
 
 
 def rapport_p_export_excel(rapport):
-    
+    """ """
     book = xlwt.Workbook(encoding='ascii')
     sheet = book.add_sheet(u"Rapport")
     rowx = 0
@@ -156,8 +156,8 @@ def rapport_p_export_excel(rapport):
     sheet.col(1).width = 0x0d00 * 1.2
     sheet.col(2).width = 0x0d00 * 1.5
     sheet.col(4).width = 0x0d00 * 1.1
-    hdngs = [u"Auteur",u"Magasin", u"Produit", u"N carton", \
-                        u"Carton R", u"Pièce R", u"Date"]
+    hdngs = [u"Auteur", u"Magasin", u"Produit", u"N carton", \
+                                        u"Carton R", u"Pièce R", u"Date"]
     rowx += 3
     for colx, value in enumerate(hdngs):
         sheet.write(rowx, colx, value, style_t_table)
@@ -173,10 +173,9 @@ def rapport_p_export_excel(rapport):
         sheet.write(rowx, 3, int(rap.nbr_carton), style_row_table)
         sheet.write(rowx, 4, int(rap.carton_remaining), style_row_table)
         sheet.write(rowx, 5, int(rap.piece_remaining), style_row_table)
-        sheet.write(rowx, 6, str(rap.date.strftime("%d/%m/%Y")), style_row_table)
+        sheet.write(rowx, 6, str(rap.date.strftime("%d/%m/%Y")), \
+                                                    style_row_table)
         rowx += 1
     stream = StringIO.StringIO()
     book.save(stream)
     return stream
-
-

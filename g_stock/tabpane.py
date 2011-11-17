@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # maintainer: Fad
 
-
 from PyQt4 import QtGui
+
 
 class TabPane(QtGui.QScrollArea):
 

@@ -109,7 +109,6 @@ def get_time_pagination(year, duration, duration_number):
                                         duration,
                                         todays_date.month))
 
-
         # l'adresse pour afficher le mois precedent
         previous_date_url = reverse(url,
                                      args=additional_args + \

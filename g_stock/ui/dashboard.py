@@ -39,7 +39,8 @@ class DashbordViewWidget(F_Widget):
         tablebox_dern_op.addWidget(self.title_dern_op)
         tablebox_dern_op.addWidget(self.table_dern_op)
         tab_widget = tabbox((table_alert, u"Alerte sur les produits"), \
-                            (tablebox_dern_op, u"Table de dernière operations"))
+                            (tablebox_dern_op, \
+                                        u"Table de dernière operations"))
 
         vbox.addWidget(tab_widget)
 
@@ -51,7 +52,7 @@ class Dern_opTableWidget(F_TableWidget):
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"),_(u"Magasin"), _(u"Produit"), \
+        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
                        _(u"Date"), _(u"quantite")]
         self.set_data_for()
         self.refresh(True)
@@ -76,13 +77,12 @@ class Dern_opTableWidget(F_TableWidget):
                                                         data, context)
 
 
-
 class Alert_TableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"),_(u"Magasin"), _(u"Produit"), \
+        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
                        _(u"Date"), _(u"quantite")]
         self.set_data_for()
         self.refresh(True)

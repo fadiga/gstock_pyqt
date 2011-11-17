@@ -15,7 +15,6 @@ class deleteViewWidget(QtGui.QDialog, F_Widget):
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
         self.setWindowTitle((u"Suppression"))
-
         self.title = F_PageTitle(u"Suppression")
         self.op = report
         self.title.setText(_(u"Confirmation de la suppresion"))
@@ -24,11 +23,11 @@ class deleteViewWidget(QtGui.QDialog, F_Widget):
         title_hbox.addWidget(self.title)
         report_hbox = QtGui.QGridLayout()
 
-
-        report_hbox.addWidget(QtGui.QLabel((_(u"Magasin"))), 0, 0)
-        report_hbox.addWidget(QtGui.QLabel(self.op.magasin.name), 1, 0)
-        report_hbox.addWidget(QtGui.QLabel((_(u"Produit"))), 0, 1)
-        report_hbox.addWidget(QtGui.QLabel(self.op.produit.libelle), 1, 1)
+        report_hbox.addWidget(QtGui.QLabel(" ".\
+                        join(["Le produit ", \
+                        self.op.produit.libelle, u" qui se trouve dans ", \
+                        self.op.magasin.name, u"enregister le", \
+                        self.op.date_rapp.strftime('%x %Hh:%Mmn')])), 0, 0)
         #delete and cancel hbox
         button_hbox = QtGui.QHBoxLayout()
 
@@ -54,8 +53,10 @@ class deleteViewWidget(QtGui.QDialog, F_Widget):
     def delete(self):
         session.delete(self.op)
         session.commit()
-        self.parent.table.refresh()
-        raise_success(_(u"Deleting"), _(u"Operation succefully removed"))
-
-    def cancel(self):
-        self.close()
+        self.cancel()
+        raise_success(u"Confirmation", \
+                        " ".join(["Ce rapport conserne le produit ", \
+                        self.op.produit.libelle, u" qui se trouve dans ", \
+                        self.op.magasin.name, u"enregister le", \
+                        self.op.date_rapp.strftime('%x %Hh:%Mmn'), \
+                        u"A été supprimer"]))

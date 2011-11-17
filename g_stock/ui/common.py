@@ -19,7 +19,6 @@ class F_PageTitle(QtGui.QLabel):
         self.setAlignment(Qt.AlignCenter)
 
 
-
 class F_BoxTitle(QtGui.QLabel):
 
     def __init__(self, *args, **kwargs):

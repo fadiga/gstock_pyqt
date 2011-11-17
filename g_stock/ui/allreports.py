@@ -9,15 +9,16 @@ from PyQt4.QtCore import Qt
 from database import *
 from data_helper import current_period
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
-from for_magasin import For_magasinViewWidget
-from for_produit import For_produitViewWidget
+from by_magasin import by_magasinViewWidget
+from by_produit import by_produitViewWidget
 
 
 class AllreportsViewWidget(F_Widget, F_PeriodHolder):
 
     def __init__(self, parent=0, *args, **kwargs):
 
-        super(AllreportsViewWidget, self).__init__(parent=parent, *args, **kwargs)
+        super(AllreportsViewWidget, self).__init__(parent=parent, *args, \
+                                                                **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
         self.title = F_PageTitle(_(u"Tout les rapport"))
@@ -60,7 +61,7 @@ class RapportTableWidget(F_TableWidget):
         self.refresh()
 
     def set_data_for(self, period):
-        self.data = [(rap.type_, rap.magasin, rap.produit,rap.nbr_carton, \
+        self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport).all()]
 
@@ -79,10 +80,10 @@ class RapportTableWidget(F_TableWidget):
         magsin_column = 1
         produit_column = 2
         if column == magsin_column:
-            self.parent.change_main_context(For_magasinViewWidget, \
+            self.parent.change_main_context(by_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])
         if column == produit_column:
-            self.parent.change_main_context(For_produitViewWidget, \
+            self.parent.change_main_context(by_produitViewWidget, \
                                     produit=self.data[row][produit_column])
         else:
             return

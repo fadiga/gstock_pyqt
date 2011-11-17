@@ -17,6 +17,8 @@ from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
 from deleteview import deleteViewWidget
 from allreports import AllreportsViewWidget
+from by_magasin import by_magasinViewWidget
+from by_produit import by_produitViewWidget
 
 
 class G_reportViewWidget(F_Widget):
@@ -49,18 +51,20 @@ class G_reportViewWidget(F_Widget):
         for index in self.liste_type:
             self.box_type.addItem(u'%(type)s' % {'type': index})
         #Combobox widget
-        self.liste_magasin = session.query(Magasin).order_by(desc(Magasin.id)).all()
+        self.liste_magasin = session.query(Magasin)\
+                                    .order_by(desc(Magasin.id)).all()
         self.box_mag = QtGui.QComboBox()
         for index in xrange(0, len(self.liste_magasin)):
             op = self.liste_magasin[index]
-            sentence = _(u"%(name)s")  % {'name': op.name}
+            sentence = _(u"%(name)s") % {'name': op.name}
             self.box_mag.addItem(sentence, QtCore.QVariant(op.id))
         #Combobox widget
-        self.liste_produit = session.query(Produit).order_by(desc(Produit.id)).all()
+        self.liste_produit = session.query(Produit)\
+                                    .order_by(desc(Produit.id)).all()
         self.box_prod = QtGui.QComboBox()
         for index in xrange(0, len(self.liste_produit)):
             op = self.liste_produit[index]
-            sentence = _(u"%(libelle)s")  % {'libelle': op.libelle}
+            sentence = _(u"%(libelle)s") % {'libelle': op.libelle}
             self.box_prod.addItem(sentence, QtCore.QVariant(op.id))
 
         editbox.addWidget(QtGui.QLabel((_(u"Type"))), 0, 0)
@@ -82,6 +86,10 @@ class G_reportViewWidget(F_Widget):
         vbox.addLayout(tablebox)
         self.setLayout(vbox)
 
+    def refresh(self):
+        self.table_op.refresh()
+        print "***************refresh***************"
+
     def add_operation(self):
         ''' add operation '''
         type_ = self.liste_type[self.box_type.currentIndex()]
@@ -94,7 +102,7 @@ class G_reportViewWidget(F_Widget):
         datetime_ = datetime(int(year), int(month), int(day), dt.hour, \
                                     dt.minute, dt.second, dt.microsecond)
 
-        if unicode(self.nbre_carton.text()) != "" :
+        if unicode(self.nbre_carton.text()) != "":
             r = remaining(type_,  nbre_carton, magasin.id, produit.id)
             if r[0] == None:
                 raise_error(_(u"error"), _(r[1]))
@@ -114,14 +122,16 @@ class G_reportViewWidget(F_Widget):
 
 
 class MagasinTableWidget(F_TableWidget):
+    """ """
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"),_(u"Magasin No."), _(u"Produit"), \
+        self.header = [_(u"Type"), _(u"Magasin No."), _(u"Produit"), \
                        _(u"Nombre de carton"), _(u"Carto Restant"), \
                        _(u"Date"), _(u"modification"), _(u"Suppresion")]
         self.set_data_for()
         self.refresh(True)
+        self.parent = parent
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
@@ -153,17 +163,18 @@ class MagasinTableWidget(F_TableWidget):
         modified_column = 6
         del_column = 7
         if column == magsin_column:
-            self.parent.change_main_context(MagasinViewWidget, \
+            self.parent.change_main_context(by_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])
         if column == produit_column:
-            self.parent.change_main_context(ProduitViewWidget, \
-                                    produit=self.data[row][produit_column] )
+            self.parent.change_main_context(by_produitViewWidget, \
+                                    produit=self.data[row][produit_column])
         if column == modified_column:
             self.parent.change_main_context(AllreportsViewWidget)
         if column == del_column:
             self.open_dialog(deleteViewWidget, modal=True,\
-                             report= session.query(Rapport).\
-                             filter(Rapport.date_rapp==self. \
-                             data[row][5]).all()[0])
+                             report=session.query(Rapport)\
+                             .filter(Rapport.date_rapp == self \
+                             .data[row][5]).all()[0])
+            self.parent.refresh()
         else:
             return

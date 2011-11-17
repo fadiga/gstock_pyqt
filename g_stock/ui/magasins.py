@@ -74,5 +74,6 @@ class MagasinTableWidget(F_TableWidget):
         self.refresh(True)
 
     def set_data_for(self):
-        self.data = [(mag.name, mag.adresse) for mag in session.query(Magasin).\
-                        order_by(desc(Magasin.id)).all()]
+        self.data = [(mag.name, mag.adresse) \
+                                    for mag in session.query(Magasin).\
+                                    order_by(desc(Magasin.id)).all()]

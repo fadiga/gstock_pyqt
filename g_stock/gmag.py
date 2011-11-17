@@ -11,6 +11,7 @@ from PyQt4 import QtGui
 from ui.mainwindow import MainWindow
 from ui.window import F_Window
 
+
 def main():
 
     locale.setlocale(locale.LC_ALL, '')

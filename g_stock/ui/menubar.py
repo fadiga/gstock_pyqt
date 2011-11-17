@@ -71,6 +71,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def resumer(self):
         pass
     #About
+
     def goto_about(self):
         mbox = QtGui.QMessageBox.about(self, (u"About ANM"), \
                           (u"ibfadiga@gmail.com \n" \
