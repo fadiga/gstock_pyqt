@@ -16,12 +16,6 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
 
         #Menu File
         file_ = self.addMenu((u"&File"))
-        # Dele
-        self.delete_ = QtGui.QAction(u"Delete an operation", self)
-        self.connect(self.delete_, QtCore.SIGNAL("triggered()"),\
-                                            self.goto_delete_rapport)
-        self.delete_.setEnabled(False)
-        file_.addAction(self.delete_)
 
         # Print
         print_ = QtGui.QAction((u"Print"), self)
@@ -56,10 +50,6 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def goto_print(self):
         pass
 
-    #Delete an operation.
-    def goto_delete_rapport(self):
-        pass
-
     #Export the database.
     def goto_export_db(self):
         pass
@@ -67,9 +57,6 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def goto_export_excel(self):
         pass
 
-    #list_of_balances
-    def resumer(self):
-        pass
     #About
 
     def goto_about(self):

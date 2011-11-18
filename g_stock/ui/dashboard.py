@@ -53,16 +53,18 @@ class Dern_opTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
         self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Date"), _(u"quantite")]
+                       _(u"Quantite"), u"Restant", (u"Date")]
         self.set_data_for()
         self.refresh(True)
 
     def set_data_for(self):
+        """ """
 
         self.data = [(op.type_, op.magasin, op.produit,\
-                        op.date_rapp.strftime(_(u'%x %Hh:%Mmn')),\
-                        formatted_number(op.nbr_carton),)\
-                        for op in session.query(Rapport)\
+                     formatted_number(op.nbr_carton), \
+                     formatted_number(op.restant), \
+                     op.date_rapp.strftime(_(u'%x %Hh:%Mmn'))) \
+                     for op in session.query(Rapport)\
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
@@ -83,7 +85,7 @@ class Alert_TableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
         self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Date"), _(u"quantite")]
+                       _(u"Quantite"), u"Restant", (u"Date")]
         self.set_data_for()
         self.refresh(True)
 
@@ -91,9 +93,11 @@ class Alert_TableWidget(F_TableWidget):
         """ """
 
         self.data = [(op.type_, op.magasin, op.produit,\
-                        op.date_rapp.strftime(_(u'%x %Hh:%Mmn')),\
-                        formatted_number(op.nbr_carton),)\
-                        for op in session.query(Rapport)\
+                     formatted_number(op.nbr_carton), \
+                     formatted_number(op.restant), \
+                     op.date_rapp.strftime(_(u'%x %Hh:%Mmn')))
+                     for op in session.query(Rapport)\
+                        .filter(Rapport.restant <= 100)\
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):

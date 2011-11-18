@@ -5,6 +5,7 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtCore import Qt
+from sqlalchemy import desc
 
 from database import *
 from data_helper import current_period
@@ -63,7 +64,8 @@ class RapportTableWidget(F_TableWidget):
     def set_data_for(self, period):
         self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                        for rap in session.query(Rapport).all()]
+                        for rap in session.query(Rapport) \
+                        .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == "Entre":
