@@ -11,7 +11,7 @@ from PyQt4 import QtGui, QtCore
 from database import *
 from common import (F_Widget, F_PageTitle, F_TableWidget,
                                                 F_BoxTitle)
-from utils import raise_success, raise_error
+from utils import raise_success, raise_error, formatted_number
 from data_helper import remaining
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
@@ -40,6 +40,7 @@ class G_reportViewWidget(F_Widget):
 
         self.date_ = QtGui.QDateTimeEdit(QtCore.QDate.currentDate())
         self.date_.setDisplayFormat("dd/MM/yyyy")
+
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
@@ -88,7 +89,6 @@ class G_reportViewWidget(F_Widget):
 
     def refresh(self):
         self.table_op.refresh()
-        print "***************refresh***************"
 
     def add_operation(self):
         ''' add operation '''
@@ -131,14 +131,14 @@ class MagasinTableWidget(F_TableWidget):
                        _(u"Date"), _(u"modification"), _(u"Suppresion")]
         self.set_data_for()
         self.refresh(True)
-        self.parent = parent
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
-                        rap.nbr_carton, rap.restant, \
+                        formatted_number(rap.nbr_carton), \
+                        formatted_number(rap.restant), \
                         rap.date_rapp, "", "") \
-                        for rap in session.query(Rapport).\
-                        order_by(desc(Rapport.id)).all()]
+                        for rap in session.query(Rapport) \
+                        .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == "Entre":
@@ -175,6 +175,6 @@ class MagasinTableWidget(F_TableWidget):
                              report=session.query(Rapport)\
                              .filter(Rapport.date_rapp == self \
                              .data[row][5]).all()[0])
-            self.parent.refresh()
+            self.parent.change_main_context(G_reportViewWidget)
         else:
             return
