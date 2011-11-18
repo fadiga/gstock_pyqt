@@ -9,6 +9,7 @@ from sqlalchemy import desc
 
 from database import *
 from data_helper import current_period
+from utils import formatted_number
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from by_magasin import by_magasinViewWidget
 from by_produit import by_produitViewWidget
@@ -62,8 +63,10 @@ class RapportTableWidget(F_TableWidget):
         self.refresh()
 
     def set_data_for(self, period):
-        self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
-                      rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
+        self.data = [(rap.type_, rap.magasin, rap.produit, \
+                        formatted_number(rap.nbr_carton), \
+                        formatted_number(rap.restant), \
+                        rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport) \
                         .order_by(desc(Rapport.date_rapp)).all()]
 

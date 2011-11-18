@@ -11,7 +11,7 @@ from PyQt4 import QtGui, QtCore
 from database import *
 from common import (F_Widget, F_PageTitle, F_TableWidget,
                                                 F_BoxTitle)
-from utils import raise_success, raise_error
+from utils import raise_success, raise_error, formatted_number
 from data_helper import remaining
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
@@ -134,7 +134,8 @@ class MagasinTableWidget(F_TableWidget):
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
-                        rap.nbr_carton, rap.restant, \
+                        formatted_number(rap.nbr_carton), \
+                        formatted_number(rap.restant), \
                         rap.date_rapp, "", "") \
                         for rap in session.query(Rapport) \
                         .order_by(desc(Rapport.date_rapp)).all()]

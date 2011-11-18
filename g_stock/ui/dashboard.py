@@ -26,7 +26,7 @@ class DashbordViewWidget(F_Widget):
         tablebox_dern_op = QtGui.QVBoxLayout()
 
         self.title = F_PageTitle("Accuiel")
-        self.title_alert = F_BoxTitle(_(u"Alerte sur les produits"))
+        self.title_alert = F_BoxTitle(_(u"La liste des produits dont le restant est < 100"))
         self.title_dern_op = F_BoxTitle(_(u"Table de dernière operations"))
 
         self.table_alert = Alert_TableWidget(parent=self)
