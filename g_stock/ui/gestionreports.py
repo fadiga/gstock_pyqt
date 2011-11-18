@@ -40,6 +40,7 @@ class G_reportViewWidget(F_Widget):
 
         self.date_ = QtGui.QDateTimeEdit(QtCore.QDate.currentDate())
         self.date_.setDisplayFormat("dd/MM/yyyy")
+
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
@@ -131,7 +132,6 @@ class MagasinTableWidget(F_TableWidget):
                        _(u"Date"), _(u"modification"), _(u"Suppresion")]
         self.set_data_for()
         self.refresh(True)
-        self.parent = parent
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
@@ -175,6 +175,6 @@ class MagasinTableWidget(F_TableWidget):
                              report=session.query(Rapport)\
                              .filter(Rapport.date_rapp == self \
                              .data[row][5]).all()[0])
-            self.parent.refresh()
+            self.parent.change_main_context(G_reportViewWidget)
         else:
             return
