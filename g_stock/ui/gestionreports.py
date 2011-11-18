@@ -89,7 +89,6 @@ class G_reportViewWidget(F_Widget):
 
     def refresh(self):
         self.table_op.refresh()
-        print "***************refresh***************"
 
     def add_operation(self):
         ''' add operation '''
@@ -137,8 +136,8 @@ class MagasinTableWidget(F_TableWidget):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
                         rap.nbr_carton, rap.restant, \
                         rap.date_rapp, "", "") \
-                        for rap in session.query(Rapport).\
-                        order_by(desc(Rapport.id)).all()]
+                        for rap in session.query(Rapport) \
+                        .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == "Entre":

@@ -12,6 +12,7 @@ from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
 from gestionreports import G_reportViewWidget
 from allreports import AllreportsViewWidget
+from menubar import MenuBar
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -35,6 +36,9 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar.addAction(QtGui.QIcon('images/about.png'), "Help", \
                                                             self.goto_help)
         self.addToolBar(self.toolbar)
+
+        self.menubar = MenuBar(self)
+        self.setMenuBar(self.menubar)
         self.change_context(DashbordViewWidget)
 
     def goto_help(self):
