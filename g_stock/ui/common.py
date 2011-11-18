@@ -6,7 +6,7 @@ from PyQt4 import QtGui
 from PyQt4.QtCore import Qt
 
 from utils import formatted_number
-from data_helper import current_period
+from data_helper import Date_pagination
 
 MAIN_WIDGET_SIZE = 900
 
@@ -198,7 +198,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
 
 class F_PeriodHolder(object):
 
-    def __init__(self, period=current_period(), *args, **kwargs):
+    def __init__(self, period=Date_pagination, *args, **kwargs):
 
         self.main_period = period
         self.periods_bar = self.gen_bar_for(self.main_period)
@@ -232,7 +232,7 @@ class F_PeriodTabBar(QtGui.QTabBar):
 
         self.currentChanged.connect(self.changed_period)
 
-    def set_data_from(self, period=current_period()):
+    def set_data_from(self, period=Date_pagination):
         self.main_period = period
 
         self.periods = ["self.main_period.previous()", \

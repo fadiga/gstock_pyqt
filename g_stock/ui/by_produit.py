@@ -7,7 +7,7 @@ from PyQt4 import QtCore
 from PyQt4.QtCore import Qt
 
 from database import *
-from data_helper import current_period
+from data_helper import Date_pagination
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 #~ from by_magasin import by_magasinViewWidget
 
@@ -25,7 +25,7 @@ class by_produitViewWidget(F_Widget, F_PeriodHolder):
         self.table = by_produitTableWidget(produit, parent=self, \
                                                 period=self.main_period)
         # periods
-        period = current_period()
+        period = Date_pagination
 
         vbox = QtGui.QVBoxLayout()
         vbox.addWidget(self.title)

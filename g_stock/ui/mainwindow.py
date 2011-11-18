@@ -27,8 +27,7 @@ class MainWindow(QtGui.QMainWindow):
                                                     "Exit", self.goto_exit)
         self.toolbar.addAction("Aceuil", self.aceuil)
         self.toolbar.addAction("Magasin", self.goto_magasin)
-        self.toolbar.addAction("Tous les rapports", \
-                                                    self.goto_all_rapport)
+        self.toolbar.addAction("Tous les rapports", self.goto_all_rapport)
         self.toolbar.addAction("Produit", self.goto_produit)
         self.toolbar.addAction("Gestion des rapports", \
                                                 self.goto_gestion_rapport)
