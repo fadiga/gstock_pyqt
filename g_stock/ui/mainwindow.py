@@ -25,15 +25,15 @@ class MainWindow(QtGui.QMainWindow):
 
         self.toolbar = QtGui.QToolBar()
         self.toolbar.addAction(QtGui.QIcon('images/out.png'), \
-                                                    "Exit", self.goto_exit)
+                                                    "Quiter", self.goto_exit)
         self.toolbar.addAction("Aceuil", self.aceuil)
-        self.toolbar.addAction("Magasin", self.goto_magasin)
-        self.toolbar.addAction("Produit", self.goto_produit)
+        self.toolbar.addAction("Magasins", self.goto_magasin)
+        self.toolbar.addAction("Produits", self.goto_produit)
         self.toolbar.addAction("Tous les rapports", \
                                                     self.goto_all_rapport)
         self.toolbar.addAction("Gestion des rapports", \
                                                 self.goto_gestion_rapport)
-        self.toolbar.addAction(QtGui.QIcon('images/about.png'), "Help", \
+        self.toolbar.addAction(QtGui.QIcon('images/about.png'), "A propos", \
                                                             self.goto_help)
         self.addToolBar(self.toolbar)
 
@@ -42,13 +42,13 @@ class MainWindow(QtGui.QMainWindow):
         self.change_context(DashbordViewWidget)
 
     def goto_help(self):
-        mbox = QtGui.QMessageBox.about(self, _(u"About gestion de stock"), \
+        mbox = QtGui.QMessageBox.about(self, _(u"A propos"), \
                                   _(u"G_stock gestion de stock\n\n" \
                                     "Developpeur: Ibrahima Fadiga, \n"\
                                     u"© 2011 fad service s.à.r.l\n" \
                                     u"Bamako (Mali)\n" \
                                     u"Tel: (223) 76 43 38 90\n" \
-                                    u"E-mail: ibfadiga@gmail.com\n\n"))
+                                    u"E-mail: ibfadiga@gmail.com"))
 
     def goto_exit(self):
         self.close()

@@ -8,7 +8,7 @@ from PyQt4.QtCore import Qt
 from sqlalchemy import desc
 
 from database import *
-from data_helper import Date_pagination
+from lib.tools import Date_pagination
 from utils import formatted_number
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from by_magasin import by_magasinViewWidget
@@ -23,15 +23,22 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
-        self.title = F_PageTitle(_(u"Tout les rapport"))
+        self.title = F_PageTitle(_(u"Tous les rapports"))
 
+        vbox = QtGui.QVBoxLayout()
         self.table = RapportTableWidget(parent=self, period=self.main_period)
 
         # periods
         period = Date_pagination
 
-        vbox = QtGui.QVBoxLayout()
+        self.liste_type = [u"Année", u"Mois", u"Smaine"]
+        #Combobox widget
+        self.box_type = QtGui.QComboBox()
+        for el in self.liste_type:
+            i = self.liste_type.index(el)
+            self.box_type.addItem(el, QtCore.QVariant(i))
         vbox.addWidget(self.title)
+        vbox.addWidget(self.box_type)
         vbox.addWidget(self.periods_bar)
         vbox.addWidget(self.table)
 
@@ -51,11 +58,12 @@ class RapportTableWidget(F_TableWidget):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
         self.header = [_(u"Type"), (u"Magasin No."), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Carto Restant"), \
+                       _(u"Nbre carton"), _(u"Restant"), \
                        _(u"Date")]
 
         self.set_data_for(period)
         self.refresh(True)
+        self.setColumnWidth(0,20)
 
     def refresh_period(self, period):
         self.main_period = period

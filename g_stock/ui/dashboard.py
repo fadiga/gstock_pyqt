@@ -26,7 +26,8 @@ class DashbordViewWidget(F_Widget):
         tablebox_dern_op = QtGui.QVBoxLayout()
 
         self.title = F_PageTitle("Accuiel")
-        self.title_alert = F_BoxTitle((u"La liste des produits dont le restant est < 100"))
+        self.title_alert = F_BoxTitle((u"La liste des produits " \
+                                    u"dont le restant est < 100 cartons"))
         self.title_dern_op = F_BoxTitle((u"Table de dernière operations"))
 
         self.table_alert = Alert_TableWidget(parent=self)
@@ -56,6 +57,7 @@ class Dern_opTableWidget(F_TableWidget):
                        _(u"Quantite"), u"Restant", (u"Date")]
         self.set_data_for()
         self.refresh(True)
+        self.setColumnWidth(0,20)
 
     def set_data_for(self):
         """ """
@@ -88,6 +90,7 @@ class Alert_TableWidget(F_TableWidget):
                        _(u"Quantite"), u"Restant", (u"Date")]
         self.set_data_for()
         self.refresh(True)
+        self.setColumnWidth(0,20)
 
     def set_data_for(self):
         """ """

@@ -11,9 +11,6 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def __init__(self, parent=None, *args, **kwargs):
         QtGui.QMenuBar.__init__(self, parent, *args, **kwargs)
 
-        # change icon so that it appears in About box
-        self.setWindowIcon(QtGui.QIcon('images/logo.png'))
-
         #Menu File
         file_ = self.addMenu((u"&File"))
 
@@ -40,7 +37,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
 
         #Menu Aide
         help = self.addMenu((u"Help"))
-        help.addAction((u"About"), self.goto_about)
+        help.addAction(QtGui.QIcon('images/about.png'), "A propos", self.goto_about)
 
     #Refresh the menu bar to enabled or disabled the delete menu
     def refresh(self):
@@ -60,6 +57,10 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     #About
 
     def goto_about(self):
-        mbox = QtGui.QMessageBox.about(self, (u"About ANM"), \
-                          (u"ibfadiga@gmail.com \n" \
-                            u"FADIGA IBRAHIMA"))
+        mbox = QtGui.QMessageBox.about(self, (u"A propos"), \
+                                 (u"G_stock gestion de stock\n\n" \
+                                    "Developpeur: Ibrahima Fadiga, \n"\
+                                    u"© 2011 fad service s.à.r.l\n" \
+                                    u"Bamako (Mali)\n" \
+                                    u"Tel: (223) 76 43 38 90\n" \
+                                    u"E-mail: ibfadiga@gmail.com"))

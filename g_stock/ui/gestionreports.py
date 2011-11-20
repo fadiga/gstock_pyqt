@@ -9,8 +9,7 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import (F_Widget, F_PageTitle, F_TableWidget,
-                                                F_BoxTitle)
+from common import (F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle)
 from utils import raise_success, raise_error, formatted_number
 from data_helper import remaining
 from magasins import MagasinViewWidget
@@ -28,10 +27,10 @@ class G_reportViewWidget(F_Widget):
                                                         *args, **kwargs)
         self.setWindowTitle((u"Gestion des rapports"))
         vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(F_PageTitle(u"Gestion des rapports"))
+        #~ vbox.addWidget(F_PageTitle(u"Gestion des rapports"))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(u"Table rapport"))
+        tablebox.addWidget(F_BoxTitle(u"Table rapports"))
         self.table_op = MagasinTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
@@ -44,7 +43,7 @@ class G_reportViewWidget(F_Widget):
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
-        formbox.addWidget(F_BoxTitle(u"Add rapport"))
+        formbox.addWidget(F_BoxTitle(u"Ajout rapport"))
 
         self.liste_type = [_("Entre"), _("Sortie")]
         #Combobox widget
@@ -126,17 +125,21 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"), _(u"Magasin No."), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Carto Restant"), \
-                       _(u"Date"), _(u"modification"), _(u"Suppresion")]
+        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
+                       _(u"Nbre carton"), _(u"Restant"), \
+                       _(u" "), _(u"Date"), _(u"Modification"), _(u"Suppresion")]
         self.set_data_for()
         self.refresh(True)
+        #je cache la 5 eme colonne
+        self.hideColumn(5)
+        self.setColumnWidth(0,20)
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
                         formatted_number(rap.nbr_carton), \
                         formatted_number(rap.restant), \
-                        rap.date_rapp, "", "") \
+                        rap.date_rapp, rap.date_rapp.strftime(u'%x %Hh:%Mmn'), \
+                        "", "") \
                         for rap in session.query(Rapport) \
                         .order_by(desc(Rapport.date_rapp)).all()]
 
@@ -147,10 +150,10 @@ class MagasinTableWidget(F_TableWidget):
         if column == 0 and self.data[row][0] == "Sortie":
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
                                           _(u""))
-        if column == 7:
+        if column == 8:
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), \
                                           _(u""))
-        if column == 6:
+        if column == 7:
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), \
                                           _(u""))
         return super(MagasinTableWidget, self)\
@@ -160,8 +163,8 @@ class MagasinTableWidget(F_TableWidget):
     def click_item(self, row, column, *args):
         magsin_column = 1
         produit_column = 2
-        modified_column = 6
-        del_column = 7
+        modified_column = 7
+        del_column = 8
         if column == magsin_column:
             self.parent.change_main_context(by_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])

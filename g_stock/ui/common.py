@@ -6,9 +6,9 @@ from PyQt4 import QtGui
 from PyQt4.QtCore import Qt
 
 from utils import formatted_number
-from data_helper import Date_pagination
+from lib.tools import Date_pagination
 
-MAIN_WIDGET_SIZE = 900
+MAIN_WIDGET_SIZE = 950
 
 
 class F_PageTitle(QtGui.QLabel):
@@ -65,11 +65,15 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
 
         self.cellClicked.connect(self.click_item)
 
-        self.verticalHeader().setVisible(False)
+        #~ self.verticalHeader().setVisible(False)
         self.horizontalHeader().setStretchLastSection(True)
         self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.setFont(QtGui.QFont("Courier New", 10))
+        # style au tr
+        self.setStyleSheet("color: #020028;background-color:#F5F8FC")
+        # enable sorting
+        self.setSortingEnabled(True)
 
     def setdata(self, value):
         if not isinstance(value, (list, None.__class__)):
@@ -94,6 +98,15 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
     def _reset(self):
         for index in range(self.rowCount(), -1, -1):
             self.removeRow(index)
+
+    def sort(self, Ncol, order):
+        """Sort table by given column number.
+        """
+        self.emit(SIGNAL("layoutAboutToBeChanged()"))
+        self.arraydata = sorted(self.arraydata, key=operator.itemgetter(Ncol))
+        if order == Qt.DescendingOrder:
+            self.arraydata.reverse()
+        self.emit(SIGNAL("layoutChanged()"))
 
     def refresh(self, resize=False):
         if not self.data or not self.header:
@@ -162,9 +175,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
                 item = QtGui.QTableWidgetItem(self._format_for_table(total))
                 self.setItem(row_num, index, item)
 
-    def setDisplayTotal(self, display=False, \
-                              column_totals={}, \
-                              label=None):
+    def setDisplayTotal(self, display=False, column_totals={}, label=None):
         ''' adds an additional row at end of table
 
         display: bool wheter of not to display the total row
@@ -198,7 +209,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
 
 class F_PeriodHolder(object):
 
-    def __init__(self, period=Date_pagination, *args, **kwargs):
+    def __init__(self, period=Date_pagination(), *args, **kwargs):
 
         self.main_period = period
         self.periods_bar = self.gen_bar_for(self.main_period)
@@ -234,17 +245,15 @@ class F_PeriodTabBar(QtGui.QTabBar):
 
     def set_data_from(self, period=Date_pagination):
         self.main_period = period
+        print self.main_period.previous
 
-        self.periods = ["self.main_period.previous()", \
-                        "self.main_period", \
-                        "self.main_period.next()"]
+        self.periods = [self.main_period.previous, \
+                        self.main_period.current_date, \
+                        self.main_period.next_date]
 
     def build_tab_list(self):
         for index, period in enumerate(self.periods):
-            self.setTabText(index, 'period.display_name()')
-            self.setTabToolTip(index, _(u"Period from %(start)s to %(end)s" \
-                               % {'start': "period.start_on.strftime('%x')", \
-                                  'end': "period.end_on.strftime('%x')"}))
+            self.setTabText(index, str(period))
         self.setTabTextColor(1, QtGui.QColor('darkBlue'))
         self.setCurrentIndex(1)
 

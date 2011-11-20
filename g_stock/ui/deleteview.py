@@ -14,10 +14,9 @@ class deleteViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
-        self.setWindowTitle((u"Suppression"))
-        self.title = F_PageTitle(u"Suppression")
+        self.setWindowTitle((u"Confirmation de la suppression"))
+        self.title = F_PageTitle(u"Voulez-vous supprimer ?")
         self.op = report
-        self.title.setText(_(u"Confirmation de la suppresion"))
         self.title.setAlignment(QtCore.Qt.AlignHCenter)
         title_hbox = QtGui.QHBoxLayout()
         title_hbox.addWidget(self.title)

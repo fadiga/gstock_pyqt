@@ -7,9 +7,8 @@ from PyQt4 import QtCore
 from PyQt4.QtCore import Qt
 
 from database import *
-from data_helper import Date_pagination
+from lib.tools import Date_pagination
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
-#~ from by_produit import by_produitViewWidget
 
 
 class by_magasinViewWidget(F_Widget, F_PeriodHolder):
@@ -76,7 +75,8 @@ class by_magasinTableWidget(F_TableWidget):
     def click_item(self, row, column, *args):
         produit_column = 1
         if column == produit_column:
-            self.parent.change_main_context(ProduitViewWidget, \
+            from by_produit import by_produitViewWidget
+            self.parent.change_main_context(by_produitViewWidget, \
                                     produit=self.data[row][produit_column])
         else:
             return
