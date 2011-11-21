@@ -26,7 +26,7 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar = QtGui.QToolBar()
         self.toolbar.addAction(QtGui.QIcon('images/out.png'), \
                                                     "Quiter", self.goto_exit)
-        self.toolbar.addAction("Aceuil", self.aceuil)
+        self.toolbar.addAction("Accueil", self.accueil)
         self.toolbar.addAction("Magasins", self.goto_magasin)
         self.toolbar.addAction("Produits", self.goto_produit)
         self.toolbar.addAction("Tous les rapports", \
@@ -53,8 +53,8 @@ class MainWindow(QtGui.QMainWindow):
     def goto_exit(self):
         self.close()
 
-    def aceuil(self):
-        self.setWindowTitle(u"Aceuil")
+    def accueil(self):
+        self.setWindowTitle(u"Accueil")
         self.change_context(DashbordViewWidget)
 
     def goto_produit(self):
