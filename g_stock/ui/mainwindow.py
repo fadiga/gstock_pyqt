@@ -26,13 +26,19 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar = QtGui.QToolBar()
         self.toolbar.addAction(QtGui.QIcon('images/out.png'), \
                                                     "Quiter", self.goto_exit)
+        self.toolbar.addSeparator()
         self.toolbar.addAction("Aceuil", self.aceuil)
+        self.toolbar.addSeparator()
         self.toolbar.addAction("Magasins", self.goto_magasin)
+        self.toolbar.addSeparator()
         self.toolbar.addAction("Produits", self.goto_produit)
+        self.toolbar.addSeparator()
         self.toolbar.addAction("Tous les rapports", \
                                                     self.goto_all_rapport)
+        self.toolbar.addSeparator()
         self.toolbar.addAction("Gestion des rapports", \
                                                 self.goto_gestion_rapport)
+        self.toolbar.addSeparator()
         self.toolbar.addAction(QtGui.QIcon('images/about.png'), "A propos", \
                                                             self.goto_help)
         self.addToolBar(self.toolbar)

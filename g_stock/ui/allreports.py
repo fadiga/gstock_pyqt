@@ -8,7 +8,6 @@ from PyQt4.QtCore import Qt
 from sqlalchemy import desc
 
 from database import *
-from lib.tools import Date_pagination
 from utils import formatted_number
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from by_magasin import by_magasinViewWidget
@@ -26,23 +25,26 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
         self.title = F_PageTitle(_(u"Tous les rapports"))
 
         vbox = QtGui.QVBoxLayout()
+        #Combobox widget
+        self.liste_type = [u"Année", u"Mois", u"Smaine"]
+        self.box_type = QtGui.QComboBox()
+        for index in self.liste_type:
+            self.box_type.addItem(u'%(type)s' % {'type': index})
+        self.connect(self.box_type, \
+                        QtCore.SIGNAL("currentIndexChanged(QString)"), \
+                                                    self.change_period_type)
         self.table = RapportTableWidget(parent=self, period=self.main_period)
 
-        # periods
-        period = Date_pagination
-
-        self.liste_type = [u"Année", u"Mois", u"Smaine"]
-        #Combobox widget
-        self.box_type = QtGui.QComboBox()
-        for el in self.liste_type:
-            i = self.liste_type.index(el)
-            self.box_type.addItem(el, QtCore.QVariant(i))
         vbox.addWidget(self.title)
         vbox.addWidget(self.box_type)
         vbox.addWidget(self.periods_bar)
         vbox.addWidget(self.table)
 
         self.setLayout(vbox)
+
+    def change_period_type(self):
+        self.typ = self.liste_type[self.box_type.currentIndex()]
+        return self.typ
 
     def refresh(self):
         self.table.refresh()
@@ -60,7 +62,6 @@ class RapportTableWidget(F_TableWidget):
         self.header = [_(u"Type"), (u"Magasin No."), _(u"Produit"), \
                        _(u"Nbre carton"), _(u"Restant"), \
                        _(u"Date")]
-
         self.set_data_for(period)
         self.refresh(True)
         self.setColumnWidth(0,20)
