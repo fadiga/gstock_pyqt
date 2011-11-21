@@ -239,7 +239,7 @@ class F_PeriodTabBar(QtGui.QTabBar):
         for i in range(0, 3):
             self.addTab('%s' % i)
         NOW = datetime.now()
-        self.type_date ="W"
+        self.type_date ="Y"
         self.set_data_from(NOW, self.type_date)
         self.build_tab_list()
 
