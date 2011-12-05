@@ -22,18 +22,18 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
-        self.title = F_PageTitle(_(u"Tous les rapports"))
+        self.title = F_PageTitle(u"Tous les rapports")
 
-        vbox = QtGui.QVBoxLayout()
+        self.table = RapportTableWidget(parent=self, period=self.main_period)
         #Combobox widget
+        vbox = QtGui.QVBoxLayout()
         self.liste_type = [u"Année", u"Mois", u"Smaine"]
         self.box_type = QtGui.QComboBox()
         for index in self.liste_type:
             self.box_type.addItem(u'%(type)s' % {'type': index})
         self.connect(self.box_type, \
-                        QtCore.SIGNAL("currentIndexChanged(QString)"), \
-                                                    self.change_period_type)
-        self.table = RapportTableWidget(parent=self, period=self.main_period)
+                                QtCore.SIGNAL("currentIndexChanged(QString)"), \
+                                                        self.change_period_type)
 
         vbox.addWidget(self.title)
         vbox.addWidget(self.box_type)
@@ -43,8 +43,8 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
         self.setLayout(vbox)
 
     def change_period_type(self):
-        self.typ = self.liste_type[self.box_type.currentIndex()]
-        return self.typ
+        self.type_date = self.liste_type[self.box_type.currentIndex()]
+        F_PeriodHolder(self, self.type_date)
 
     def refresh(self):
         self.table.refresh()
