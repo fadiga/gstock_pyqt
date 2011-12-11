@@ -7,7 +7,7 @@ from PyQt4 import QtCore
 from PyQt4.QtCore import Qt
 
 from database import *
-from lib.tools import Date_pagination
+from tools.tools import Date_pagination
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 
 

@@ -4,7 +4,8 @@
 
 from PyQt4 import QtGui, QtCore
 from common import F_Widget
-
+from magasins import MagasinViewWidget
+from tools.exports import export_database_as_file, export_database_as_excel
 
 class MenuBar(QtGui.QMenuBar, F_Widget):
 
@@ -25,6 +26,13 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         export.addAction((u"Backup Database"), self.goto_export_db)
         export.addAction((u"In an Excel file"),\
                                         self.goto_export_excel)
+        # magasin
+        
+        magasin = QtGui.QAction((u"Nouveau magasin"), self)
+        magasin.setShortcut("Ctrl+M")
+        self.connect(magasin, QtCore.SIGNAL("triggered()"),\
+                                            self.addstore)
+        file_.addAction(magasin)
         # Exit
         exit = QtGui.QAction((u"Exit"), self)
         exit.setShortcut("Ctrl+Q")
@@ -54,6 +62,16 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def goto_export_excel(self):
         pass
 
+    def addstore(self):
+        self.change_main_context(MagasinViewWidget)
+        
+    #Export the database.
+    def goto_export_db(self):
+        export_database_as_file()
+
+    def goto_export_excel(self):
+        export_database_as_excel()
+        
     #About
 
     def goto_about(self):

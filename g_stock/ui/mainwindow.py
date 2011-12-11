@@ -26,9 +26,8 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar = QtGui.QToolBar()
         self.toolbar.addAction(QtGui.QIcon('images/out.png'), \
                                                     "Quiter", self.goto_exit)
-        self.toolbar.addAction("Accueil", self.accueil)
         self.toolbar.addSeparator()
-        self.toolbar.addAction("Magasins", self.goto_magasin)
+        self.toolbar.addAction("Accueil", self.accueil)
         self.toolbar.addSeparator()
         self.toolbar.addAction("Produits", self.goto_produit)
         self.toolbar.addSeparator()
@@ -65,10 +64,6 @@ class MainWindow(QtGui.QMainWindow):
     def goto_produit(self):
         self.setWindowTitle(u"Produits")
         self.change_context(ProduitViewWidget)
-
-    def goto_magasin(self):
-        self.setWindowTitle(u"Magasins")
-        self.change_context(MagasinViewWidget)
 
     def goto_all_rapport(self):
         self.setWindowTitle(u"Tous les Rapports")

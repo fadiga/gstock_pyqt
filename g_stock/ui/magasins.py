@@ -35,7 +35,7 @@ class MagasinViewWidget(F_Widget):
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(u"Add opertion"))
 
-        editbox.addWidget(QtGui.QLabel((_(u"Designation"))), 0, 0)
+        editbox.addWidget(QtGui.QLabel((_(u"Nom du magasin"))), 0, 0)
         editbox.addWidget(self.name, 1, 0)
         editbox.addWidget(QtGui.QLabel((_(u"Adresse du magasin"))), 0, 1)
         editbox.addWidget(self.adresse, 1, 1)
