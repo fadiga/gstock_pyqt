@@ -3,9 +3,12 @@
 # maintainer: fad
 
 from PyQt4 import QtGui, QtCore
+
 from common import F_Widget
 from magasins import MagasinViewWidget
+from by_period import by_periodViewWidget
 from tools.exports import export_database_as_file, export_database_as_excel
+
 
 class MenuBar(QtGui.QMenuBar, F_Widget):
 
@@ -27,25 +30,30 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         export.addAction((u"In an Excel file"),\
                                         self.goto_export_excel)
         # magasin
-        
         magasin = QtGui.QAction((u"Nouveau magasin"), self)
         magasin.setShortcut("Ctrl+M")
         self.connect(magasin, QtCore.SIGNAL("triggered()"),\
                                             self.addstore)
         file_.addAction(magasin)
+        # Rapport periodique
+        rap_p = QtGui.QAction((u"Rapport periodique"), self)
+        rap_p.setShortcut("Ctrl+R")
+        self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
+                                            self.report_period)
+        file_.addAction(rap_p)
         # Exit
-        exit = QtGui.QAction((u"Exit"), self)
-        exit.setShortcut("Ctrl+Q")
-        exit.setToolTip(("Exit application"))
-        self.connect(exit, QtCore.SIGNAL("triggered()"), \
+        exit_ = QtGui.QAction((u"Exit"), self)
+        exit_.setShortcut("Ctrl+Q")
+        exit_.setToolTip(("Exit application"))
+        self.connect(exit_, QtCore.SIGNAL("triggered()"), \
                                          self.parentWidget(), \
                                          QtCore.SLOT("close()"))
-        file_.addAction(exit)
+        file_.addAction(exit_)
         # Menu aller à
 
         #Menu Aide
-        help = self.addMenu((u"Help"))
-        help.addAction(QtGui.QIcon('images/about.png'), "A propos", self.goto_about)
+        help_ = self.addMenu((u"Help"))
+        help_.addAction(QtGui.QIcon('images/about.png'), "A propos", self.goto_about)
 
     #Refresh the menu bar to enabled or disabled the delete menu
     def refresh(self):
@@ -55,12 +63,10 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def goto_print(self):
         pass
 
-    #Export the database.
-    def goto_export_db(self):
-        pass
+    #Rapport periodique.
+    def report_period(self):
+        self.change_main_context(by_periodViewWidget)
 
-    def goto_export_excel(self):
-        pass
 
     def addstore(self):
         self.change_main_context(MagasinViewWidget)

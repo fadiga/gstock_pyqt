@@ -19,7 +19,7 @@ class by_produitViewWidget(F_Widget, F_PeriodHolder):
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
-        self.title = F_PageTitle(" ".join([u"Les rapport dont le produit:", \
+        self.title = F_PageTitle(" ".join([u"Les rapports dont le produit:", \
                                                         produit.libelle]))
         self.table = by_produitTableWidget(produit, parent=self, \
                                                 period=self.main_period)

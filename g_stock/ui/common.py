@@ -28,6 +28,24 @@ class F_BoxTitle(QtGui.QLabel):
         self.setAlignment(Qt.AlignCenter)
 
 
+class FormLabel(QtGui.QLabel):
+
+    def __init__(self, text, parent=None):
+        QtGui.QLabel.__init__(self, text, parent)
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.setFont(font)
+        self.setAlignment(Qt.AlignLeft)
+
+
+class IntLineEdit(QtGui.QLineEdit):
+    """Accepter que des nombre positive """
+
+    def __init__(self, parent=None):
+        QtGui.QLineEdit.__init__(self, parent)
+        self.setValidator(QtGui.QIntValidator(0, 100000, self))
+
+
 class F_Widget(QtGui.QWidget):
 
     def __init__(self, parent=0, *args, **kwargs):

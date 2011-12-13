@@ -44,7 +44,6 @@ class DashbordViewWidget(F_Widget):
                                         u"Table de dernière operations"))
 
         vbox.addWidget(tab_widget)
-
         self.setLayout(vbox)
 
 
@@ -94,7 +93,6 @@ class Alert_TableWidget(F_TableWidget):
 
     def set_data_for(self):
         """ """
-
         self.data = [(op.type_, op.magasin, op.produit,\
                      formatted_number(op.nbr_carton), \
                      formatted_number(op.restant), \
