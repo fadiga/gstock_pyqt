@@ -17,7 +17,8 @@ class by_periodViewWidget(F_Widget, F_PeriodHolder):
         super(by_periodViewWidget, self).__init__(parent=parent, *args, \
                                                                 **kwargs)
 
-        self.table = by_periodTableWidget(parent=self)
+        list_date = parent.list_
+        self.table = by_periodTableWidget(list_date, parent=self)
         self.title = F_PageTitle(u"Les rapports dans le magasin: ")
         self.on_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
         self.end_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
@@ -43,25 +44,26 @@ class by_periodViewWidget(F_Widget, F_PeriodHolder):
     def rapport_filter(self):
         on_date = self.on_date.text()
         end_date = self.end_date.text()
-        by_periodTableWidget(self, on_date, end_date)
+        l_date = [on_date, end_date]
+        self.change_main_context(by_periodViewWidget, l_date)
 
 
 class by_periodTableWidget(F_TableWidget):
     """ """
 
-    def __init__(self, parent, on_date=None, end_date=None, *args, **kwargs):
+    def __init__(self, list_date, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
         self.header = [_(u"Type"), _(u"Produit"), \
                        _(u"Nombre de carton"), _(u"Carto Restant"), \
                        _(u"Date")]
-        if on_date or end_date:
-            self.on_date = self.format_date(on_date)
-            self.end_date = self.format_date(end_date)
-        else:
+        try:
+            self.on_date = self.format_date(list_date[0])
+            self.end_date = self.format_date(list_date[1])
+        except:
             self.on_date = "2011-01-01"
-            self.end_date = date.today().strftime("%Y-%M-%d")
+            self.end_date = date.today().strftime("%Y-%m-%d")
         self.set_data_for()
         self.refresh(True)
 
@@ -70,16 +72,13 @@ class by_periodTableWidget(F_TableWidget):
         self.refresh()
 
     def format_date(self, valeur):
-        print valeur
         valeur = str(valeur)
         day, month, year = valeur.split('/')
         return '-'.join(["20" + year, month, day])
 
     def set_data_for(self):
-        print self.on_date, self.end_date
         self.data = [(rap.type_, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport)\
                             .filter(Rapport.date_rapp.__gt__(self.on_date)) \
                             .filter(Rapport.date_rapp.__lt__(self.end_date))]
-        print self.data

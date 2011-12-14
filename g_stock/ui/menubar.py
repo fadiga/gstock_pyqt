@@ -37,7 +37,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         file_.addAction(magasin)
         # Rapport periodique
         rap_p = QtGui.QAction((u"Rapport periodique"), self)
-        rap_p.setShortcut("Ctrl+R")
+        rap_p.setShortcut("Ctrl+T")
         self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
                                             self.report_period)
         file_.addAction(rap_p)
@@ -70,14 +70,14 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
 
     def addstore(self):
         self.change_main_context(MagasinViewWidget)
-        
+
     #Export the database.
     def goto_export_db(self):
         export_database_as_file()
 
     def goto_export_excel(self):
         export_database_as_excel()
-        
+
     #About
 
     def goto_about(self):
