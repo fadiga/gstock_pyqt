@@ -13,14 +13,29 @@ from sqlalchemy.orm import exc
 from database import *
 
 
-def last_rapport(magasin, produit):
+def last_rapport(magasin_id, produit_id):
     """ last Rapport
     prams: magasin_id et produit_id"""
-    last_rapp = session.query(Rapport).filter(Rapport.magasin_id == magasin)\
-                                      .filter(Rapport.produit_id == produit)\
+    last_rapp = session.query(Rapport).filter(Rapport.magasin_id == magasin_id)\
+                                      .filter(Rapport.produit_id == produit_id)\
                                       .order_by(desc(Rapport.date_rapp))\
                                       .first()
     return last_rapp
+
+
+def alerte_report():
+    """ """
+    list_alert = []
+    for mag in session.query(Magasin):
+        for prod in session.query(Produit):
+            f = last_rapport(mag.id, prod.id)
+            print f
+            if f:
+                if f.restant <= 100:
+                    list_alert.append(f)
+    return list_alert
+
+
 
 
 def remaining(type_,  nbr_carton, magasin, produit):

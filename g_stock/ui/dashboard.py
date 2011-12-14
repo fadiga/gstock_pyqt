@@ -7,6 +7,7 @@ from sqlalchemy import desc
 
 from utils import get_temp_filename, formatted_number
 from database import Magasin, Produit, Rapport, session
+from data_helper import *
 from tabpane import tabbox
 from common import F_Widget, F_PageTitle, F_TableWidget, \
                                                 F_BoxTitle
@@ -97,9 +98,7 @@ class Alert_TableWidget(F_TableWidget):
                      formatted_number(op.nbr_carton), \
                      formatted_number(op.restant), \
                      op.date_rapp.strftime(_(u'%x %Hh:%Mmn')))
-                     for op in session.query(Rapport)\
-                        .filter(Rapport.restant <= 100)\
-                        .order_by(desc(Rapport.date_rapp)).all()]
+                     for op in alerte_report()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == "Entre":
