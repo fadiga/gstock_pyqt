@@ -5,7 +5,7 @@
 from PyQt4 import QtGui
 from sqlalchemy import desc
 
-from utils import get_temp_filename, formatted_number
+from util import get_temp_filename, formatted_number
 from database import Rapport, session
 from data_helper import alerte_report
 from tabpane import tabbox

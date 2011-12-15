@@ -10,7 +10,7 @@ from PyQt4 import QtGui, QtCore
 
 from database import *
 from common import (F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle)
-from utils import raise_success, raise_error, formatted_number
+from util import raise_success, raise_error, formatted_number
 from data_helper import remaining
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
