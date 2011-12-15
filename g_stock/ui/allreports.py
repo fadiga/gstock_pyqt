@@ -8,7 +8,7 @@ from PyQt4.QtCore import Qt
 from sqlalchemy import desc
 
 from database import *
-from utils import formatted_number
+from util import formatted_number
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from by_magasin import by_magasinViewWidget
 from by_produit import by_produitViewWidget

@@ -6,7 +6,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
-from utils import raise_error, raise_success
+from util import raise_error, raise_success
 from database import *
 
 

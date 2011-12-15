@@ -11,7 +11,7 @@ from PyQt4 import QtGui, QtCore
 from database import *
 from common import (F_Widget, F_PageTitle, F_TableWidget,
                                                 F_BoxTitle)
-from utils import raise_success, raise_error
+from util import raise_success, raise_error
 
 
 class ProduitViewWidget(F_Widget):

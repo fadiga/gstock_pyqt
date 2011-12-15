@@ -7,7 +7,7 @@ from PyQt4.QtCore import Qt
 from dateutil.relativedelta import *
 from datetime import *
 
-from utils import formatted_number
+from util import formatted_number
 
 MAIN_WIDGET_SIZE = 950
 

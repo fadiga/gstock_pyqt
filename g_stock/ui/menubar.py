@@ -7,7 +7,7 @@ from PyQt4 import QtGui, QtCore
 from common import F_Widget
 from magasins import MagasinViewWidget
 from by_period import by_periodViewWidget
-from tools.exports import export_database_as_file, export_database_as_excel
+from utils.exports import export_database_as_file, export_database_as_excel
 
 
 class MenuBar(QtGui.QMenuBar, F_Widget):
