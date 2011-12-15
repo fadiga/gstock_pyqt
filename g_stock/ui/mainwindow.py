@@ -36,23 +36,12 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar.addSeparator()
         self.toolbar.addAction("Gestion des rapports", \
                                                 self.goto_gestion_rapport)
-        self.toolbar.addSeparator()
-        self.toolbar.addAction(QtGui.QIcon('images/about.png'), "A propos", \
-                                                            self.goto_help)
+
         self.addToolBar(self.toolbar)
 
         self.menubar = MenuBar(self)
         self.setMenuBar(self.menubar)
         self.change_context(DashbordViewWidget)
-
-    def goto_help(self):
-        mbox = QtGui.QMessageBox.about(self, _(u"A propos"), \
-                                  _(u"G_stock gestion de stock\n\n" \
-                                    "Developpeur: Ibrahima Fadiga, \n"\
-                                    u"© 2011 fad service s.à.r.l\n" \
-                                    u"Bamako (Mali)\n" \
-                                    u"Tel: (223) 76 43 38 90\n" \
-                                    u"E-mail: ibfadiga@gmail.com"))
 
     def goto_exit(self):
         self.close()

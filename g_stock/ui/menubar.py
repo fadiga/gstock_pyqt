@@ -16,7 +16,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         QtGui.QMenuBar.__init__(self, parent, *args, **kwargs)
 
         #Menu File
-        file_ = self.addMenu((u"&File"))
+        file_ = self.addMenu(u"&Fichier")
 
         # Print
         print_ = QtGui.QAction((u"Print"), self)
@@ -26,34 +26,37 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         file_.addAction(print_)
         # Export
         export = file_.addMenu((u"&Export data"))
-        export.addAction((u"Backup Database"), self.goto_export_db)
-        export.addAction((u"In an Excel file"),\
+        export.addAction((u"Savegarde de la Database"), self.goto_export_db)
+        export.addAction((u"Export db en Excel"),\
                                         self.goto_export_excel)
-        # magasin
-        magasin = QtGui.QAction((u"Nouveau magasin"), self)
-        magasin.setShortcut("Ctrl+M")
-        self.connect(magasin, QtCore.SIGNAL("triggered()"),\
-                                            self.addstore)
-        file_.addAction(magasin)
-        # Rapport periodique
-        rap_p = QtGui.QAction((u"Rapport periodique"), self)
-        rap_p.setShortcut("Ctrl+T")
-        self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
-                                            self.report_period)
-        file_.addAction(rap_p)
+
         # Exit
-        exit_ = QtGui.QAction((u"Exit"), self)
+        exit_ = QtGui.QAction((u"Quiter"), self)
         exit_.setShortcut("Ctrl+Q")
-        exit_.setToolTip(("Exit application"))
+        exit_.setToolTip(("Quiter l'application"))
         self.connect(exit_, QtCore.SIGNAL("triggered()"), \
                                          self.parentWidget(), \
                                          QtCore.SLOT("close()"))
         file_.addAction(exit_)
         # Menu aller à
+        goto_ = self.addMenu((u"Aller à"))
+        # magasin
+        magasin = QtGui.QAction((u"Nouveau magasin"), self)
+        magasin.setShortcut("Ctrl+M")
+        self.connect(magasin, QtCore.SIGNAL("triggered()"),\
+                                            self.addstore)
+        goto_.addAction(magasin)
+        # Rapport periodique
+        rap_p = QtGui.QAction((u"Rapport periodique"), self)
+        rap_p.setShortcut("Ctrl+T")
+        self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
+                                            self.report_period)
+        goto_.addAction(rap_p)
 
         #Menu Aide
-        help_ = self.addMenu((u"Help"))
-        help_.addAction(QtGui.QIcon('images/about.png'), "A propos", self.goto_about)
+        help_ = self.addMenu((u"Aide"))
+        help_.addAction(QtGui.QIcon('images/help.png'), "Aide", self.goto_help)
+        help_.addAction(QtGui.QIcon('images/about.png'), "A propos", self.report_period)
 
     #Refresh the menu bar to enabled or disabled the delete menu
     def refresh(self):
@@ -78,8 +81,12 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def goto_export_excel(self):
         export_database_as_excel()
 
-    #About
+    #Aide
+    def goto_help(self):
+        mbox = QtGui.QMessageBox.about(self, (u"Aide"), \
+                                 (u"Bien d'aide appele Fad"))
 
+    #About
     def goto_about(self):
         mbox = QtGui.QMessageBox.about(self, (u"A propos"), \
                                  (u"G_stock gestion de stock\n\n" \

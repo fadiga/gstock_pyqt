@@ -29,13 +29,10 @@ def alerte_report():
     for mag in session.query(Magasin):
         for prod in session.query(Produit):
             f = last_rapport(mag.id, prod.id)
-            print f
             if f:
                 if f.restant <= 100:
                     list_alert.append(f)
     return list_alert
-
-
 
 
 def remaining(type_,  nbr_carton, magasin, produit):
@@ -62,4 +59,3 @@ def remaining(type_,  nbr_carton, magasin, produit):
 
 def update_rapport():
     pass
-

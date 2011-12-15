@@ -6,11 +6,10 @@ from PyQt4 import QtGui
 from sqlalchemy import desc
 
 from utils import get_temp_filename, formatted_number
-from database import Magasin, Produit, Rapport, session
-from data_helper import *
+from database import Rapport, session
+from data_helper import alerte_report
 from tabpane import tabbox
-from common import F_Widget, F_PageTitle, F_TableWidget, \
-                                                F_BoxTitle
+from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 
 
 class DashbordViewWidget(F_Widget):
@@ -48,20 +47,38 @@ class DashbordViewWidget(F_Widget):
         self.setLayout(vbox)
 
 
+class Alert_TableWidget(F_TableWidget):
+
+    def __init__(self, parent, *args, **kwargs):
+
+        F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
+        self.header = [_(u"Magasin"), _(u"Produit"), \
+                       _(u"Quantite"), u"Restant", (u"Date")]
+        self.set_data_for()
+        self.refresh(True)
+
+    def set_data_for(self):
+        """ """
+        self.data = [(op.magasin, op.produit,\
+                     formatted_number(op.nbr_carton), \
+                     formatted_number(op.restant), \
+                     op.date_rapp.strftime(_(u'%x %Hh:%Mmn')))
+                     for op in alerte_report()]
+
+
 class Dern_opTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Quantite"), u"Restant", (u"Date")]
+        self.header = [u" ", u"Magasin", u"Produit", u"Quantite", u"Restant", \
+                                                                u"Date"]
         self.set_data_for()
         self.refresh(True)
         self.setColumnWidth(0,20)
 
     def set_data_for(self):
         """ """
-
         self.data = [(op.type_, op.magasin, op.produit,\
                      formatted_number(op.nbr_carton), \
                      formatted_number(op.restant), \
@@ -77,36 +94,5 @@ class Dern_opTableWidget(F_TableWidget):
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
                                           _(u""))
         return super(Dern_opTableWidget, self)\
-                                            ._item_for_data(row, column, \
-                                                        data, context)
-
-
-class Alert_TableWidget(F_TableWidget):
-
-    def __init__(self, parent, *args, **kwargs):
-
-        F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Quantite"), u"Restant", (u"Date")]
-        self.set_data_for()
-        self.refresh(True)
-        self.setColumnWidth(0,20)
-
-    def set_data_for(self):
-        """ """
-        self.data = [(op.type_, op.magasin, op.produit,\
-                     formatted_number(op.nbr_carton), \
-                     formatted_number(op.restant), \
-                     op.date_rapp.strftime(_(u'%x %Hh:%Mmn')))
-                     for op in alerte_report()]
-
-    def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entre":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
-                                          _(u""))
-        if column == 0 and self.data[row][0] == "Sortie":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
-                                          _(u""))
-        return super(Alert_TableWidget, self)\
                                             ._item_for_data(row, column, \
                                                         data, context)
