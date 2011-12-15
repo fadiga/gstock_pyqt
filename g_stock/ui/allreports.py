@@ -32,8 +32,8 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
         for index in self.liste_type:
             self.box_type.addItem(u'%(type)s' % {'type': index})
         self.connect(self.box_type, \
-                                QtCore.SIGNAL("currentIndexChanged(QString)"), \
-                                                        self.change_period_type)
+                            QtCore.SIGNAL("currentIndexChanged(QString)"), \
+                                                    self.change_period_type)
 
         vbox.addWidget(self.title)
         vbox.addWidget(self.box_type)
@@ -64,7 +64,7 @@ class RapportTableWidget(F_TableWidget):
                        _(u"Date")]
         self.set_data_for(period)
         self.refresh(True)
-        self.setColumnWidth(0,20)
+        self.setColumnWidth(0, 20)
 
     def refresh_period(self, period):
         self.main_period = period

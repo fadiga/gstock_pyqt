@@ -75,7 +75,7 @@ class Dern_opTableWidget(F_TableWidget):
                                                                 u"Date"]
         self.set_data_for()
         self.refresh(True)
-        self.setColumnWidth(0,20)
+        self.setColumnWidth(0, 20)
 
     def set_data_for(self):
         """ """

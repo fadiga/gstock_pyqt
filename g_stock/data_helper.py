@@ -16,10 +16,10 @@ from database import *
 def last_rapport(magasin_id, produit_id):
     """ last Rapport
     prams: magasin_id et produit_id"""
-    last_rapp = session.query(Rapport).filter(Rapport.magasin_id == magasin_id)\
-                                      .filter(Rapport.produit_id == produit_id)\
-                                      .order_by(desc(Rapport.date_rapp))\
-                                      .first()
+    last_rapp = session.query(Rapport)\
+                                .filter(Rapport.magasin_id == magasin_id)\
+                                .filter(Rapport.produit_id == produit_id)\
+                                .order_by(desc(Rapport.date_rapp)).first()
     return last_rapp
 
 

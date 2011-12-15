@@ -56,7 +56,8 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         #Menu Aide
         help_ = self.addMenu((u"Aide"))
         help_.addAction(QtGui.QIcon('images/help.png'), "Aide", self.goto_help)
-        help_.addAction(QtGui.QIcon('images/about.png'), "A propos", self.report_period)
+        help_.addAction(QtGui.QIcon('images/about.png'), "A propos", \
+                                                            self.report_period)
 
     #Refresh the menu bar to enabled or disabled the delete menu
     def refresh(self):
@@ -69,7 +70,6 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     #Rapport periodique.
     def report_period(self):
         self.change_main_context(by_periodViewWidget)
-
 
     def addstore(self):
         self.change_main_context(MagasinViewWidget)
@@ -84,7 +84,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     #Aide
     def goto_help(self):
         mbox = QtGui.QMessageBox.about(self, (u"Aide"), \
-                                 (u"Bien d'aide appele Fad"))
+                                 (u"Besoin d'aide appele Fad"))
 
     #About
     def goto_about(self):

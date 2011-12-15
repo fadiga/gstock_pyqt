@@ -115,9 +115,9 @@ class G_reportViewWidget(F_Widget):
                 self.nbre_carton.clear()
                 self.refresh()
                 self.change_main_context(G_reportViewWidget)
-                raise_success(_(u"Confirmation"), _(u"Registered opération"))
+                raise_success(u"Confirmation", u"Registered opération")
         else:
-            raise_error(_(u"error"), _(u"Donnez le nbre de carton"))
+            raise_error(u"error", u"Donnez le nbre de carton")
 
 
 class MagasinTableWidget(F_TableWidget):
@@ -125,21 +125,21 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Nbre carton"), _(u"Restant"), \
-                       _(u" "), _(u"Date"), _(u"Modification"), _(u"Suppresion")]
+        self.header = [u"Type", u"Magasin", u"Produit", \
+                       u"Nbre carton", u"Restant", u" ", \
+                       u"Date", u"Modification", u"Suppresion"]
         self.set_data_for()
         self.refresh(True)
         #je cache la 5 eme colonne
         self.hideColumn(5)
-        self.setColumnWidth(0,20)
+        self.setColumnWidth(0, 20)
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
                         formatted_number(rap.nbr_carton), \
                         formatted_number(rap.restant), \
-                        rap.date_rapp, rap.date_rapp.strftime(u'%x %Hh:%Mmn'), \
-                        "", "") \
+                        rap.date_rapp, \
+                        rap.date_rapp.strftime(u'%x %Hh:%Mmn'), "", "") \
                         for rap in session.query(Rapport) \
                         .order_by(desc(Rapport.date_rapp)).all()]
 
