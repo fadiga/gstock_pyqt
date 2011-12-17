@@ -7,7 +7,8 @@ from PyQt4 import QtGui, QtCore
 from common import F_Widget
 from magasins import MagasinViewWidget
 from by_period import by_periodViewWidget
-from utils.exports import export_database_as_file, export_database_as_excel
+from utils.exports import export_database_as_file, \
+                          export_database_as_excel
 
 
 class MenuBar(QtGui.QMenuBar, F_Widget):
@@ -17,19 +18,11 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
 
         #Menu File
         file_ = self.addMenu(u"&Fichier")
-
-        # Print
-        print_ = QtGui.QAction((u"Print"), self)
-        print_.setShortcut("Ctrl+P")
-        self.connect(print_, QtCore.SIGNAL("triggered()"),\
-                                            self.goto_print)
-        file_.addAction(print_)
         # Export
-        export = file_.addMenu((u"&Export data"))
-        export.addAction((u"Savegarde de la Database"), self.goto_export_db)
-        export.addAction((u"Export db en Excel"),\
-                                        self.goto_export_excel)
-
+        export = file_.addMenu((u"&Exporter les données"))
+        export.addAction((u"Dans un fichier db"), self.goto_export_db)
+        export.addAction((u"Dans un fichier Excel"),\
+                                               self.goto_export_excel)
         # Exit
         exit_ = QtGui.QAction((u"Quiter"), self)
         exit_.setShortcut("Ctrl+Q")
@@ -52,12 +45,12 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
                                             self.report_period)
         goto_.addAction(rap_p)
-
         #Menu Aide
         help_ = self.addMenu((u"Aide"))
-        help_.addAction(QtGui.QIcon('images/help.png'), "Aide", self.goto_help)
-        help_.addAction(QtGui.QIcon('images/about.png'), "A propos", \
-                                                            self.goto_about)
+        help_.addAction(QtGui.QIcon('images/help.png'), \
+                                        "Aide", self.goto_help)
+        help_.addAction(QtGui.QIcon('images/about.png'), \
+                                        "A propos", self.goto_about)
 
     #Refresh the menu bar to enabled or disabled the delete menu
     def refresh(self):
@@ -90,7 +83,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     def goto_about(self):
         mbox = QtGui.QMessageBox.about(self, (u"A propos"), \
                                  (u"G_stock gestion de stock\n\n" \
-                                    "Developpeur: Ibrahima Fadiga, \n"\
+                                    "Developpeur: Ibrahima Fadiga,\n\n"\
                                     u"© 2011 fad service s.à.r.l\n" \
                                     u"Bamako (Mali)\n" \
                                     u"Tel: (223) 76 43 38 90\n" \

@@ -24,7 +24,7 @@ class MainWindow(QtGui.QMainWindow):
         self.setWindowIcon(QtGui.QIcon('images/mali.png'))
 
         self.toolbar = QtGui.QToolBar()
-        self.toolbar.addAction(QtGui.QIcon('images/out.png'), \
+        self.toolbar.addAction(QtGui.QIcon('images/quiter.png'), \
                                                     "Quiter", self.goto_exit)
         self.toolbar.addSeparator()
         self.toolbar.addAction("Accueil", self.accueil)

@@ -17,7 +17,7 @@ from util import raise_success, raise_error
 
 def export_database_as_file():
     destination = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), \
-                                    _(u"Save DB as..."), \
+                                    _(u"Sauvegarder la base de Donnée."), \
                                     "%s.db" % datetime.now()\
                                                 .strftime('%d-%m-%Y %Hh%M'), \
                                     "*.db")
@@ -25,18 +25,16 @@ def export_database_as_file():
         return
 
     try:
-        shutil.copyfile(gstock.DB_FILE, destination)
-        raise_success(_(u"Database exported!"), \
-                      _(u"The Database has been successfuly exported.\n" \
-                        u"Keep that file private as it contains your data.\n" \
-                        u"Export your data regularly."))
+        shutil.copyfile(database.DB_FILE, destination)
+        raise_success(u"Les données ont été exportées correctement.",
+                      u"Conservez ce fichier précieusement car il "
+                      u"contient toutes vos données.\n"
+                      u"Exportez vos données régulièrement."
+                      u"Database exported!")
     except IOError:
-        raise_error(_(u"Error in exporting Database!"), \
-                    _(u"The database backup could not be exported.\n" \
-                      u"Please verify that you selected a destination " \
-                      u"folder which you have write permissions to.\n" \
-                      u"Then retry.\n\n" \
-                      u"Request assistance if the problem persist."))
+        raise_error(u"La base de données n'a pas pu être exportée.",
+                    u"Vérifiez le chemin de destination puis re-essayez.\n\n"
+                    u"Demandez de l'aide si le problème persiste.")
 
 
 def export_database_as_excel():
@@ -50,14 +48,11 @@ def export_database_as_excel():
         return
     try:
         write_xls(destination)
-        raise_success(_(u"Database exported!"), \
-                      _(u"The data have been successfully exported.\n" \
-                        u"Keep that file private as it contains your data.\n" \
-                        u"Export your data regularly."))
+        raise_success(u"Les données ont été exportées correctement.",
+                      u"Conservez ce fichier précieusement car il contient "
+                      u"toutes vos données.\n\n"
+                      u"Exportez vos données régulièrement.")
     except IOError:
-        raise_error(_(u"Error in exporting Database!"), \
-                    _(u"The database backup could not be exported.\n" \
-                      u"Please verify that you selected a destination " \
-                      u"folder which you have write permissions to.\n" \
-                      u"Then retry.\n\n" \
-                      u"Request assistance if the problem persist."))
+        raise_error(u"La base de données n'a pas pu être exportée.",
+                    u"Vérifiez le chemin de destination puis re-essayez.\n\n"
+                    u"Demandez de l'aide si le problème persiste.")

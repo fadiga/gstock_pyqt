@@ -19,7 +19,6 @@ def tabbox(*args):
     params:  (widget, title) title is the string """
     ongles = args
     tab_widget = QtGui.QTabWidget()
-
     for el in ongles:
         pane = TabPane()
         pane.addBox(el[0])
