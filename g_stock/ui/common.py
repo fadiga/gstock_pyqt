@@ -12,6 +12,15 @@ from util import formatted_number
 MAIN_WIDGET_SIZE = 950
 
 
+class TabPane(QtGui.QScrollArea):
+
+    def __init__(self, parent=None):
+        super(TabPane, self).__init__(parent)
+
+    def addBox(self, box):
+        self.setLayout(box)
+
+
 class F_PageTitle(QtGui.QLabel):
 
     def __init__(self, *args, **kwargs):

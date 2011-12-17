@@ -1,6 +1,6 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
-#maintainer: Fad
+#maintainer: Fadiga
 
 
 from datetime import datetime
@@ -9,7 +9,8 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import (F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle)
+
+from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 from util import raise_success, raise_error, formatted_number
 from data_helper import remaining
 from magasins import MagasinViewWidget

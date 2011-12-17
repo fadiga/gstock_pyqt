@@ -9,8 +9,7 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import (F_Widget, F_PageTitle, F_TableWidget,
-                                                F_BoxTitle)
+from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 from util import raise_success, raise_error
 
 

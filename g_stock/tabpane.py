@@ -3,25 +3,15 @@
 # maintainer: Fad
 
 from PyQt4 import QtGui
-
-
-class TabPane(QtGui.QScrollArea):
-
-    def __init__(self, parent=None):
-        super(TabPane, self).__init__(parent)
-
-    def addBox(self, box):
-        self.setLayout(box)
+from ui.common import TabPane
 
 
 def tabbox(*args):
     """ adds a box with tab
     params:  (widget, title) title is the string """
-    ongles = args
     tab_widget = QtGui.QTabWidget()
-
-    for el in ongles:
+    for box, btitle in args:
         pane = TabPane()
-        pane.addBox(el[0])
-        tab_widget.addTab(pane, el[1])
+        pane.addBox(box)
+        tab_widget.addTab(pane, btitle)
     return tab_widget

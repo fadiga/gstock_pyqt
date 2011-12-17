@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# maintainer: alou
+# maintainer: Fadiga
 
 from PyQt4 import QtGui
 from sqlalchemy import desc
@@ -36,7 +36,6 @@ class DashbordViewWidget(F_Widget):
         vbox.addWidget(self.title)
         table_alert.addWidget(self.title_alert)
         table_alert.addWidget(self.table_alert)
-
         tablebox_dern_op.addWidget(self.title_dern_op)
         tablebox_dern_op.addWidget(self.table_dern_op)
         tab_widget = tabbox((table_alert, u"Alerte sur les produits"), \
