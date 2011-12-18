@@ -8,7 +8,7 @@ from PyQt4 import QtCore
 
 from database import *
 from common import F_Widget, F_TableWidget, F_PeriodHolder, \
-                            F_PageTitle, FormLabel
+                                                F_PageTitle, FormLabel
 
 
 class by_periodViewWidget(F_Widget, F_PeriodHolder):
@@ -19,9 +19,14 @@ class by_periodViewWidget(F_Widget, F_PeriodHolder):
 
         list_date = parent.list_
         self.table = by_periodTableWidget(list_date, parent=self)
-        self.title = F_PageTitle(u"Les rapports dans le magasin: ")
-        self.on_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
+        self.title = F_PageTitle(u"Rapport periodique ")
+
+        if list_date:
+            on,end = list_date
+        self.on_date = QtGui.QDateEdit(QtCore.QDate(2011,01,01))
+        self.on_date.setDisplayFormat("dd/MM/yyyy")
         self.end_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
+        self.end_date.setDisplayFormat("dd/MM/yyyy")
         self.button = QtGui.QPushButton(_(u"ok"))
         self.button.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
@@ -33,6 +38,14 @@ class by_periodViewWidget(F_Widget, F_PeriodHolder):
         gridbox.addWidget(self.end_date, 1, 2)
         gridbox.addWidget(FormLabel(""), 0, 3)
         gridbox.addWidget(self.button, 2, 2)
+        gridbox.setColumnStretch(3, 5)
+        if list_date:
+            gridbox.addWidget(FormLabel("Les Rapports du" + on + " au " + \
+                                                        end ), 4, 3)
+        else:
+            gridbox.addWidget(FormLabel("Les Rapports du " + \
+                                        self.on_date.text() + " au " + \
+                                        self.end_date.text()), 4, 3)
         vbox.addWidget(self.title)
         vbox.addLayout(gridbox)
         vbox.addWidget(self.table)
@@ -74,7 +87,7 @@ class by_periodTableWidget(F_TableWidget):
     def format_date(self, valeur):
         valeur = str(valeur)
         day, month, year = valeur.split('/')
-        return '-'.join(["20" + year, month, day])
+        return '-'.join([year, month, day])
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.produit, rap.nbr_carton, \
