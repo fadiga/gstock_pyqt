@@ -7,7 +7,7 @@ import gettext
 from datetime import date, datetime
 
 import sqlalchemy
-from sqlalchemy import desc, func
+from sqlalchemy import desc, asc, func
 from sqlalchemy.orm import exc
 
 from database import *
@@ -35,7 +35,7 @@ def alerte_report():
     return list_alert
 
 
-def remaining(type_,  nbr_carton, magasin, produit):
+def remaining(type_, nbr_carton, magasin, produit):
     """ Calculation of remaining. """
     previous_rapp = ""
     previous_rapp = last_rapport(magasin, produit)
@@ -57,5 +57,35 @@ def remaining(type_,  nbr_carton, magasin, produit):
             return [int(nbr_carton), u""]
 
 
-def update_rapport():
-    pass
+def update_rapport(report):
+    """ mise à jour après la suppression"""
+    prev_report = []
+    prev_report = session.query(Rapport) \
+                    .filter(Rapport.magasin_id == report.magasin_id)\
+                    .filter(Rapport.produit_id == report.produit_id)\
+                    .filter(Rapport.date_rapp.__lt__(report.date_rapp))\
+                    .order_by(desc(Rapport.date_rapp)).first()
+    if prev_report:
+        rest = prev_report.restant
+        next_report = [(rap) for rap in session.query(Rapport) \
+                .filter(Rapport.magasin_id == prev_report.magasin_id)\
+                .filter(Rapport.produit_id == prev_report.produit_id)\
+                .filter(Rapport.date_rapp.__gt__(prev_report.date_rapp))\
+                .order_by(asc(Rapport.date_rapp)).all()]
+    else:
+        next_report = session.query(Rapport) \
+                .filter(Rapport.magasin_id == report.magasin_id)\
+                .filter(Rapport.produit_id == report.produit_id)\
+                .filter(Rapport.date_rapp.__gt__(report.date_rapp))\
+                .order_by(asc(Rapport.date_rapp)).all()
+        rest = 0
+    if next_report != []:
+        for rap in next_report:
+            rap.restant = rest
+            if rap.type_ == "Entre":
+                rap.restant = rest + rap.nbr_carton
+            if rap.type_ == "Sortie":
+                rap.restant = rest - rap.nbr_carton
+            rest = rap.restant
+            session.add(rap)
+            session.commit()

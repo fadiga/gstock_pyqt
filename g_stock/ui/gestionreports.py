@@ -126,7 +126,7 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u"Type", u"Magasin", u"Produit", \
+        self.header = [u" ", u"Magasin", u"Produit", \
                        u"Nbre carton", u"Restant", u" ", \
                        u"Date", u"Modification", u"Suppresion"]
         self.set_data_for()

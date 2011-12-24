@@ -22,7 +22,7 @@ class by_periodViewWidget(F_Widget, F_PeriodHolder):
         self.title = F_PageTitle(u"Rapport periodique ")
 
         if list_date:
-            on,end = list_date
+            on, end = list_date
         self.on_date = QtGui.QDateEdit(QtCore.QDate(2011,01,01))
         self.on_date.setDisplayFormat("dd/MM/yyyy")
         self.end_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
@@ -41,7 +41,7 @@ class by_periodViewWidget(F_Widget, F_PeriodHolder):
         gridbox.setColumnStretch(3, 5)
         if list_date:
             gridbox.addWidget(FormLabel("Les Rapports du" + on + " au " + \
-                                                        end ), 4, 3)
+                                                                end ), 4, 3)
         else:
             gridbox.addWidget(FormLabel("Les Rapports du " + \
                                         self.on_date.text() + " au " + \

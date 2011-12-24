@@ -7,6 +7,7 @@ from PyQt4 import QtCore
 
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from util import raise_error, raise_success
+from data_helper import update_rapport
 from database import *
 
 
@@ -52,6 +53,7 @@ class deleteViewWidget(QtGui.QDialog, F_Widget):
     def delete(self):
         session.delete(self.op)
         session.commit()
+        update_rapport(self.op)
         self.cancel()
         raise_success(u"Confirmation", \
                         " ".join(["Ce rapport conserne le produit ", \
