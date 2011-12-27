@@ -11,8 +11,8 @@ setuptools.setup(
 
     install_requires=['SQLAlchemy>=0.6.6','pysqlite'],
     provides=['gstock'],
-
-    description='Budget Management G.U.I',
+	autor = "Fadiga",
+    description='Gestion des magasin de stock G.U.I',
     long_description=open('README.rst').read(),
 
     url='http://github.com/yeleman/anm',

@@ -9,17 +9,16 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-
 from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 from util import raise_success, raise_error, formatted_number
-from data_helper import remaining
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
-from deleteview import deleteViewWidget
+from modifview import ModifViewWidget
+from data_helper import remaining
+from deleteview import DeleteViewWidget
 from allreports import AllreportsViewWidget
-from by_magasin import by_magasinViewWidget
-from by_produit import by_produitViewWidget
-
+from by_magasin import By_magasinViewWidget
+from by_produit import By_produitViewWidget
 
 class G_reportViewWidget(F_Widget):
 
@@ -167,15 +166,20 @@ class MagasinTableWidget(F_TableWidget):
         modified_column = 7
         del_column = 8
         if column == magsin_column:
-            self.parent.change_main_context(by_magasinViewWidget, \
+            self.parent.change_main_context(By_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])
         if column == produit_column:
-            self.parent.change_main_context(by_produitViewWidget, \
+            self.parent.change_main_context(By_produitViewWidget, \
                                     produit=self.data[row][produit_column])
         if column == modified_column:
-            self.parent.change_main_context(AllreportsViewWidget)
+            self.open_dialog(ModifViewWidget, modal=True,\
+                             report=session.query(Rapport)\
+                             .filter(Rapport.date_rapp == self \
+                             .data[row][5]).all()[0])
+            self.parent.change_main_context(G_reportViewWidget)
+
         if column == del_column:
-            self.open_dialog(deleteViewWidget, modal=True,\
+            self.open_dialog(DeleteViewWidget, modal=True,\
                              report=session.query(Rapport)\
                              .filter(Rapport.date_rapp == self \
                              .data[row][5]).all()[0])

@@ -9,8 +9,8 @@ from sqlalchemy import desc
 from database import *
 from util import formatted_number
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
-from by_magasin import by_magasinViewWidget
-from by_produit import by_produitViewWidget
+from by_magasin import By_magasinViewWidget
+from by_produit import By_produitViewWidget
 
 
 class AllreportsViewWidget(F_Widget, F_PeriodHolder):
@@ -93,10 +93,10 @@ class RapportTableWidget(F_TableWidget):
         magsin_column = 1
         produit_column = 2
         if column == magsin_column:
-            self.parent.change_main_context(by_magasinViewWidget, \
+            self.parent.change_main_context(By_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])
         if column == produit_column:
-            self.parent.change_main_context(by_produitViewWidget, \
+            self.parent.change_main_context(By_produitViewWidget, \
                                     produit=self.data[row][produit_column])
         else:
             return

@@ -44,7 +44,7 @@ You need a working windows environment to build ANM windows packageL
     pysqlite-2.6.0.win32-py2.6.exe
 
     python-2.6.6.msi (add C:\Python26 to PATH)
-    
+
     reboot
 
     xlwt-0.7.2.win32.exe
@@ -52,7 +52,7 @@ You need a working windows environment to build ANM windows packageL
     reportlab-2.5.win32-py2.6.exe
 
     setuptools-0.6c11.win32-py2.6.exe
-    
+
     cd C:\Python26\Scripts
     ``easy_install SQLAlchemy==0.6.6``
 
@@ -63,12 +63,12 @@ Once setup, create windows executable:
 
     ``copy ..\resources\microsoftdll\*.man* .``
 
-    ``.python.exe setup-win.py py2exe``
+    ``python.exe setup-win.py py2exe``
 
 If you want a single executable (everything inside ; faster):
 
     ``set PY2EXEMODE=single ; python.exe setup-win.py py2exe``
 
 Once windows binary is complete, create installer with:
-    
+
     ``"C:\Program Files\NSIS\makensis.exe" installer.nsi``

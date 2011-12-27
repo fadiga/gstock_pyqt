@@ -9,17 +9,17 @@ from database import *
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 
 
-class by_produitViewWidget(F_Widget, F_PeriodHolder):
+class By_produitViewWidget(F_Widget, F_PeriodHolder):
 
     def __init__(self, produit, parent=0, *args, **kwargs):
 
-        super(by_produitViewWidget, self).__init__(parent=parent, *args, \
+        super(By_produitViewWidget, self).__init__(parent=parent, *args, \
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
         self.title = F_PageTitle(" ".join([u"Les rapports dont le produit:", \
                                                         produit.libelle]))
-        self.table = by_produitTableWidget(produit, parent=self, \
+        self.table = By_produitTableWidget(produit, parent=self, \
                                                 period=self.main_period)
         # periods
         period = ""
@@ -35,7 +35,7 @@ class by_produitViewWidget(F_Widget, F_PeriodHolder):
         self.table.refresh()
 
 
-class by_produitTableWidget(F_TableWidget):
+class By_produitTableWidget(F_TableWidget):
 
     def __init__(self, produit, parent, period, *args, **kwargs):
 
@@ -66,15 +66,15 @@ class by_produitTableWidget(F_TableWidget):
         if column == 0 and self.data[row][0] == "Sortie":
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
                                           _(u""))
-        return super(by_produitTableWidget, self)\
+        return super(By_produitTableWidget, self)\
                                             ._item_for_data(row, column, \
                                                         data, context)
 
     def click_item(self, row, column, *args):
         magsin_column = 1
         if column == magsin_column:
-            from by_magasin import by_magasinViewWidget
-            self.parent.change_main_context(by_magasinViewWidget, \
+            from by_magasin import By_magasinViewWidget
+            self.parent.change_main_context(By_magasinViewWidget, \
                                     magasin=self.data[row][magsin_column])
         else:
             return

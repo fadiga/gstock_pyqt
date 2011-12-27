@@ -11,7 +11,7 @@ from data_helper import update_rapport
 from database import *
 
 
-class deleteViewWidget(QtGui.QDialog, F_Widget):
+class DeleteViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)

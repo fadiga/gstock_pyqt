@@ -20,7 +20,7 @@ else:
     BUNDLES = 1
 
 setup(windows=[{'script': 'gmag.py', \
-                'icon_resources': [(0, 'images\\mali.png')]}],
+                'icon_resources': [(0, 'images\\ap.ico')]}],
       options={'py2exe': {
                     'includes': ['sip'],
                     'packages': ['sqlalchemy.dialects.sqlite'],

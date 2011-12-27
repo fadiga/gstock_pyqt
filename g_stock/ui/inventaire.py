@@ -11,15 +11,15 @@ from common import F_Widget, F_TableWidget, F_PeriodHolder, \
                                                 F_PageTitle, FormLabel
 
 
-class By_periodViewWidget(F_Widget, F_PeriodHolder):
+class InventaireViewWidget(F_Widget, F_PeriodHolder):
 
     def __init__(self, parent=0, *args, **kwargs):
-        super(By_periodViewWidget, self).__init__(parent=parent, *args, \
+        super(InventaireViewWidget, self).__init__(parent=parent, *args, \
                                                                 **kwargs)
 
         list_date = parent.list_
-        self.table = By_periodTableWidget(list_date, parent=self)
-        self.title = F_PageTitle(u"Rapport periodique ")
+        self.table = InventaireTableWidget(list_date, parent=self)
+        self.title = F_PageTitle(u"Inventaire")
 
         if list_date:
             on, end = list_date
@@ -58,10 +58,10 @@ class By_periodViewWidget(F_Widget, F_PeriodHolder):
         on_date = self.on_date.text()
         end_date = self.end_date.text()
         l_date = [on_date, end_date]
-        self.change_main_context(By_periodViewWidget, l_date)
+        self.change_main_context(InventaireViewWidget, l_date)
 
 
-class By_periodTableWidget(F_TableWidget):
+class InventaireTableWidget(F_TableWidget):
     """ """
 
     def __init__(self, list_date, parent, *args, **kwargs):
@@ -93,5 +93,5 @@ class By_periodTableWidget(F_TableWidget):
         self.data = [(rap.type_, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport)\
-                            .filter(Rapport.date_rapp.__gt__(self.on_date)) \
-                            .filter(Rapport.date_rapp.__lt__(self.end_date))]
+                        .filter(Rapport.date_rapp.__gt__(self.on_date)) \
+                        .filter(Rapport.date_rapp.__lt__(self.end_date))]

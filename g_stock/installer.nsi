@@ -6,7 +6,7 @@ Name "Suivi de stock GSTOCK"
 OutFile "Install-gstock.exe"
 
 ; default destination dir
-InstallDir "C:\Gstock"
+InstallDir "C:\GSTOCK"
 
 ; request application privilege
 ; user should be ok. one can still right-click to install as admin
@@ -30,7 +30,7 @@ Section ""
 
   ; start menu entry
   CreateDirectory "$SMPROGRAMS\GSTOCK"
-  CreateShortCut "$SMPROGRAMS\GSTOCK\Suivi gstock.lnk" "$INSTDIR\gstock.exe" "" "$INSTDIR\gstock.exe" 0
+  CreateShortCut "$SMPROGRAMS\GSTOCK\Suivi de stock.lnk" "$INSTDIR\gstock.exe" "" "$INSTDIR\gstock.exe" 0
   createShortCut "$SMPROGRAMS\GSTOCK\Uninstall Suivi gstock.lnk" "$INSTDIR\uninstaller.exe"
 
 
@@ -54,7 +54,7 @@ delete $INSTDIR\*.exe
 delete $INSTDIR\*.lib
 delete $INSTDIR\*.zip
 RMDir /r $INSTDIR\images
-;~ RMDir /r $INSTDIR\locale
+RMDir /r $INSTDIR\locale
 
 sectionEnd
 

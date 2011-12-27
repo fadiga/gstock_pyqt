@@ -6,7 +6,8 @@ from PyQt4 import QtGui, QtCore
 
 from common import F_Widget
 from magasins import MagasinViewWidget
-from by_period import by_periodViewWidget
+from by_period import By_periodViewWidget
+from inventaire import InventaireViewWidget
 from utils.exports import export_database_as_file, \
                           export_database_as_excel
 
@@ -45,6 +46,12 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
                                             self.report_period)
         goto_.addAction(rap_p)
+        # Rapport inventaire
+        rap_inv = QtGui.QAction((u"Inventaire"), self)
+        rap_inv.setShortcut("Ctrl+I")
+        self.connect(rap_inv, QtCore.SIGNAL("triggered()"),\
+                                            self.goto_inventaire)
+        goto_.addAction(rap_inv)
         #Menu Aide
         help_ = self.addMenu((u"Aide"))
         help_.addAction(QtGui.QIcon('images/help.png'), \
@@ -52,17 +59,13 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         help_.addAction(QtGui.QIcon('images/about.png'), \
                                         "A propos", self.goto_about)
 
-    #Refresh the menu bar to enabled or disabled the delete menu
-    def refresh(self):
-        pass
-
     #Print
-    def goto_print(self):
-        pass
+    def goto_inventaire(self):
+        self.change_main_context(InventaireViewWidget)
 
     #Rapport periodique.
     def report_period(self):
-        self.change_main_context(by_periodViewWidget)
+        self.change_main_context(By_periodViewWidget)
 
     def addstore(self):
         self.change_main_context(MagasinViewWidget)
