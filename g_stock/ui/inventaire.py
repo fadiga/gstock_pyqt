@@ -9,6 +9,7 @@ from PyQt4 import QtCore
 from database import *
 from common import F_Widget, F_TableWidget, F_PeriodHolder, \
                                                 F_PageTitle, FormLabel
+from data_helper import last_rapport, inventaire
 
 
 class InventaireViewWidget(F_Widget, F_PeriodHolder):
@@ -68,7 +69,7 @@ class InventaireTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Type"), _(u"Produit"), \
+        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
                        _(u"Nombre de carton"), _(u"Carto Restant"), \
                        _(u"Date")]
         try:
@@ -76,7 +77,7 @@ class InventaireTableWidget(F_TableWidget):
             self.end_date = self.format_date(list_date[1])
         except:
             self.on_date = "2011-01-01"
-            self.end_date = date.today().strftime("%Y-%m-%d")
+            self.end_date = date.today().strftime("%Y-%M-%d")
         self.set_data_for()
         self.refresh(True)
 
@@ -90,8 +91,7 @@ class InventaireTableWidget(F_TableWidget):
         return '-'.join([year, month, day])
 
     def set_data_for(self):
-        self.data = [(rap.type_, rap.produit, rap.nbr_carton, \
+        reports = inventaire(self.on_date, self.end_date)
+        self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                        for rap in session.query(Rapport)\
-                        .filter(Rapport.date_rapp.__gt__(self.on_date)) \
-                        .filter(Rapport.date_rapp.__lt__(self.end_date))]
+                      for rap in reports]

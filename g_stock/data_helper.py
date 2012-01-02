@@ -89,3 +89,23 @@ def update_rapport(report):
             rest = rap.restant
             session.add(rap)
             session.commit()
+
+
+def inventaire(on_date, end_date):
+    """ """
+    list_rap = []
+    reports = session.query(Rapport)\
+                    .filter(Rapport.date_rapp.__ge__(on_date)) \
+                    .filter(Rapport.date_rapp.__le__(end_date))
+    for mag in session.query(Magasin).all():
+        for prod in session.query(Produit).all():
+            p =reports.filter(Rapport.magasin_id == mag.id) \
+                        .filter(Rapport.produit_id == prod.id)\
+                        .order_by("-date_rapp")
+            try:
+                list_rap.append(p[0])
+            except:
+                pass
+    return list_rap
+
+

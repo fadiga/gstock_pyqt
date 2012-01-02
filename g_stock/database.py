@@ -86,10 +86,10 @@ class Rapport(object):
         self.registered_on = datetime.now()
 
     def __repr__(self):
-        return ("Rapport('%(type_)s','%(date_rapp)s',\
-                '%(produit)s','%(nbr_carton)s)") \
-                 % {'type_': self.type_, 'date_rapp': self.date_rapp, \
-                 'nbr_carton': self.nbr_carton, 'produit': self.produit}
+        return ("Rapport('%(type_)s', '%(magasin)s', '%(produit)s', \
+                '%(nbr_carton)s, '%(date_rapp)s')") % {'type_': self.type_, \
+                'date_rapp': self.date_rapp, 'nbr_carton': self.nbr_carton, \
+                'magasin': self.magasin, 'produit': self.produit}
 
     def __unicode__(self):
         return (u"%(type_)s %(date_rapp)s %(produit)s: %(magasin)s") \

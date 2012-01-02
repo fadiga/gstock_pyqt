@@ -68,7 +68,7 @@ class By_periodTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Type"), _(u"Produit"), \
+        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
                        _(u"Nombre de carton"), _(u"Carto Restant"), \
                        _(u"Date")]
         try:
@@ -90,8 +90,8 @@ class By_periodTableWidget(F_TableWidget):
         return '-'.join([year, month, day])
 
     def set_data_for(self):
-        self.data = [(rap.type_, rap.produit, rap.nbr_carton, \
+        self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport)\
-                            .filter(Rapport.date_rapp.__gt__(self.on_date)) \
-                            .filter(Rapport.date_rapp.__lt__(self.end_date))]
+                            .filter(Rapport.date_rapp.__ge__(self.on_date)) \
+                            .filter(Rapport.date_rapp.__le__(self.end_date))]
