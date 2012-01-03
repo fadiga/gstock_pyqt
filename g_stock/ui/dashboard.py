@@ -86,7 +86,7 @@ class Dern_opTableWidget(F_TableWidget):
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entre":
+        if column == 0 and self.data[row][0] == "Entrer":
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
                                           _(u""))
         if column == 0 and self.data[row][0] == "Sortie":

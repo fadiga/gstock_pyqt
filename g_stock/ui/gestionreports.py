@@ -45,7 +45,7 @@ class G_reportViewWidget(F_Widget):
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(u"Ajout rapport"))
 
-        self.liste_type = [_("Entre"), _("Sortie")]
+        self.liste_type = [_("Entrer"), _("Sortie")]
         #Combobox widget
         self.box_type = QtGui.QComboBox()
         for index in self.liste_type:
@@ -144,7 +144,7 @@ class MagasinTableWidget(F_TableWidget):
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entre":
+        if column == 0 and self.data[row][0] == "Entrer":
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
                                           _(u""))
         if column == 0 and self.data[row][0] == "Sortie":

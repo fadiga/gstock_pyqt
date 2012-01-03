@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # maintainer: Fad
 
-from datetime import date
+from datetime import date, timedelta
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
@@ -76,7 +76,7 @@ class InventaireTableWidget(F_TableWidget):
             self.on_date = self.format_date(list_date[0])
             self.end_date = self.format_date(list_date[1])
         except:
-            self.on_date = "2011-01-01"
+            self.on_date = (date.today() - timedelta(365)).strftime("%Y-%m-%d")
             self.end_date = date.today().strftime("%Y-%M-%d")
         self.set_data_for()
         self.refresh(True)

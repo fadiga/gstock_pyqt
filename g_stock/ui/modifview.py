@@ -33,7 +33,7 @@ class ModifViewWidget(QtGui.QDialog, F_Widget):
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(u"Modifier rapport"))
 
-        self.liste_type = [_("Entre"), _("Sortie")]
+        self.liste_type = [_("Entrer"), _("Sortie")]
         #Combobox widget
         self.box_type = QtGui.QComboBox()
         for index in self.liste_type:

@@ -48,8 +48,8 @@ def remaining(type_, nbr_carton, magasin, produit):
                                 + str(nbr_carton)]
             return [restant, u""]
         except AttributeError:
-            return [None, u"IL n'y eu aucun  entre pour ce produit "]
-    if type_ == "Entre":
+            return [None, u"IL n'y eu aucun  entrer pour ce produit "]
+    if type_ == "Entrer":
         try:
             restant = int(previous_rapp.restant) + int(nbr_carton)
             return [restant, u""]
@@ -82,7 +82,7 @@ def update_rapport(report):
     if next_report != []:
         for rap in next_report:
             rap.restant = rest
-            if rap.type_ == "Entre":
+            if rap.type_ == "Entrer":
                 rap.restant = rest + rap.nbr_carton
             if rap.type_ == "Sortie":
                 rap.restant = rest - rap.nbr_carton

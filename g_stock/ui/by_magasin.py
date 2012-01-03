@@ -60,7 +60,7 @@ class By_magasinTableWidget(F_TableWidget):
                                 .filter(Rapport.magasin_id == self.mag.id)]
 
     def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entre":
+        if column == 0 and self.data[row][0] == "Entrer":
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
                                           _(u""))
         if column == 0 and self.data[row][0] == "Sortie":
