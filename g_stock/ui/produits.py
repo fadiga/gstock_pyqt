@@ -39,7 +39,7 @@ class ProduitViewWidget(F_Widget):
         editbox.addWidget(self.libelle, 1, 0)
         editbox.addWidget(QtGui.QLabel((_(u"Nbre de piece"))), 0, 1)
         editbox.addWidget(self.nbre_piece, 1, 1)
-        butt = QtGui.QPushButton((u"Add"))
+        butt = QtGui.QCommandLinkButton((u"Enregistrer"))
         butt.clicked.connect(self.add_operation)
         editbox.addWidget(butt, 1, 2)
 

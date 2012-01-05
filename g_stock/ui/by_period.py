@@ -25,9 +25,11 @@ class By_periodViewWidget(F_Widget, F_PeriodHolder):
             on, end = list_date
         self.on_date = QtGui.QDateEdit(QtCore.QDate(date.today().year,01,01))
         self.on_date.setDisplayFormat("dd/MM/yyyy")
+        self.on_date.setCalendarPopup(True)
         self.end_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
         self.end_date.setDisplayFormat("dd/MM/yyyy")
-        self.button = QtGui.QPushButton(_(u"ok"))
+        self.end_date.setCalendarPopup(True)
+        self.button = QtGui.QCommandLinkButton(_(u"ok"))
         self.button.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
         # Grid

@@ -102,6 +102,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
         self.setStyleSheet("color: #020028;background-color:#F5F8FC")
         # enable sorting
         self.setSortingEnabled(True)
+        self.setCursor(QtGui.QCursor(True))
 
     def setdata(self, value):
         if not isinstance(value, (list, None.__class__)):
@@ -272,6 +273,7 @@ class F_PeriodTabBar(QtGui.QTabBar):
         self.set_data_from(self.main_type_date, NOW)
         self.build_tab_list()
         self.currentChanged.connect(self.changed_period)
+        self.setMovable(True)
 
     def set_data_from(self, typ, period):
         self.main_period = period

@@ -35,10 +35,13 @@ class G_reportViewWidget(F_Widget):
         tablebox.addWidget(self.table_op)
 
         self.nbre_carton = QtGui.QLineEdit()
+        self.nbre_carton.setDragEnabled(True)
         self.nbre_carton.setValidator(QtGui.QIntValidator())
 
         self.date_ = QtGui.QDateTimeEdit(QtCore.QDate.currentDate())
         self.date_.setDisplayFormat("dd/MM/yyyy")
+        self.date_.setCalendarPopup(True)
+        self.date_.setFont(QtGui.QFont("Courier New", 10, True))
 
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
@@ -77,8 +80,9 @@ class G_reportViewWidget(F_Widget):
         editbox.addWidget(self.nbre_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = QtGui.QPushButton((u"Add"))
+        butt = QtGui.QCommandLinkButton((u"Enregister"))
         butt.clicked.connect(self.add_operation)
+        #~ butt.setChecked(True)
         editbox.addWidget(butt, 1, 5)
 
         formbox.addLayout(editbox)
