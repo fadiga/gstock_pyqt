@@ -13,12 +13,12 @@ from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 from util import raise_success, raise_error, formatted_number
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
-from modifview import ModifViewWidget
 from data_helper import remaining
 from deleteview import DeleteViewWidget
 from allreports import AllreportsViewWidget
 from by_magasin import By_magasinViewWidget
 from by_produit import By_produitViewWidget
+from edit_report import EditReportViewWidget
 
 class G_reportViewWidget(F_Widget):
 
@@ -34,9 +34,9 @@ class G_reportViewWidget(F_Widget):
         self.table_op = MagasinTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
-        self.nbre_carton = QtGui.QLineEdit()
-        self.nbre_carton.setDragEnabled(True)
-        self.nbre_carton.setValidator(QtGui.QIntValidator())
+        self.nbr_carton = QtGui.QLineEdit()
+        self.nbr_carton.setDragEnabled(True)
+        self.nbr_carton.setValidator(QtGui.QIntValidator())
 
         self.date_ = QtGui.QDateTimeEdit(QtCore.QDate.currentDate())
         self.date_.setDisplayFormat("dd/MM/yyyy")
@@ -77,7 +77,7 @@ class G_reportViewWidget(F_Widget):
         editbox.addWidget(QtGui.QLabel((_(u"Produit"))), 0, 2)
         editbox.addWidget(self.box_prod, 1, 2)
         editbox.addWidget(QtGui.QLabel((_(u"Nbre carton"))), 0, 3)
-        editbox.addWidget(self.nbre_carton, 1, 3)
+        editbox.addWidget(self.nbr_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
         butt = QtGui.QCommandLinkButton((u"Enregister"))
@@ -98,25 +98,25 @@ class G_reportViewWidget(F_Widget):
         type_ = self.liste_type[self.box_type.currentIndex()]
         magasin = self.liste_magasin[self.box_mag.currentIndex()]
         produit = self.liste_produit[self.box_prod.currentIndex()]
-        nbre_carton = self.nbre_carton.text()
+        nbr_carton = self.nbr_carton.text()
         date_ = self.date_.text()
         day, month, year = date_.split('/')
         dt = datetime.now()
         datetime_ = datetime(int(year), int(month), int(day), dt.hour, \
                                     dt.minute, dt.second, dt.microsecond)
 
-        if unicode(self.nbre_carton.text()) != "":
-            r = remaining(type_,  nbre_carton, magasin.id, produit.id)
+        if unicode(self.nbr_carton.text()) != "":
+            r = remaining(type_,  nbr_carton, magasin.id, produit.id)
             if r[0] == None:
                 raise_error(_(u"error"), _(r[1]))
             else:
-                report = Rapport(unicode(type_), int(nbre_carton), datetime_)
+                report = Rapport(unicode(type_), int(nbr_carton), datetime_)
                 report.magasin = magasin
                 report.produit = produit
                 report.restant = r[0]
                 session.add(report)
                 session.commit()
-                self.nbre_carton.clear()
+                self.nbr_carton.clear()
                 self.refresh()
                 self.change_main_context(G_reportViewWidget)
                 raise_success(u"Confirmation", u"Registered opération")
@@ -154,11 +154,11 @@ class MagasinTableWidget(F_TableWidget):
         if column == 0 and self.data[row][0] == "Sortie":
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
                                           _(u""))
-        if column == 8:
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), \
-                                          _(u""))
         if column == 7:
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), \
+                                          _(u""))
+        if column == 8:
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), \
                                           _(u""))
         return super(MagasinTableWidget, self)\
                                             ._item_for_data(row, column, \
@@ -176,7 +176,7 @@ class MagasinTableWidget(F_TableWidget):
             self.parent.change_main_context(By_produitViewWidget, \
                                     produit=self.data[row][produit_column])
         if column == modified_column:
-            self.open_dialog(ModifViewWidget, modal=True,\
+            self.open_dialog(EditReportViewWidget, modal=True,\
                              report=session.query(Rapport)\
                              .filter(Rapport.date_rapp == self \
                              .data[row][5]).all()[0])

@@ -12,7 +12,7 @@ from data_helper import update_rapport
 from database import *
 
 
-class ModifViewWidget(QtGui.QDialog, F_Widget):
+class EditReportViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
@@ -22,7 +22,7 @@ class ModifViewWidget(QtGui.QDialog, F_Widget):
         self.op = report
         vbox = QtGui.QVBoxLayout()
 
-        self.nbre_carton = QtGui.QLineEdit()
+        self.nbre_carton = QtGui.QLineEdit(str(self.op.nbr_carton))
         self.nbre_carton.setValidator(QtGui.QIntValidator())
 
         self.date_ = QtGui.QDateTimeEdit(QtCore.QDate(self.op.date_rapp))
@@ -65,8 +65,8 @@ class ModifViewWidget(QtGui.QDialog, F_Widget):
         editbox.addWidget(self.nbre_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = QtGui.QPushButton((u"Enregistre la modification"))
-        butt.clicked.connect(self.modif)
+        butt = QtGui.QPushButton((u"Enregistrer"))
+        butt.clicked.connect(self.edit_report)
         cancel_but = QtGui.QPushButton((u"Cancel"))
         cancel_but.clicked.connect(self.cancel)
         editbox.addWidget(butt, 2, 3)
@@ -79,8 +79,13 @@ class ModifViewWidget(QtGui.QDialog, F_Widget):
     def cancel(self):
         self.close()
 
-    def modif(self):
-        session.add(self.op)
+    def edit_report(self):
+        report = self.op
+        report.type_ = ""
+        report.magasin = ""
+        report.produit = ""
+        report.nbr_cartion = ""
+        session.add(report)
         session.commit()
         update_rapport(self.op)
         self.cancel()

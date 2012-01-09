@@ -30,7 +30,7 @@ class InventaireViewWidget(F_Widget, F_PeriodHolder):
         self.end_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
         self.end_date.setDisplayFormat("dd/MM/yyyy")
         self.end_date.setCalendarPopup(True)
-        self.button = QtGui.QCommandLinkButton(_(u"ok"))
+        self.button = QtGui.QCommandLinkButton(u"ok")
         self.button.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
         # Grid

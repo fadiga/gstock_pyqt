@@ -18,14 +18,13 @@ class DashbordViewWidget(F_Widget):
     def __init__(self, parent=0, *args, **kwargs):
         super(DashbordViewWidget, self).__init__(parent=parent,
                                                         *args, **kwargs)
-
         vbox = QtGui.QVBoxLayout()
         box_left = QtGui.QHBoxLayout()
         box_rigth = QtGui.QHBoxLayout()
         table_alert = QtGui.QVBoxLayout()
         tablebox_dern_op = QtGui.QVBoxLayout()
 
-        self.title = F_PageTitle("Accuiel")
+        self.title = F_PageTitle("Accueil")
         self.title_alert = F_BoxTitle((u"La liste des produits " \
                                     u"dont le restant est < 100 cartons"))
         self.title_dern_op = F_BoxTitle((u"Table de dernière operations"))
@@ -86,12 +85,10 @@ class Dern_opTableWidget(F_TableWidget):
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
+
         if column == 0 and self.data[row][0] == "Entrer":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
-                                          _(u""))
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
         if column == 0 and self.data[row][0] == "Sortie":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
-                                          _(u""))
-        return super(Dern_opTableWidget, self)\
-                                            ._item_for_data(row, column, \
-                                                        data, context)
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
+        return super(Dern_opTableWidget, self)._item_for_data(row, column, \
+                                                                data, context)

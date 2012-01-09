@@ -70,9 +70,8 @@ class By_periodTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Carto Restant"), \
-                       _(u"Date")]
+        self.header = [u"Type", u"Magasin", u"Produit", u"Nombre de carton", \
+                                                    u"Carto Restant", u"Date"]
         try:
             self.on_date = self.format_date(list_date[0])
             self.end_date = self.format_date(list_date[1])

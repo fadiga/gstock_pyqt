@@ -12,7 +12,7 @@ from util import formatted_number
 MAIN_WIDGET_SIZE = 950
 
 
-class TabPane(QtGui.QScrollArea):
+class TabPane(QtGui.QTabBar):
 
     def __init__(self, parent=None):
         super(TabPane, self).__init__(parent)
@@ -266,14 +266,13 @@ class F_PeriodTabBar(QtGui.QTabBar):
 
         super(F_PeriodTabBar, self).__init__(*args, **kwargs)
 
-        for i in range(0, 3):
+        for i in range(0, 4):
             self.addTab('%s' % i)
         NOW = datetime.now()
         self.main_type_date = main_type_date
         self.set_data_from(self.main_type_date, NOW)
         self.build_tab_list()
         self.currentChanged.connect(self.changed_period)
-        self.setMovable(True)
 
     def set_data_from(self, typ, period):
         self.main_period = period

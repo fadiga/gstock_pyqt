@@ -11,7 +11,7 @@ from PyQt4 import QtGui, QtCore
 from database import *
 from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 from util import raise_success, raise_error
-
+from edit_produit import EditProduitViewWidget
 
 class ProduitViewWidget(F_Widget):
 
@@ -24,7 +24,7 @@ class ProduitViewWidget(F_Widget):
 
         tablebox = QtGui.QVBoxLayout()
         tablebox.addWidget(F_BoxTitle(u"Table produits"))
-        self.table_op = MagasinTableWidget(parent=self)
+        self.table_op = ProduitTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
         self.libelle = QtGui.QLineEdit()
@@ -60,23 +60,40 @@ class ProduitViewWidget(F_Widget):
                 self.nbre_piece.clear()
                 self.refresh()
                 self.change_main_context(ProduitViewWidget)
-                raise_success(_(u"Confirmation"), _(u"Registered opération"))
+                raise_success(u"Confirmation", u"Le produit %s "
+                              u" à été bien enregistrer" % produit.libelle)
             else:
-                raise_error(_(u"error"), \
-                            _(u"Donnez le nombre de pièce dans le carton"))
+                raise_error(u"error", \
+                            u"Donnez le nombre de pièce dans le carton")
         else:
-            raise_error(_(u"error"), _(u"Donnez le nom du produit"))
+            raise_error(u"error", u"Donnez le nom du produit")
 
 
-class MagasinTableWidget(F_TableWidget):
+class ProduitTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [(u"Designation"), (u"Nbre de piece")]
+        self.header = [u"Designation", u"Nbre de pièce", u"modification"]
         self.set_data_for()
         self.refresh(True)
 
     def set_data_for(self):
-        self.data = [(prod.libelle, prod.nbr_piece) \
+        self.data = [(prod.libelle, prod.nbr_piece, "") \
                                     for prod in session.query(Produit).\
                                         order_by(desc(Produit.id)).all()]
+
+    def _item_for_data(self, row, column, data, context=None):
+        if column == 2:
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), "")
+        return super(ProduitTableWidget, self)\
+                                            ._item_for_data(row, column, \
+                                                        data, context)
+    def click_item(self, row, column, *args):
+        modified_column = 2
+        if column == modified_column:
+            self.open_dialog(EditProduitViewWidget, modal=True, \
+                                produit=session.query(Produit) \
+                                .filter(Produit.libelle==self.data[row][0]).all()[0])
+            self.parent.change_main_context(ProduitViewWidget)
+        else:
+            return

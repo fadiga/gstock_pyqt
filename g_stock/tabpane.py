@@ -10,6 +10,10 @@ def tabbox(*args):
     """ adds a box with tab
     params:  (widget, title) title is the string """
     tab_widget = QtGui.QTabWidget()
+    tab_widget.setMovable(True)
+    #~ tab_widget.setTabShape(QtGui.QTabWidget.Triangular)
+    tab_widget.setTabPosition(QtGui.QTabWidget.West)
+
     for box, btitle in args:
         pane = TabPane()
         pane.addBox(box)
