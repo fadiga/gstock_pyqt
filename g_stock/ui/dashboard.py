@@ -24,10 +24,10 @@ class DashbordViewWidget(F_Widget):
         table_alert = QtGui.QVBoxLayout()
         tablebox_dern_op = QtGui.QVBoxLayout()
 
-        self.title = F_PageTitle("Accueil")
-        self.title_alert = F_BoxTitle((u"La liste des produits " \
+        self.title = F_PageTitle(_("Dashboard"))
+        self.title_alert = F_BoxTitle(_(u"La liste des produits " \
                                     u"dont le restant est < 100 cartons"))
-        self.title_dern_op = F_BoxTitle((u"Table de dernière operations"))
+        self.title_dern_op = F_BoxTitle(_(u"Tableau de dernière operations"))
 
         self.table_alert = Alert_TableWidget(parent=self)
         self.table_dern_op = Dern_opTableWidget(parent=self)
@@ -37,9 +37,8 @@ class DashbordViewWidget(F_Widget):
         table_alert.addWidget(self.table_alert)
         tablebox_dern_op.addWidget(self.title_dern_op)
         tablebox_dern_op.addWidget(self.table_dern_op)
-        tab_widget = tabbox((table_alert, u"Alerte sur les produits"), \
-                            (tablebox_dern_op, \
-                                        u"Table de dernière operations"))
+        tab_widget = tabbox((table_alert, _(u"Alerte sur les produits")), \
+                            (tablebox_dern_op,  _(u"The last operations")))
 
         vbox.addWidget(tab_widget)
         self.setLayout(vbox)
@@ -50,8 +49,8 @@ class Alert_TableWidget(F_TableWidget):
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Magasin"), _(u"Produit"), \
-                       _(u"Quantite"), u"Restant", (u"Date")]
+        self.header = [_(u"Magasin"), _(u"Produit"), _(u"Quantite"), \
+                                      _(u"Remaining"), _(u"Date")]
         self.set_data_for()
         self.refresh(True)
 
@@ -69,8 +68,8 @@ class Dern_opTableWidget(F_TableWidget):
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u" ", u"Magasin", u"Produit", u"Quantite", u"Restant", \
-                                                                u"Date"]
+        self.header = [u" ", _(u"Magasin"), _(u"Produit"), _(u"Quantite"), \
+                                            _(u"Remaining"), _(u"Date")]
         self.set_data_for()
         self.refresh(True)
         self.setColumnWidth(0, 20)
@@ -86,9 +85,9 @@ class Dern_opTableWidget(F_TableWidget):
 
     def _item_for_data(self, row, column, data, context=None):
 
-        if column == 0 and self.data[row][0] == "Entrer":
+        if column == 0 and self.data[row][0] == _(u"input"):
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
-        if column == 0 and self.data[row][0] == "Sortie":
+        if column == 0 and self.data[row][0] == _(u"inout"):
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
         return super(Dern_opTableWidget, self)._item_for_data(row, column, \
                                                                 data, context)

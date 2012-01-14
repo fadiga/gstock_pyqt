@@ -34,9 +34,9 @@ class By_periodViewWidget(F_Widget, F_PeriodHolder):
         vbox = QtGui.QVBoxLayout()
         # Grid
         gridbox = QtGui.QGridLayout()
-        gridbox.addWidget(FormLabel(u"Date debut"), 0, 1)
+        gridbox.addWidget(FormLabel(_(u"On date")), 0, 1)
         gridbox.addWidget(self.on_date, 0, 2)
-        gridbox.addWidget(FormLabel(u"Date fin"), 1, 1)
+        gridbox.addWidget(FormLabel(u"End date"), 1, 1)
         gridbox.addWidget(self.end_date, 1, 2)
         gridbox.addWidget(FormLabel(""), 0, 3)
         gridbox.addWidget(self.button, 2, 2)
@@ -70,8 +70,9 @@ class By_periodTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [u"Type", u"Magasin", u"Produit", u"Nombre de carton", \
-                                                    u"Carto Restant", u"Date"]
+        self.header = [_(u" "), _(u"Magasin"), _(u"Produit"), \
+                       _(u"Nombre de carton"), _(u"Carto Restant"), \
+                       _(u"Date")]
         try:
             self.on_date = self.format_date(list_date[0])
             self.end_date = self.format_date(list_date[1])

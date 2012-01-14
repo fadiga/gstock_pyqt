@@ -19,12 +19,12 @@ class MagasinViewWidget(F_Widget):
     def __init__(self, magasin="", parent=0, *args, **kwargs):
         super(MagasinViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
-        self.setWindowTitle((u"Magasins"))
+        self.setWindowTitle(_(u"Magasins"))
         vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(F_PageTitle(u"La liste des magasins"))
+        vbox.addWidget(F_PageTitle(_(u"Liste des magasins")))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(u"Table magasin"))
+        tablebox.addWidget(F_BoxTitle(_(u"Tableau magasin")))
         self.table_op = MagasinTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
@@ -32,11 +32,11 @@ class MagasinViewWidget(F_Widget):
 
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
-        formbox.addWidget(F_BoxTitle(u"Add opertion"))
+        formbox.addWidget(F_BoxTitle(_(u"Add opertion")))
 
         editbox.addWidget(QtGui.QLabel((_(u"Nom du magasin"))), 0, 0)
         editbox.addWidget(self.name, 1, 0)
-        butt = QtGui.QCommandLinkButton((u"Enregistrer"))
+        butt = QtGui.QCommandLinkButton(_(u"Save"))
         butt.clicked.connect(self.add_operation)
         editbox.addWidget(butt, 1, 1)
 
@@ -54,9 +54,9 @@ class MagasinViewWidget(F_Widget):
             session.commit()
             self.name.clear()
             self.refresh()
-            raise_success(_(u"Confirmation"), _(u"Registered opération"))
+            raise_success(_(u"Confirmation"), _(u"Registered operation"))
         else:
-            raise_error(u"Erreur", u"Donnez le nom du magasin")
+            raise_error(_("Erreur"), _(u"Donnez le nom du magasin"))
         self.change_main_context(MagasinViewWidget)
 
 
@@ -64,7 +64,7 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [(u"Name"), (u"Modication")]
+        self.header = [_(u"Name"), _(u"Edit")]
         self.set_data_for()
         self.refresh(True)
 

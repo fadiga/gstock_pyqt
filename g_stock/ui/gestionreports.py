@@ -25,12 +25,12 @@ class G_reportViewWidget(F_Widget):
     def __init__(self, parent=0, *args, **kwargs):
         super(G_reportViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
-        self.setWindowTitle((u"Gestion des rapports"))
+        self.setWindowTitle(_(u"Gestion des rapports"))
         vbox = QtGui.QVBoxLayout()
         #~ vbox.addWidget(F_PageTitle(u"Gestion des rapports"))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(u"Table rapports"))
+        tablebox.addWidget(F_BoxTitle(_(u"Table rapports")))
         self.table_op = MagasinTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
@@ -39,16 +39,16 @@ class G_reportViewWidget(F_Widget):
         self.nbr_carton.setValidator(QtGui.QIntValidator())
 
         self.date_ = QtGui.QDateTimeEdit(QtCore.QDate.currentDate())
-        self.date_.setDisplayFormat("dd/MM/yyyy")
+        self.date_.setDisplayFormat(_(u"dd/MM/yyyy"))
         self.date_.setCalendarPopup(True)
         self.date_.setFont(QtGui.QFont("Courier New", 10, True))
 
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
-        formbox.addWidget(F_BoxTitle(u"Ajout rapport"))
+        formbox.addWidget(F_BoxTitle(_(u"add report")))
 
-        self.liste_type = [_("Entrer"), _("Sortie")]
+        self.liste_type = [_(u"input"), _(u"inout")]
         #Combobox widget
         self.box_type = QtGui.QComboBox()
         for index in self.liste_type:
@@ -59,7 +59,7 @@ class G_reportViewWidget(F_Widget):
         self.box_mag = QtGui.QComboBox()
         for index in xrange(0, len(self.liste_magasin)):
             op = self.liste_magasin[index]
-            sentence = _(u"%(name)s") % {'name': op.name}
+            sentence = u"%(name)s" % {'name': op.name}
             self.box_mag.addItem(sentence, QtCore.QVariant(op.id))
         #Combobox widget
         self.liste_produit = session.query(Produit)\
@@ -70,19 +70,18 @@ class G_reportViewWidget(F_Widget):
             sentence = _(u"%(libelle)s") % {'libelle': op.libelle}
             self.box_prod.addItem(sentence, QtCore.QVariant(op.id))
 
-        editbox.addWidget(QtGui.QLabel((_(u"Type"))), 0, 0)
+        editbox.addWidget(QtGui.QLabel(_(u"Type")), 0, 0)
         editbox.addWidget(self.box_type, 1, 0)
-        editbox.addWidget(QtGui.QLabel((_(u"Magasin"))), 0, 1)
+        editbox.addWidget(QtGui.QLabel(_(u"Magasin")), 0, 1)
         editbox.addWidget(self.box_mag, 1, 1)
-        editbox.addWidget(QtGui.QLabel((_(u"Produit"))), 0, 2)
+        editbox.addWidget(QtGui.QLabel(_(u"Produit")), 0, 2)
         editbox.addWidget(self.box_prod, 1, 2)
         editbox.addWidget(QtGui.QLabel((_(u"Nbre carton"))), 0, 3)
         editbox.addWidget(self.nbr_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = QtGui.QCommandLinkButton((u"Enregister"))
+        butt = QtGui.QCommandLinkButton(_(u"Save"))
         butt.clicked.connect(self.add_operation)
-        #~ butt.setChecked(True)
         editbox.addWidget(butt, 1, 5)
 
         formbox.addLayout(editbox)
@@ -108,7 +107,7 @@ class G_reportViewWidget(F_Widget):
         if unicode(self.nbr_carton.text()) != "":
             r = remaining(type_,  nbr_carton, magasin.id, produit.id)
             if r[0] == None:
-                raise_error(_(u"error"), _(r[1]))
+                raise_error(_(u"error"), r[1])
             else:
                 report = Rapport(unicode(type_), int(nbr_carton), datetime_)
                 report.magasin = magasin
@@ -119,9 +118,9 @@ class G_reportViewWidget(F_Widget):
                 self.nbr_carton.clear()
                 self.refresh()
                 self.change_main_context(G_reportViewWidget)
-                raise_success(u"Confirmation", u"Registered opération")
+                raise_success(_(u"Confirmation"), _(u"Registered operation"))
         else:
-            raise_error(u"error", u"Donnez le nbre de carton")
+            raise_error(_(u"error"), _(u"Donnez le nbre de carton"))
 
 
 class MagasinTableWidget(F_TableWidget):
@@ -129,9 +128,9 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u" ", u"Magasin", u"Produit", \
-                       u"Nbre carton", u"Restant", u" ", \
-                       u"Date", u"Modification", u"Suppresion"]
+        self.header = [u" ", _(u"Magasin"), _(u"Produit"), \
+                             _(u"Nbre carton"), _(u"Restant"), u" ", \
+                             _(u"Date"), _(u"Edit"), _(u"Delete")]
         self.set_data_for()
         self.refresh(True)
         #je cache la 5 eme colonne
@@ -148,18 +147,14 @@ class MagasinTableWidget(F_TableWidget):
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entrer":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
-                                          _(u""))
-        if column == 0 and self.data[row][0] == "Sortie":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
-                                          _(u""))
+        if column == 0 and self.data[row][0] == _("input"):
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
+        if column == 0 and self.data[row][0] == _("inout"):
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
         if column == 7:
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), \
-                                          _(u""))
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), u"")
         if column == 8:
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), \
-                                          _(u""))
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), u"")
         return super(MagasinTableWidget, self)\
                                             ._item_for_data(row, column, \
                                                         data, context)

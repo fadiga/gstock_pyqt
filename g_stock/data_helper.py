@@ -39,17 +39,17 @@ def remaining(type_, nbr_carton, magasin, produit):
     """ Calculation of remaining. """
     previous_rapp = ""
     previous_rapp = last_rapport(magasin, produit)
-    if type_ == "Sortie":
+    if type_ == _(u"inout"):
         try:
             restant = int(previous_rapp.restant) - int(nbr_carton)
             if restant < 0:
-                return [None, u"Vous ne pouvez pas effectie cette operation \n"
-                        u" Car " + str(previous_rapp.restant) + " < " \
+                return [None, _(u"Vous ne pouvez pas effectie cette operation \n"
+                                u" Car ") + str(previous_rapp.restant) + " < " \
                                 + str(nbr_carton)]
             return [restant, u""]
         except AttributeError:
-            return [None, u"IL n'y eu aucun  entrer pour ce produit "]
-    if type_ == "Entrer":
+            return [None, _(u"IL n'y eu aucun  input pour ce produit ")]
+    if type_ == _(u"input"):
         try:
             restant = int(previous_rapp.restant) + int(nbr_carton)
             return [restant, u""]
@@ -61,10 +61,10 @@ def update_rapport(report):
     """ mise à jour après la suppression"""
     prev_report = []
     prev_report = session.query(Rapport) \
-                    .filter(Rapport.magasin_id == report.magasin_id) \
-                    .filter(Rapport.produit_id == report.produit_id) \
-                    .filter(Rapport.date_rapp.__lt__(report.date_rapp)) \
-                    .order_by(desc(Rapport.date_rapp)).first()
+                .filter(Rapport.magasin_id == report.magasin_id) \
+                .filter(Rapport.produit_id == report.produit_id) \
+                .filter(Rapport.date_rapp.__lt__(report.date_rapp)) \
+                .order_by(desc(Rapport.date_rapp)).first()
     if prev_report:
         rest = prev_report.restant
         next_report = [(rap) for rap in session.query(Rapport) \
@@ -82,9 +82,9 @@ def update_rapport(report):
     if next_report != []:
         for rap in next_report:
             rap.restant = rest
-            if rap.type_ == "Entrer":
+            if rap.type_ == _(u"input"):
                 rap.restant = rest + rap.nbr_carton
-            if rap.type_ == "Sortie":
+            if rap.type_ == _(u"inout"):
                 rap.restant = rest - rap.nbr_carton
             rest = rap.restant
             session.add(rap)
@@ -107,5 +107,3 @@ def inventaire(on_date, end_date):
             except:
                 pass
     return list_rap
-
-

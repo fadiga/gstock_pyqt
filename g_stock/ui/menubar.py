@@ -25,39 +25,39 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         export.addAction((u"Dans un fichier Excel"),\
                                                self.goto_export_excel)
         # Exit
-        exit_ = QtGui.QAction((u"Quiter"), self)
+        exit_ = QtGui.QAction((u"Exit"), self)
         exit_.setShortcut("Ctrl+Q")
-        exit_.setToolTip(("Quiter l'application"))
+        exit_.setToolTip(_("Quiter l'application"))
         self.connect(exit_, QtCore.SIGNAL("triggered()"), \
                                          self.parentWidget(), \
                                          QtCore.SLOT("close()"))
         file_.addAction(exit_)
         # Menu aller à
-        goto_ = self.addMenu((u"Aller à"))
+        goto_ = self.addMenu(_(u"&Go to"))
         # magasin
-        magasin = QtGui.QAction((u"Nouveau magasin"), self)
+        magasin = QtGui.QAction(_(u"Nouveau magasin"), self)
         magasin.setShortcut("Ctrl+M")
         self.connect(magasin, QtCore.SIGNAL("triggered()"),\
                                             self.addstore)
         goto_.addAction(magasin)
         # Rapport periodique
-        rap_p = QtGui.QAction((u"Rapport periodique"), self)
+        rap_p = QtGui.QAction(_(u"Rapport periodique"), self)
         rap_p.setShortcut("Ctrl+T")
         self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
                                             self.report_period)
         goto_.addAction(rap_p)
         # Rapport inventaire
-        rap_inv = QtGui.QAction((u"Inventaire"), self)
+        rap_inv = QtGui.QAction(_(u"Inventaire"), self)
         rap_inv.setShortcut("Ctrl+I")
         self.connect(rap_inv, QtCore.SIGNAL("triggered()"),\
                                             self.goto_inventaire)
         goto_.addAction(rap_inv)
         #Menu Aide
-        help_ = self.addMenu((u"Aide"))
+        help_ = self.addMenu(_(u"help"))
         help_.addAction(QtGui.QIcon('images/help.png'), \
-                                        "Aide", self.goto_help)
+                                        "help", self.goto_help)
         help_.addAction(QtGui.QIcon('images/about.png'), \
-                                        "A propos", self.goto_about)
+                                        "About", self.goto_about)
 
     #Print
     def goto_inventaire(self):
@@ -79,13 +79,13 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
 
     #Aide
     def goto_help(self):
-        mbox = QtGui.QMessageBox.about(self, (u"Aide"), \
-                                 (u"Besoin d'aide appele Fad"))
+        mbox = QtGui.QMessageBox.about(self, _(u"help"), \
+                                             _(u"Besoin d'aide"))
 
     #About
     def goto_about(self):
-        mbox = QtGui.QMessageBox.about(self, (u"A propos"), \
-                                 (u"G_stock gestion de stock\n\n" \
+        mbox = QtGui.QMessageBox.about(self, _(u"About"), \
+                                 _(u"G_stock gestion de stock\n\n" \
                                     "Developpeur: Ibrahima Fadiga,\n\n"\
                                     u"© 2011 fad service s.à.r.l\n" \
                                     u"Bamako (Mali)\n" \

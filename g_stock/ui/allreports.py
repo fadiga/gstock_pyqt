@@ -21,33 +21,25 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
-        self.title = F_PageTitle(u"Tous les rapports")
+        self.title = F_PageTitle(_(u"All reports"))
         self.table = RapportTableWidget(parent=self, period=self.main_period)
         #Combobox widget
         vbox = QtGui.QVBoxLayout()
-        self.liste_type = [u"Année", u"Mois", u"Smaine"]
-        self.box_type = QtGui.QComboBox()
-        for index in self.liste_type:
-            self.box_type.addItem(u'%(type)s' % {'type': index})
-        self.connect(self.box_type, \
-                            QtCore.SIGNAL("currentIndexChanged(QString)"), \
-                                                    self.change_period_type)
 
         vbox.addWidget(self.title)
-        vbox.addWidget(self.box_type)
         vbox.addWidget(self.periods_bar)
         vbox.addWidget(self.table)
         self.setLayout(vbox)
 
     def change_period_type(self):
-        self.type_date = self.liste_type[self.box_type.currentIndex()]
+
         F_PeriodHolder(self, self.main_period)
 
     def refresh(self):
         self.table.refresh()
 
-    def change_period(self, period, type_date):
-        self.table.refresh_period(period, type_date)
+    def change_period(self, period):
+        self.table.refresh_period(period)
 
 
 class RapportTableWidget(F_TableWidget):
@@ -60,13 +52,11 @@ class RapportTableWidget(F_TableWidget):
                        _(u"Nbre carton"), _(u"Restant"), \
                        _(u"Date")]
         self.set_data_for(period)
-        self.type_date = parent.main_type_date
         self.refresh(True)
         self.setColumnWidth(0, 20)
 
-    def refresh_period(self, period, type_date):
+    def refresh_period(self, period):
         self.main_period = period
-        self.type_date = type_date
         self.set_data_for(period)
         self.refresh()
 
@@ -79,12 +69,10 @@ class RapportTableWidget(F_TableWidget):
                         .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entrer":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
-                                          _(u""))
-        if column == 0 and self.data[row][0] == "Sortie":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
-                                          _(u""))
+        if column == 0 and self.data[row][0] == _("input"):
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
+        if column == 0 and self.data[row][0] == _(u"inout"):
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
         return super(RapportTableWidget, self)\
                                             ._item_for_data(row, column, \
                                                         data, context)

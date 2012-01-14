@@ -20,21 +20,21 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self)
 
         self.resize(900, 650)
-        self.setWindowTitle(u"gestion de stock")
+        self.setWindowTitle(_(u"gestion de stock"))
         self.setWindowIcon(QtGui.QIcon('images/mali.png'))
 
         self.toolbar = QtGui.QToolBar()
         self.toolbar.addAction(QtGui.QIcon('images/quiter.png'), \
-                                                    "Quiter", self.goto_exit)
+                                                    _(u"Exit"), self.goto_exit)
         self.toolbar.addSeparator()
-        self.toolbar.addAction("Accueil", self.accueil)
+        self.toolbar.addAction(_(u"Dashboard"), self.accueil)
         self.toolbar.addSeparator()
-        self.toolbar.addAction("Produits", self.goto_produit)
+        self.toolbar.addAction(_(u"Produits"), self.goto_produit)
         self.toolbar.addSeparator()
-        self.toolbar.addAction("Tous les rapports", \
+        self.toolbar.addAction(_(u"All reports"), \
                                                     self.goto_all_rapport)
         self.toolbar.addSeparator()
-        self.toolbar.addAction("Gestion des rapports", \
+        self.toolbar.addAction(_(u"Management reports"), \
                                                 self.goto_gestion_rapport)
 
         self.addToolBar(self.toolbar)
@@ -47,19 +47,19 @@ class MainWindow(QtGui.QMainWindow):
         self.close()
 
     def accueil(self):
-        self.setWindowTitle(u"Accueil")
+        self.setWindowTitle(_(u"Dashboard"))
         self.change_context(DashbordViewWidget)
 
     def goto_produit(self):
-        self.setWindowTitle(u"Produits")
+        self.setWindowTitle(_(u"Produits"))
         self.change_context(ProduitViewWidget)
 
     def goto_all_rapport(self):
-        self.setWindowTitle(u"Tous les Rapports")
+        self.setWindowTitle(_(u"All Reports"))
         self.change_context(AllreportsViewWidget)
 
     def goto_gestion_rapport(self):
-        self.setWindowTitle(u"Gestion Rapports")
+        self.setWindowTitle(_(u"Management Reports"))
         self.change_context(G_reportViewWidget)
 
     def change_context(self, context_widget, list_=[], *args, **kwargs):

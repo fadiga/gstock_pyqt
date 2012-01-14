@@ -66,14 +66,14 @@ class ProduitViewWidget(F_Widget):
                 raise_error(u"error", \
                             u"Donnez le nombre de pièce dans le carton")
         else:
-            raise_error(u"error", u"Donnez le nom du produit")
+            raise_error(u"Error", u"Donnez le nom du produit")
 
 
 class ProduitTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u"Designation", u"Nbre de pièce", u"modification"]
+        self.header = [u"Designation", u"Nbre de pièce", u"Edit"]
         self.set_data_for()
         self.refresh(True)
 

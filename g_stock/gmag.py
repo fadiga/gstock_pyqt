@@ -5,6 +5,7 @@
 import sys
 import gettext
 import locale
+import gettext_windows
 
 from PyQt4 import QtGui
 
@@ -14,6 +15,7 @@ from ui.window import F_Window
 
 def main():
 
+    gettext_windows.setup_env()
     locale.setlocale(locale.LC_ALL, '')
     gettext.install('g_stock', localedir='locale', unicode=True)
 

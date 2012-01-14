@@ -41,7 +41,7 @@ class By_magasinTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Type"), _(u"Produit"), \
+        self.header = [_(u" "), _(u"Produit"), \
                        _(u"Nombre de carton"), _(u"Carto Restant"), \
                        _(u"Date")]
         self.mag = magasin
@@ -60,12 +60,10 @@ class By_magasinTableWidget(F_TableWidget):
                                 .filter(Rapport.magasin_id == self.mag.id)]
 
     def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == "Entrer":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), \
-                                          _(u""))
-        if column == 0 and self.data[row][0] == "Sortie":
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), \
-                                          _(u""))
+        if column == 0 and self.data[row][0] == "input":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
+        if column == 0 and self.data[row][0] == "inout":
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
         return super(By_magasinTableWidget, self)\
                                             ._item_for_data(row, column, \
                                                         data, context)

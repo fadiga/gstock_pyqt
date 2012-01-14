@@ -14,13 +14,17 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
         self.setWindowTitle(u"Modification")
 
-        self.prod = produit.libelle
+        self.prod = produit
         vbox = QtGui.QVBoxLayout()
         vbox.addWidget(F_BoxTitle(u"Voulez-vous modification?"))
-        self.new_produit = QtGui.QLineEdit(self.prod)
+        self.new_produit = QtGui.QLineEdit(self.prod.libelle)
+        self.new_nbr_piece = QtGui.QLineEdit(str(self.prod.nbr_piece))
+        self.new_nbr_piece.setValidator(QtGui.QIntValidator())
         editbox = QtGui.QGridLayout()
         editbox.addWidget(QtGui.QLabel("Nom du produit"), 0, 1)
         editbox.addWidget(self.new_produit, 0, 2)
+        editbox.addWidget(QtGui.QLabel("Nombre de piece"), 1, 1)
+        editbox.addWidget(self.new_nbr_piece, 1, 2)
         butt = QtGui.QPushButton(u"Enregistre la modification")
         butt.clicked.connect(self.edit_prod)
         cancel_but = QtGui.QPushButton(u"Cancel")
@@ -35,8 +39,12 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
         self.close()
 
     def edit_prod(self):
-        produit = session.query(Produit).filter(Produit.libelle==self.prod).all()[0]
+        produit = session.query(Produit)\
+                         .filter(Produit.libelle==self.prod.libelle) \
+                         .filter(Produit.nbr_piece==self.prod.nbr_piece)\
+                         .all()[0]
         produit.libelle = str(self.new_produit.text())
+        produit.nbr_piece = int(self.new_nbr_piece.text())
         session.add(produit)
         session.commit()
         self.cancel()

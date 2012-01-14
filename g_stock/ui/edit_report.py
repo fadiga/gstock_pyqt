@@ -16,8 +16,8 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
-        self.setWindowTitle((u"Modification"))
-        self.title = F_PageTitle(u"Voulez-vous modification?")
+        self.setWindowTitle(_(u"Edit"))
+        self.title = F_PageTitle(_(u"Voulez-vous modification?"))
 
         self.op = report
         vbox = QtGui.QVBoxLayout()
@@ -31,13 +31,12 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
-        formbox.addWidget(F_BoxTitle(u"Modifier rapport"))
+        formbox.addWidget(F_BoxTitle(_(u"Edit report")))
 
-        self.liste_type = [_("Entrer"), _("Sortie")]
         #Combobox widget
         self.box_type = QtGui.QComboBox()
-        for index in self.liste_type:
-            self.box_type.addItem(u'%(type)s' % {'type': index})
+        self.box_type.addItem(_(u"input"))
+        self.box_type.addItem(_(u"inout"))
         #Combobox widget
         self.liste_magasin = session.query(Magasin)\
                                     .order_by(desc(Magasin.id)).all()
@@ -54,7 +53,7 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
             op = self.liste_produit[index]
             sentence = _(u"%(libelle)s") % {'libelle': op.libelle}
             self.box_prod.addItem(sentence, QtCore.QVariant(op.id))
-
+            self.box_prod.setCurrentIndex(2)
         editbox.addWidget(QtGui.QLabel((_(u"Type"))), 0, 0)
         editbox.addWidget(self.box_type, 1, 0)
         editbox.addWidget(QtGui.QLabel((_(u"Magasin"))), 0, 1)
@@ -65,7 +64,7 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         editbox.addWidget(self.nbre_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = QtGui.QPushButton((u"Enregistrer"))
+        butt = QtGui.QPushButton(_(u"Save"))
         butt.clicked.connect(self.edit_report)
         cancel_but = QtGui.QPushButton((u"Cancel"))
         cancel_but.clicked.connect(self.cancel)

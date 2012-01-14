@@ -85,7 +85,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
         self._header = []
         self._display_total = False
         self._column_totals = {}
-        self._total_label = (u"TOTAL")
+        self._total_label = _(u"TOTAL")
 
         self.parent = parent
 
@@ -238,17 +238,16 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
 
 class F_PeriodHolder(object):
 
-    def __init__(self, period=None, type_date="Mois", *args, **kwargs):
+    def __init__(self, period=None, *args, **kwargs):
 
         self.main_period = period
-        self.main_type_date = type_date
-        self.periods_bar = self.gen_bar_for(self.main_period, self.main_type_date)
 
-    def gen_bar_for(self, period, type_date):
-        return F_PeriodTabBar(parent=self, main_period=period, main_type_date=type_date)
+        self.periods_bar = self.gen_bar_for(self.main_period)
 
-    def change_period(self, date_type, period):
-        self.main_type_date = type_date
+    def gen_bar_for(self, period):
+        return F_PeriodTabBar(parent=self, main_period=period)
+
+    def change_period(self, period):
         self.main_period = period
 
     def getmain_period(self):
@@ -262,38 +261,29 @@ class F_PeriodHolder(object):
 
 class F_PeriodTabBar(QtGui.QTabBar):
 
-    def __init__(self, parent, main_period=None, main_type_date=u"Année", *args, **kwargs):
+    def __init__(self, parent, main_period=None, *args, **kwargs):
 
         super(F_PeriodTabBar, self).__init__(*args, **kwargs)
 
-        for i in range(0, 4):
+        for i in range(0, 3):
             self.addTab('%s' % i)
         NOW = datetime.now()
-        self.main_type_date = main_type_date
-        self.set_data_from(self.main_type_date, NOW)
+        self.set_data_from(NOW)
         self.build_tab_list()
         self.currentChanged.connect(self.changed_period)
 
-    def set_data_from(self, typ, period):
-        self.main_period = period
-        self.type_date = typ
+    def set_data_from(self, period):
 
-        if self.type_date == u"Mois":
-            self.periods = [self.main_period + relativedelta(months=-1), \
-                           self.main_period.strftime('%M'), \
-                           self.main_period + relativedelta(months=+1)]
-        if self.type_date == u"Smaine":
-            self.periods = [self.main_period + relativedelta(weeks=+1), \
-                           self.main_period.strftime('%A'), \
-                           self.main_period + relativedelta(weeks=+1)]
-        else:
-            self.periods = [self.main_period + relativedelta(years=-1), \
+        self.main_period = period
+        self.main_period + relativedelta(years=-1)
+        self.periods = [self.main_period + relativedelta(years=-1), \
                            self.main_period.strftime('%x'), \
                            self.main_period + relativedelta(years=+1)]
 
     def build_tab_list(self):
         for index, period in enumerate(self.periods):
             self.setTabText(index, str(period))
+            self.setTabToolTip(index, str(period))
         self.setTabTextColor(1, QtGui.QColor('darkBlue'))
         self.setCurrentIndex(1)
 
@@ -302,7 +292,7 @@ class F_PeriodTabBar(QtGui.QTabBar):
             return False
         else:
             np = self.periods[index]
-            self.set_data_from(self.main_type_date, np)
+            self.set_data_from(np)
             self.build_tab_list()
             self.parentWidget().main_period = np
-            self.parentWidget().change_period(np, self.main_type_date)
+            self.parentWidget().change_period(np)
