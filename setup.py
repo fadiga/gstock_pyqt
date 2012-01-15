@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding=utf-8
-# maintainer: rgaudin
+# maintainer: Fadiga
 
 import setuptools
 
@@ -15,7 +15,7 @@ setuptools.setup(
     description='Gestion des magasin de stock G.U.I',
     long_description=open('README.rst').read(),
 
-    url='http://github.com/yeleman/anm',
+    url='http://github.com/fadiga/gstock',
 
     packages=['gstock'],
 

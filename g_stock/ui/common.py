@@ -4,7 +4,6 @@
 
 from PyQt4 import QtGui
 from PyQt4.QtCore import Qt
-from dateutil.relativedelta import *
 from datetime import *
 
 from util import formatted_number
@@ -275,15 +274,14 @@ class F_PeriodTabBar(QtGui.QTabBar):
     def set_data_from(self, period):
 
         self.main_period = period
-        self.main_period + relativedelta(years=-1)
-        self.periods = [self.main_period + relativedelta(years=-1), \
-                           self.main_period.strftime('%x'), \
-                           self.main_period + relativedelta(years=+1)]
+        prev = self.main_period - timedelta(365)
+        next_ = self.main_period + timedelta(365)
+        self.periods = [prev, self.main_period, next_]
 
     def build_tab_list(self):
         for index, period in enumerate(self.periods):
-            self.setTabText(index, str(period))
-            self.setTabToolTip(index, str(period))
+            self.setTabText(index, str(period.strftime('%x')))
+            self.setTabToolTip(index, str(period.strftime('%x')))
         self.setTabTextColor(1, QtGui.QColor('darkBlue'))
         self.setCurrentIndex(1)
 

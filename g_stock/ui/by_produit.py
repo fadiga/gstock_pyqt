@@ -41,7 +41,7 @@ class By_produitTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u""), _(u"Magasin"), \
+        self.header = [u"", _(u"Magasin"), \
                        _(u"Nombre de carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.prod = produit

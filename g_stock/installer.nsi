@@ -1,4 +1,4 @@
-Name "Suivi de stock GSTOCK"
+Name "Suivi du stock"
 
 ;SetCompress off
 
@@ -30,7 +30,7 @@ Section ""
 
   ; start menu entry
   CreateDirectory "$SMPROGRAMS\GSTOCK"
-  CreateShortCut "$SMPROGRAMS\GSTOCK\Suivi de stock.lnk" "$INSTDIR\gstock.exe" "" "$INSTDIR\gstock.exe" 0
+  CreateShortCut "$SMPROGRAMS\GSTOCK\Suivi du stock.lnk" "$INSTDIR\gstock.exe" "" "$INSTDIR\gstock.exe" 0
   createShortCut "$SMPROGRAMS\GSTOCK\Uninstall Suivi gstock.lnk" "$INSTDIR\uninstaller.exe"
 
 
@@ -57,4 +57,3 @@ RMDir /r $INSTDIR\images
 RMDir /r $INSTDIR\locale
 
 sectionEnd
-

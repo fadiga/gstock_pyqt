@@ -1,3 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR yɛlɛman s.à.r.l
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: g_stock 0.1\n"
+"Report-Msgid-Bugs-To: bugs@yeleman.com\n"
+"POT-Creation-Date: 2012-01-15 16:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:42
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:87
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:74
@@ -121,26 +140,6 @@ msgstr ""
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:74
 msgid "Magasin"
 msgstr ""
-
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR yɛlɛman s.à.r.l
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:44
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: g_stock 0.1\n"
-"Report-Msgid-Bugs-To: bugs@yeleman.com\n"
-"POT-Creation-Date: 2012-01-14 17:12+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:45
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:53
@@ -374,7 +373,7 @@ msgid "Besoin d'aide"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:87
-msgid "A propos"
+msgid "About"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:88
