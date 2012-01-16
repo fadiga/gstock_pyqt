@@ -39,6 +39,7 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
         self.table.refresh()
 
     def change_period(self, period):
+
         self.table.refresh_period(period)
 
 
@@ -57,7 +58,8 @@ class RapportTableWidget(F_TableWidget):
 
     def refresh_period(self, period):
         self.main_period = period
-        self.set_data_for(period)
+
+        self.set_data_for(period.year)
         self.refresh()
 
     def set_data_for(self, period):
@@ -65,8 +67,10 @@ class RapportTableWidget(F_TableWidget):
                         formatted_number(rap.nbr_carton), \
                         formatted_number(rap.restant), \
                         rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                        for rap in session.query(Rapport) \
+                        for rap in session.query(Rapport)\
+                        .filter(Rapport.date_rapp==period) \
                         .order_by(desc(Rapport.date_rapp)).all()]
+        print self.data
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == _("input"):
