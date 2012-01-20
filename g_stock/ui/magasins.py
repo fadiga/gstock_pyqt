@@ -9,7 +9,7 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
+from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle, Button
 from util import raise_success, raise_error
 from edit_magasin import EditMagasinViewWidget
 
@@ -36,7 +36,7 @@ class MagasinViewWidget(F_Widget):
 
         editbox.addWidget(QtGui.QLabel((_(u"Nom du magasin"))), 0, 0)
         editbox.addWidget(self.name, 1, 0)
-        butt = QtGui.QCommandLinkButton(_(u"Save"))
+        butt = Button(_(u"Save"))
         butt.clicked.connect(self.add_operation)
         editbox.addWidget(butt, 1, 1)
 

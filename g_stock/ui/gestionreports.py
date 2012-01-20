@@ -9,7 +9,8 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
+from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle, \
+                                                    Button, FormatDate
 from util import raise_success, raise_error, formatted_number
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
@@ -19,6 +20,7 @@ from allreports import AllreportsViewWidget
 from by_magasin import By_magasinViewWidget
 from by_produit import By_produitViewWidget
 from edit_report import EditReportViewWidget
+
 
 class G_reportViewWidget(F_Widget):
 
@@ -38,9 +40,7 @@ class G_reportViewWidget(F_Widget):
         self.nbr_carton.setDragEnabled(True)
         self.nbr_carton.setValidator(QtGui.QIntValidator())
 
-        self.date_ = QtGui.QDateTimeEdit(QtCore.QDate.currentDate())
-        self.date_.setDisplayFormat(_(u"dd/MM/yyyy"))
-        self.date_.setCalendarPopup(True)
+        self.date_ = FormatDate(QtCore.QDate.currentDate())
         self.date_.setFont(QtGui.QFont("Courier New", 10, True))
 
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
@@ -80,7 +80,7 @@ class G_reportViewWidget(F_Widget):
         editbox.addWidget(self.nbr_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = QtGui.QCommandLinkButton(_(u"Save"))
+        butt = Button(_(u"Save"))
         butt.clicked.connect(self.add_operation)
         editbox.addWidget(butt, 1, 5)
 

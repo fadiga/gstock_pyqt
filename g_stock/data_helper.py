@@ -2,13 +2,9 @@
 # -*- coding: utf-8 -*-
 # maintainer: Fadiga
 
+from datetime import date, timedelta
 
-import gettext
-from datetime import date, datetime
-
-import sqlalchemy
 from sqlalchemy import desc, asc
-from sqlalchemy.orm import exc
 
 from database import *
 
@@ -16,11 +12,10 @@ from database import *
 def last_rapport(magasin_id, produit_id):
     """ last Rapport
     prams: magasin_id et produit_id"""
-    last_rapp = session.query(Rapport)\
+    return session.query(Rapport)\
                                 .filter(Rapport.magasin_id == magasin_id)\
                                 .filter(Rapport.produit_id == produit_id)\
                                 .order_by(desc(Rapport.date_rapp)).first()
-    return last_rapp
 
 
 def alerte_report():
@@ -43,9 +38,10 @@ def remaining(type_, nbr_carton, magasin, produit):
         try:
             restant = int(previous_rapp.restant) - int(nbr_carton)
             if restant < 0:
-                return [None, _(u"Vous ne pouvez pas effectie cette operation \n"
-                                u" Car ") + str(previous_rapp.restant) + " < " \
-                                + str(nbr_carton)]
+                return [None, _(u"Vous ne pouvez pas effectie cette \n"
+                                u"operation Car ") + \
+                                    str(previous_rapp.restant) + " < " \
+                                    + str(nbr_carton)]
             return [restant, u""]
         except AttributeError:
             return [None, _(u"IL n'y eu aucun  input pour ce produit ")]
@@ -59,12 +55,13 @@ def remaining(type_, nbr_carton, magasin, produit):
 
 def update_rapport(report):
     """ mise à jour après la suppression"""
-    prev_report = []
-    prev_report = session.query(Rapport) \
+    rapports = session.query(Rapport) \
                 .filter(Rapport.magasin_id == report.magasin_id) \
-                .filter(Rapport.produit_id == report.produit_id) \
-                .filter(Rapport.date_rapp.__lt__(report.date_rapp)) \
-                .order_by(desc(Rapport.date_rapp)).first()
+                .filter(Rapport.produit_id == report.produit_id)
+    prev_report = []
+    prev_report = rapports\
+                  .filter(Rapport.date_rapp.__lt__(report.date_rapp)) \
+                  .order_by(desc(Rapport.date_rapp)).first()
     if prev_report:
         rest = prev_report.restant
         next_report = [(rap) for rap in session.query(Rapport) \
@@ -73,11 +70,9 @@ def update_rapport(report):
                 .filter(Rapport.date_rapp.__gt__(prev_report.date_rapp)) \
                 .order_by(asc(Rapport.date_rapp)).all()]
     else:
-        next_report = session.query(Rapport) \
-                .filter(Rapport.magasin_id == report.magasin_id) \
-                .filter(Rapport.produit_id == report.produit_id) \
-                .filter(Rapport.date_rapp.__gt__(report.date_rapp)) \
-                .order_by(asc(Rapport.date_rapp)).all()
+        next_report = rapports \
+                      .filter(Rapport.date_rapp.__gt__(report.date_rapp)) \
+                      .order_by(asc(Rapport.date_rapp)).all()
         rest = 0
     if next_report != []:
         for rap in next_report:

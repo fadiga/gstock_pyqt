@@ -3,16 +3,18 @@
 # maintainer: Fad
 
 from datetime import date, timedelta
+
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 from database import *
-from common import F_Widget, F_TableWidget, F_PeriodHolder, \
-                                                F_PageTitle, FormLabel
+from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
+                                                    Button, FormatDate
+
 from data_helper import last_rapport, inventaire
 
 
-class InventaireViewWidget(F_Widget, F_PeriodHolder):
+class InventaireViewWidget(F_Widget):
 
     def __init__(self, parent=0, *args, **kwargs):
         super(InventaireViewWidget, self).__init__(parent=parent, *args, \
@@ -24,14 +26,10 @@ class InventaireViewWidget(F_Widget, F_PeriodHolder):
 
         if list_date:
             on, end = list_date
-        self.on_date = QtGui.QDateEdit(QtCore.QDate(date.today().year,01,01))
-        self.on_date.setDisplayFormat("dd/MM/yyyy")
-        self.on_date.setCalendarPopup(True)
-        self.end_date = QtGui.QDateEdit(QtCore.QDate.currentDate())
-        self.end_date.setDisplayFormat("dd/MM/yyyy")
-        self.end_date.setCalendarPopup(True)
-        self.button = QtGui.QCommandLinkButton(u"Ok")
-        self.button.clicked.connect(self.rapport_filter)
+        self.on_date = FormatDate(QtCore.QDate(date.today().year,01,01))
+        self.end_date = FormatDate(QtCore.QDate.currentDate())
+        self.Button = Button(u"Ok")
+        self.Button.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
         # Grid
         gridbox = QtGui.QGridLayout()
@@ -40,7 +38,7 @@ class InventaireViewWidget(F_Widget, F_PeriodHolder):
         gridbox.addWidget(FormLabel(_(u"End date")), 1, 1)
         gridbox.addWidget(self.end_date, 1, 2)
         gridbox.addWidget(FormLabel(""), 0, 3)
-        gridbox.addWidget(self.button, 2, 2)
+        gridbox.addWidget(self.Button, 2, 2)
         gridbox.setColumnStretch(3, 5)
         if list_date:
             gridbox.addWidget(FormLabel(_("Les Rapports du") + on + _(" au ") + \
@@ -72,7 +70,7 @@ class InventaireTableWidget(F_TableWidget):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
         self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Restant"), \
+                       _(u"Nombre de carton"), _(u"Remaining"), \
                        _(u"Date")]
         try:
             self.on_date = self.format_date(list_date[0])

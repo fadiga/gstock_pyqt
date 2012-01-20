@@ -5,7 +5,7 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
-from common import F_Widget,F_BoxTitle, F_PageTitle
+from common import F_Widget, F_BoxTitle, Button
 from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
@@ -23,9 +23,9 @@ class EditMagasinViewWidget(QtGui.QDialog, F_Widget):
         editbox = QtGui.QGridLayout()
         editbox.addWidget(QtGui.QLabel("Nom du magasin"), 0, 1)
         editbox.addWidget(self.new_magasin, 0, 2)
-        butt = QtGui.QPushButton(u"Enregistre la modification")
+        butt = Button(u"Enregistre la modification")
         butt.clicked.connect(self.edit_mag)
-        cancel_but = QtGui.QPushButton(u"Cancel")
+        cancel_but = Button(u"Cancel")
         cancel_but.clicked.connect(self.cancel)
         editbox.addWidget(butt, 2, 1)
         editbox.addWidget(cancel_but, 2, 2)

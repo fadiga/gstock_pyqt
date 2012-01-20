@@ -36,6 +36,22 @@ class F_BoxTitle(QtGui.QLabel):
         self.setAlignment(Qt.AlignCenter)
 
 
+class Button(QtGui.QCommandLinkButton):
+
+    def __init__(self, *args, **kwargs):
+        super(Button, self).__init__(*args, **kwargs)
+        self.setAutoDefault(True)
+        self.setCheckable(True)
+
+
+class FormatDate(QtGui.QDateTimeEdit):
+
+    def __init__(self, *args, **kwargs):
+        super(FormatDate, self).__init__(*args, **kwargs)
+        self.setDisplayFormat(_(u"dd/MM/yyyy"))
+        self.setCalendarPopup(True)
+
+
 class FormLabel(QtGui.QLabel):
 
     def __init__(self, text, parent=None):
@@ -98,10 +114,10 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
         self.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.setFont(QtGui.QFont("Courier New", 10))
         # style au tr
-        self.setStyleSheet("color: #020028;background-color:#F5F8FC")
+        self.setStyleSheet("color: #12103E;background-color:#F5F8FC")
         # enable sorting
         self.setSortingEnabled(True)
-        self.setCursor(QtGui.QCursor(True))
+        self.setAlternatingRowColors(True)
 
     def setdata(self, value):
         if not isinstance(value, (list, None.__class__)):
@@ -128,7 +144,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
             self.removeRow(index)
 
     def sort(self, Ncol, order):
-        """Sort table by given column number.
+        """ Sort table by given column number.
         """
         self.emit(SIGNAL("layoutAboutToBeChanged()"))
         self.arraydata = sorted(self.arraydata, key=operator.itemgetter(Ncol))
@@ -171,9 +187,9 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
             self.resizeColumnsToContents()
 
     def extend_rows(self):
-        ''' called after cells have been created/refresh.
+        """ called after cells have been created/refresh.
 
-            Use for adding/editing cells '''
+            Use for adding/editing cells """
         pass
 
     def _item_for_data(self, row, column, data, context=None):
@@ -204,7 +220,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
                 self.setItem(row_num, index, item)
 
     def setDisplayTotal(self, display=False, column_totals={}, label=None):
-        ''' adds an additional row at end of table
+        """ adds an additional row at end of table
 
         display: bool wheter of not to display the total row
         column_totals: an hash indexed by column number
@@ -214,7 +230,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
         Example call:
             self.setDisplayTotal(True, \
                                  column_totals={2: None, 3: None}, \
-                                 label="TOTALS") '''
+                                 label="TOTALS") """
 
         self._display_total = display
         self._column_totals = column_totals
@@ -222,7 +238,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
             self._total_label = label
 
     def _format_for_table(self, value):
-        ''' formats input value for string in table widget '''
+        """ formats input value for string in table widget """
         if isinstance(value, basestring):
             return value
 
@@ -237,51 +253,55 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
 
 class F_PeriodHolder(object):
 
-    def __init__(self, period=None, *args, **kwargs):
+    def __init__(self, main_date=date.today(), *args, **kwargs):
 
-        self.main_period = period
+        self.main_date = main_date
+        self.periods_bar = self.gen_bar_for(self.main_date)
 
-        self.periods_bar = self.gen_bar_for(self.main_period)
+    def gen_bar_for(self, main_date):
+        return F_PeriodTabBar(parent=self, main_date=self.main_date )
 
-    def gen_bar_for(self, period):
-        return F_PeriodTabBar(parent=self, main_period=period)
+    def change_period(self, main_date):
+        self.main_date = main_date
 
-    def change_period(self, period):
-        self.main_period = period
+    def getmain_date(self):
+        return self._main_date
 
-    def getmain_period(self):
-        return self._main_period
+    def setmain_date(self, value):
+        self._main_date = value
 
-    def setmain_period(self, value):
-        self._main_period = value
+    def on_date(self):
+        return date(self._main_date.year,01,01)
 
-    main_period = property(getmain_period, setmain_period)
+    def end_date(self):
+        return date(self._main_date.year,12,31)
+
+    main_date = property(getmain_date, setmain_date)
 
 
 class F_PeriodTabBar(QtGui.QTabBar):
 
-    def __init__(self, parent, main_period=None, *args, **kwargs):
+    def __init__(self, parent, main_date, *args, **kwargs):
 
         super(F_PeriodTabBar, self).__init__(*args, **kwargs)
 
         for i in range(0, 3):
             self.addTab('%s' % i)
-        NOW = datetime.now()
-        self.set_data_from(NOW)
+        self.set_data_from(main_date)
         self.build_tab_list()
         self.currentChanged.connect(self.changed_period)
 
     def set_data_from(self, period):
 
-        self.main_period = period
-        prev = self.main_period - timedelta(365)
-        next_ = self.main_period + timedelta(365)
-        self.periods = [prev, self.main_period, next_]
+        self.main_date = period
+        prev = self.main_date - timedelta(365)
+        next_ = self.main_date + timedelta(365)
+        self.periods = [prev, self.main_date, next_]
 
     def build_tab_list(self):
         for index, period in enumerate(self.periods):
-            self.setTabText(index, str(period.strftime('%x')))
-            self.setTabToolTip(index, str(period.strftime('%x')))
+            self.setTabText(index, str(period.strftime('%Y')))
+            #~ self.setTabToolTip(index, str(period.strftime('%Y')))
         self.setTabTextColor(1, QtGui.QColor('darkBlue'))
         self.setCurrentIndex(1)
 
@@ -292,5 +312,5 @@ class F_PeriodTabBar(QtGui.QTabBar):
             np = self.periods[index]
             self.set_data_from(np)
             self.build_tab_list()
-            self.parentWidget().main_period = np
+            self.parentWidget().main_date = np
             self.parentWidget().change_period(np)

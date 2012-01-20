@@ -20,7 +20,7 @@ class By_produitViewWidget(F_Widget, F_PeriodHolder):
         self.title = F_PageTitle(" ".join([u"Les rapports dont le produit: ", \
                                                         produit.libelle]))
         self.table = By_produitTableWidget(produit, parent=self, \
-                                                period=self.main_period)
+                                                period=self.main_date)
         # periods
         period = ""
 
@@ -49,7 +49,7 @@ class By_produitTableWidget(F_TableWidget):
         self.refresh(True)
 
     def refresh_period(self, period):
-        self.main_period = period
+        self.main_date = period
         self.set_data_for(period)
         self.refresh()
 

@@ -5,7 +5,7 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
-from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
+from common import F_Widget, F_PageTitle, Button
 from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
@@ -29,22 +29,22 @@ class DeleteViewWidget(QtGui.QDialog, F_Widget):
                         self.op.magasin.name, u"enregister le", \
                         self.op.date_rapp.strftime('%x %Hh:%Mmn')])), 0, 0)
         #delete and cancel hbox
-        button_hbox = QtGui.QHBoxLayout()
+        Button_hbox = QtGui.QHBoxLayout()
 
         #Delete Button widget.
-        delete_but = QtGui.QPushButton(_(u"Delete operation"))
-        button_hbox.addWidget(delete_but)
+        delete_but = Button(_(u"Delete operation"))
+        Button_hbox.addWidget(delete_but)
         delete_but.clicked.connect(self.delete)
         #Cancel Button widget.
-        cancel_but = QtGui.QPushButton(_(u"Cancel"))
-        button_hbox.addWidget(cancel_but)
+        cancel_but = Button(_(u"Cancel"))
+        Button_hbox.addWidget(cancel_but)
         cancel_but.clicked.connect(self.cancel)
 
         #Create the QVBoxLayout contenaire.
         vbox = QtGui.QVBoxLayout()
         vbox.addLayout(title_hbox)
         vbox.addLayout(report_hbox)
-        vbox.addLayout(button_hbox)
+        vbox.addLayout(Button_hbox)
         self.setLayout(vbox)
 
     def cancel(self):

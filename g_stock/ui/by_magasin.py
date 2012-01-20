@@ -42,7 +42,7 @@ class By_magasinTableWidget(F_TableWidget):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
         self.header = [_(u" "), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Carto Restant"), \
+                       _(u"Nombre de carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.mag = magasin
         self.set_data_for(period)

@@ -6,7 +6,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from sqlalchemy import desc
 
-from common import F_Widget,F_BoxTitle, F_PageTitle
+from common import F_Widget,F_BoxTitle, F_PageTitle, Button
 from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
@@ -64,9 +64,9 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         editbox.addWidget(self.nbre_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = QtGui.QPushButton(_(u"Save"))
+        butt = Button(_(u"Save"))
         butt.clicked.connect(self.edit_report)
-        cancel_but = QtGui.QPushButton((u"Cancel"))
+        cancel_but = Button((u"Cancel"))
         cancel_but.clicked.connect(self.cancel)
         editbox.addWidget(butt, 2, 3)
         editbox.addWidget(cancel_but, 2, 4)

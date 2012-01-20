@@ -4,7 +4,7 @@
 
 from PyQt4 import QtGui
 
-from common import F_Widget, F_BoxTitle, F_PageTitle
+from common import F_Widget, F_BoxTitle, Button
 from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
@@ -25,9 +25,9 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
         editbox.addWidget(self.new_produit, 0, 2)
         editbox.addWidget(QtGui.QLabel("Nombre de piece"), 1, 1)
         editbox.addWidget(self.new_nbr_piece, 1, 2)
-        butt = QtGui.QPushButton(u"Enregistre la modification")
+        butt = Button(u"Enregistre la modification")
         butt.clicked.connect(self.edit_prod)
-        cancel_but = QtGui.QPushButton(u"Cancel")
+        cancel_but = Button(u"Cancel")
         cancel_but.clicked.connect(self.cancel)
         editbox.addWidget(butt, 2, 1)
         editbox.addWidget(cancel_but, 2, 2)
