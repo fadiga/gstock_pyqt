@@ -53,7 +53,7 @@ class MagasinViewWidget(F_Widget):
             session.add(magasin)
             session.commit()
             self.name.clear()
-            self.refresh()
+            self.table_op.refresh_()
             raise_success(_(u"Confirmation"), _(u"Registered operation"))
         else:
             raise_error(_("Error"), _(u"Give the name of the store"))
@@ -67,6 +67,12 @@ class MagasinTableWidget(F_TableWidget):
         self.header = [_(u"Name"), _(u"Edit")]
         self.set_data_for()
         self.refresh(True)
+
+    def refresh_(self):
+        """ """
+        self._reset()
+        self.set_data_for()
+        self.refresh()
 
     def set_data_for(self):
         self.data = [(mag.name, "") for mag in session.query(Magasin).\

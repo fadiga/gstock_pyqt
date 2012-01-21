@@ -58,8 +58,7 @@ class ProduitViewWidget(F_Widget):
                 session.commit()
                 self.libelle.clear()
                 self.nbre_piece.clear()
-                self.refresh()
-                self.change_main_context(ProduitViewWidget)
+                self.table_op.refresh_()
                 raise_success(_(u"Confirmation"), _(u"The product %s "
                               u" was recorded") % produit.libelle)
             else:
@@ -76,6 +75,12 @@ class ProduitTableWidget(F_TableWidget):
         self.header = [_(u"Designation"), _(u"Number of rooms"), _(u"Edit")]
         self.set_data_for()
         self.refresh(True)
+
+    def refresh_(self):
+        """ """
+        self._reset()
+        self.set_data_for()
+        self.refresh()
 
     def set_data_for(self):
         self.data = [(prod.libelle, prod.nbr_piece, "") \

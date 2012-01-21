@@ -115,8 +115,7 @@ class G_reportViewWidget(F_Widget):
                 session.add(report)
                 session.commit()
                 self.nbr_carton.clear()
-                self.refresh()
-                self.change_main_context(G_reportViewWidget)
+                self.table_op.refresh_()
                 raise_success(_(u"Confirmation"), _(u"Registered operation"))
         else:
             raise_error(_(u"error"), _(u"Donnez le nbre de carton"))
@@ -135,6 +134,12 @@ class MagasinTableWidget(F_TableWidget):
         #je cache la 5 eme colonne
         self.hideColumn(5)
         self.setColumnWidth(0, 20)
+
+    def refresh_(self):
+        """ """
+        self._reset()
+        self.set_data_for()
+        self.refresh()
 
     def set_data_for(self):
         self.data = [(rap.type_, rap.magasin, rap.produit, \
