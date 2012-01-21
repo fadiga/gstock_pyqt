@@ -24,7 +24,7 @@ class MagasinViewWidget(F_Widget):
         vbox.addWidget(F_PageTitle(_(u"The list of stores")))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(_(u"Tableau stores")))
+        tablebox.addWidget(F_BoxTitle(_(u"Table stores")))
         self.table_op = MagasinTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 

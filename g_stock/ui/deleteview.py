@@ -15,19 +15,22 @@ class DeleteViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
-        self.setWindowTitle(_(u"Confirmation de la suppression"))
-        self.title = F_PageTitle(_(u"Voulez-vous supprimer ?"))
+        self.setWindowTitle(_(u"Delete Confirmation"))
+        self.title = F_PageTitle(_(u"Do you want to delete?"))
         self.op = report
         self.title.setAlignment(QtCore.Qt.AlignHCenter)
         title_hbox = QtGui.QHBoxLayout()
         title_hbox.addWidget(self.title)
         report_hbox = QtGui.QGridLayout()
 
-        report_hbox.addWidget(QtGui.QLabel(" ".\
-                        join(["Le produit ", \
-                        self.op.produit.libelle, u" qui se trouve dans ", \
-                        self.op.magasin.name, u"enregister le", \
-                        self.op.date_rapp.strftime('%x %Hh:%Mmn')])), 0, 0)
+        report_hbox.addWidget(QtGui.QLabel(_(u"The product %(product)s found"
+                                             u" in %(store)s "
+                                             u"save the %(date)s") %
+                                            {"product": self.op.produit \
+                                            .libelle, "store": self.op \
+                                            .magasin.name, "date": self.op \
+                                            .date_rapp \
+                                            .strftime('%x %Hh:%Mmn')}), 0, 0)
         #delete and cancel hbox
         Button_hbox = QtGui.QHBoxLayout()
 
@@ -55,9 +58,4 @@ class DeleteViewWidget(QtGui.QDialog, F_Widget):
         session.commit()
         update_rapport(self.op)
         self.cancel()
-        raise_success(u"Confirmation", \
-                        " ".join(["Ce rapport conserne le produit ", \
-                        self.op.produit.libelle, u" qui se trouve dans ", \
-                        self.op.magasin.name, u"enregister le", \
-                        self.op.date_rapp.strftime('%x %Hh:%Mmn'), \
-                        u"A été supprimer"]))
+        raise_success(_(u"Confirmation"), _(u"Your report has been deleted"))

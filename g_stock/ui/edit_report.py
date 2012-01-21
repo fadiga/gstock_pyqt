@@ -16,8 +16,8 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
-        self.setWindowTitle(_(u"Edited"))
-        self.title = F_PageTitle(_(u"Voulez-vous modification?"))
+        self.setWindowTitle(_(u"Change"))
+        self.title = F_PageTitle(_(u"Do you want to change?"))
 
         self.op = report
         vbox = QtGui.QVBoxLayout()
@@ -59,7 +59,7 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         editbox.addWidget(self.box_mag, 1, 1)
         editbox.addWidget(QtGui.QLabel((_(u"Product"))), 0, 2)
         editbox.addWidget(self.box_prod, 1, 2)
-        editbox.addWidget(QtGui.QLabel((_(u"Nbre carton"))), 0, 3)
+        editbox.addWidget(QtGui.QLabel((_(u"Number of carton"))), 0, 3)
         editbox.addWidget(self.nbre_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
@@ -87,9 +87,5 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         #~ session.commit()
         #~ update_rapport(self.op)
         self.cancel()
-        raise_success(u"Confirmation", \
-                        " ".join(["Ce rapport conserne le produit ", \
-                        self.op.produit.libelle, u" qui se trouve dans ", \
-                        self.op.magasin.name, u"enregister le", \
-                        self.op.date_rapp.strftime('%x %Hh:%Mmn'), \
-                        u"A été supprimer"]))
+        raise_success(_(u"Confirmation"), \
+                            _(u"Your report has been amended"))

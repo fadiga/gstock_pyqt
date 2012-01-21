@@ -60,8 +60,8 @@ class ProduitViewWidget(F_Widget):
                 self.nbre_piece.clear()
                 self.refresh()
                 self.change_main_context(ProduitViewWidget)
-                raise_success(_(u"Confirmation"), _(u"Le produit %s "
-                              u" à été bien enregistrer") % produit.libelle)
+                raise_success(_(u"Confirmation"), _(u"The product %s "
+                              u" was recorded") % produit.libelle)
             else:
                 raise_error(_(u"error"), \
                             _(u"Give the room number in the box"))

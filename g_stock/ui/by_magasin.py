@@ -17,8 +17,8 @@ class By_magasinViewWidget(F_Widget, F_PeriodHolder):
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
-        self.title = F_PageTitle(" ".join([u"Les rapports dans le magasin: ", \
-                                                            magasin.name]))
+        self.title = F_PageTitle(_(u"The reports of the store: %s") % \
+                                                            magasin.name)
         self.table = By_magasinTableWidget(magasin, parent=self, \
                                                 main_date=self.main_date)
 
@@ -42,8 +42,8 @@ class By_magasinTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [u" ", _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Remaining"), \
+        self.header = [u" ", _(u"Product"), \
+                       _(u"Number of carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.mag = magasin
         self.set_data_for(main_date)

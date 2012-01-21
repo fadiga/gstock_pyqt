@@ -19,31 +19,31 @@ class By_periodViewWidget(F_Widget):
 
         list_date = parent.list_
         self.table = By_periodTableWidget(list_date, parent=self)
-        self.title = F_PageTitle(u"Rapport periodique ")
+        self.title = F_PageTitle(_(u"Periodic report"))
 
         if list_date:
             on, end = list_date
         self.on_date = FormatDate(QtCore.QDate(date.today().year,01,01))
         self.end_date = FormatDate(QtCore.QDate.currentDate())
-        self.Button = Button(_(u"ok"))
+        self.Button = Button(_(u"OK"))
         self.Button.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
         # Grid
         gridbox = QtGui.QGridLayout()
         gridbox.addWidget(FormLabel(_(u"On date")), 0, 1)
         gridbox.addWidget(self.on_date, 0, 2)
-        gridbox.addWidget(FormLabel(u"End date"), 1, 1)
+        gridbox.addWidget(FormLabel(_(u"End date")), 1, 1)
         gridbox.addWidget(self.end_date, 1, 2)
         gridbox.addWidget(FormLabel(""), 0, 3)
         gridbox.addWidget(self.Button, 2, 2)
         gridbox.setColumnStretch(3, 5)
         if list_date:
-            gridbox.addWidget(FormLabel("Les Rapports du" + on + " au " + \
+            gridbox.addWidget(FormLabel(_("Reports of ") + on + _(u" to ") + \
                                                                 end ), 4, 3)
         else:
-            gridbox.addWidget(FormLabel("Les Rapports du " + \
-                                        self.on_date.text() + " au " + \
-                                        self.end_date.text()), 4, 3)
+            gridbox.addWidget(FormLabel(_("Reports of ") + \
+                                          self.on_date.text() + _(u" to ") + \
+                                          self.end_date.text()), 4, 3)
         vbox.addWidget(self.title)
         vbox.addLayout(gridbox)
         vbox.addWidget(self.table)
@@ -66,8 +66,8 @@ class By_periodTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u" "), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Remaining"), \
+        self.header = [u" ", _(u"Store"), _(u"Product"), \
+                       _(u"Number of carton"), _(u"Remaining"), \
                        _(u"Date")]
         try:
             self.on_date = self.format_date(list_date[0])

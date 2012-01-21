@@ -41,11 +41,11 @@ class InventaireViewWidget(F_Widget):
         gridbox.addWidget(self.Button, 2, 2)
         gridbox.setColumnStretch(3, 5)
         if list_date:
-            gridbox.addWidget(FormLabel(_("The Reports of:") + on + _(" au ") + \
-                                                                end ), 4, 3)
+            gridbox.addWidget(FormLabel(_("The Reports of: ") + on + \
+                                        _(" to ") + end ), 4, 3)
         else:
             gridbox.addWidget(FormLabel(_("The Reports of:  ") + \
-                                        self.on_date.text() + _(" au ") + \
+                                        self.on_date.text() + _(" to ") + \
                                         self.end_date.text()), 4, 3)
         vbox.addWidget(self.title)
         vbox.addLayout(gridbox)

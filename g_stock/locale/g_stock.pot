@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: g_stock 0.1\n"
 "Report-Msgid-Bugs-To: bugs@yeleman.com\n"
-"POT-Creation-Date: 2012-01-21 12:12+0000\n"
+"POT-Creation-Date: 2012-01-21 22:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:37
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:82
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:81
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:73
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:71
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:71
@@ -30,17 +30,15 @@ msgid "inout"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:41
-msgid ""
-"Vous ne pouvez pas effectie cette \n"
-"operation Car "
+msgid "You can not do this because"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:46
+msgid "There were no entry for this product "
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:47
-msgid "IL n'y eu aucun  input pour ce produit "
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:48
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:80
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock//data_helper.py:79
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:71
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:69
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:69
@@ -62,6 +60,8 @@ msgid "All reports"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:47
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:45
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:52
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:71
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:60
@@ -72,6 +72,10 @@ msgid "Product"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:48
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:46
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:70
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:46
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:62
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:131
 msgid "Number of carton"
 msgstr ""
@@ -100,18 +104,19 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:45
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
-msgid "Produit"
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:20
+#, python-format
+msgid "The reports of the store: %s"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:46
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:70
-msgid "Nombre de carton"
+#. Rapport periodique
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:22
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:45
+msgid "Periodic report"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:28
-msgid "ok"
+msgid "OK"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:33
@@ -119,20 +124,40 @@ msgstr ""
 msgid "On date"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
-msgid " "
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:35
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:38
+msgid "End date"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:41
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:45
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:45
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:48
+msgid " to "
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:41
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:44
+msgid "Reports of "
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
-msgid "Magasin"
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:52
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:71
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:58
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:74
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:130
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:72
+msgid "Store"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:20
+#, python-format
+msgid "The reports of the product: %s"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:45
 msgid "store"
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:46
-msgid "Number carton"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/common.py:51
@@ -170,47 +195,59 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:52
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:71
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:58
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:74
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:130
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:72
-msgid "Store"
-msgstr ""
-
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:62
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:82
 msgid "%x %Hh:%Mmn"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:18
-msgid "Confirmation de la suppression"
+msgid "Delete Confirmation"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:19
-msgid "Voulez-vous supprimer ?"
+msgid "Do you want to delete?"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:26
+#, python-format
+msgid "The product %(product)s found in %(store)s save the %(date)s"
 msgstr ""
 
 #. Delete Button widget.
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:35
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:38
 msgid "Delete operation"
 msgstr ""
 
 #. Cancel Button widget.
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:39
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:42
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_magasin.py:28
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_produit.py:30
 msgid "Cancel"
 msgstr ""
 
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:61
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_magasin.py:45
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_produit.py:51
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:90
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:120
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:57
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/produits.py:63
+msgid "Confirmation"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:61
+msgid "Your report has been deleted"
+msgstr ""
+
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_magasin.py:17
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_produit.py:15
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:19
 msgid "Change"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_magasin.py:21
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_produit.py:19
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:20
 msgid "Do you want to change?"
 msgstr ""
 
@@ -225,14 +262,6 @@ msgid "Records the change"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_magasin.py:45
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_produit.py:51
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:120
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:57
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/produits.py:63
-msgid "Confirmation"
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_magasin.py:45
 msgid "The store has been changing"
 msgstr ""
 
@@ -242,14 +271,6 @@ msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_produit.py:51
 msgid "The product has been changing"
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:19
-msgid "Edited"
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:20
-msgid "Voulez-vous modification?"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:33
@@ -273,16 +294,15 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:62
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:78
-msgid "Nbre carton"
-msgstr ""
-
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:66
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:82
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:39
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/produits.py:42
 msgid "Save"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:91
+msgid "Your report has been amended"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:30
@@ -296,6 +316,11 @@ msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:48
 msgid "add report"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:78
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:73
+msgid "Number of carton "
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:109
@@ -325,29 +350,16 @@ msgstr ""
 
 #. Rapport inventaire
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:25
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:50
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:51
 msgid "Inventory"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:38
-msgid "End date"
-msgstr ""
-
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:44
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:48
-msgid " au "
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:44
-msgid "The Reports of:"
+msgid "The Reports of: "
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:47
 msgid "The Reports of:  "
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:73
-msgid "Number of carton "
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:22
@@ -359,7 +371,7 @@ msgid "The list of stores"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:27
-msgid "Tableau stores"
+msgid "Table stores"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:35
@@ -384,8 +396,9 @@ msgid "Store Management"
 msgstr ""
 
 #. Exit
+#. Exit
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/mainwindow.py:28
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:28
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:29
 msgid "Exit"
 msgstr ""
 
@@ -402,40 +415,55 @@ msgstr ""
 msgid "Management Reports"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:30
+#. Menu File
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:21
+msgid "&File"
+msgstr ""
+
+#. Export
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:23
+msgid "&Export data"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:24
+msgid "Backup Database"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:25
+msgid "In an Excel file"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:31
 msgid "Quiter l'application"
 msgstr ""
 
 #. Menu aller à
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:36
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:37
 msgid "&Go to"
 msgstr ""
 
 #. magasin
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:38
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:39
 msgid "New store"
 msgstr ""
 
-#. Rapport periodique
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:44
-msgid "Periodic report"
-msgstr ""
-
 #. Menu Aide
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:56
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:82
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:57
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:59
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:83
 msgid "help"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:83
-msgid "Besoin d'aide"
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:87
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:61
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:88
 msgid "About"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:88
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:84
+msgid "Besoin d'aide"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:89
 msgid ""
 "G_stock gestion de stock\n"
 "\n"
@@ -471,7 +499,7 @@ msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/produits.py:63
 #, python-format
-msgid "Le produit %s  à été bien enregistrer"
+msgid "The product %s  was recorded"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/produits.py:67

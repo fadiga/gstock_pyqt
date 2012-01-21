@@ -38,13 +38,12 @@ def remaining(type_, nbr_carton, magasin, produit):
         try:
             restant = int(previous_rapp.restant) - int(nbr_carton)
             if restant < 0:
-                return [None, _(u"Vous ne pouvez pas effectie cette \n"
-                                u"operation Car ") + \
+                return [None, _(u"You can not do this because") + \
                                     str(previous_rapp.restant) + " < " \
                                     + str(nbr_carton)]
             return [restant, u""]
         except AttributeError:
-            return [None, _(u"IL n'y eu aucun  input pour ce produit ")]
+            return [None, _(u"There were no entry for this product ")]
     if type_ == _(u"input"):
         try:
             restant = int(previous_rapp.restant) + int(nbr_carton)

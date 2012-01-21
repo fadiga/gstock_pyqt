@@ -18,12 +18,13 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         QtGui.QMenuBar.__init__(self, parent, *args, **kwargs)
 
         #Menu File
-        file_ = self.addMenu(u"&Fichier")
+        file_ = self.addMenu(_(u"&File"))
         # Export
-        export = file_.addMenu((u"&Exporter les données"))
-        export.addAction((u"Dans un fichier db"), self.goto_export_db)
-        export.addAction((u"Dans un fichier Excel"),\
-                                               self.goto_export_excel)
+        export = file_.addMenu(_(u"&Export data"))
+        export.addAction(_(u"Backup Database"), self.goto_export_db)
+        export.addAction(_(u"In an Excel file"),\
+                                        self.goto_export_excel)
+        # Exit
         # Exit
         exit_ = QtGui.QAction(_(u"Exit"), self)
         exit_.setShortcut("Ctrl+Q")
@@ -55,9 +56,9 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         #Menu Aide
         help_ = self.addMenu(_(u"help"))
         help_.addAction(QtGui.QIcon('images/help.png'), \
-                                        "help", self.goto_help)
+                                        _("help"), self.goto_help)
         help_.addAction(QtGui.QIcon('images/about.png'), \
-                                        "About", self.goto_about)
+                                        _(u"About"), self.goto_about)
 
     #Print
     def goto_inventaire(self):

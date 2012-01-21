@@ -75,7 +75,7 @@ class G_reportViewWidget(F_Widget):
         editbox.addWidget(self.box_mag, 1, 1)
         editbox.addWidget(QtGui.QLabel(_(u"Product")), 0, 2)
         editbox.addWidget(self.box_prod, 1, 2)
-        editbox.addWidget(QtGui.QLabel((_(u"Nbre carton"))), 0, 3)
+        editbox.addWidget(QtGui.QLabel((_(u"Number of carton "))), 0, 3)
         editbox.addWidget(self.nbr_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
