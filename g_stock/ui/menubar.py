@@ -25,7 +25,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         export.addAction((u"Dans un fichier Excel"),\
                                                self.goto_export_excel)
         # Exit
-        exit_ = QtGui.QAction((u"Exit"), self)
+        exit_ = QtGui.QAction(_(u"Exit"), self)
         exit_.setShortcut("Ctrl+Q")
         exit_.setToolTip(_("Quiter l'application"))
         self.connect(exit_, QtCore.SIGNAL("triggered()"), \
@@ -35,19 +35,19 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         # Menu aller à
         goto_ = self.addMenu(_(u"&Go to"))
         # magasin
-        magasin = QtGui.QAction(_(u"Nouveau magasin"), self)
+        magasin = QtGui.QAction(_(u"New store"), self)
         magasin.setShortcut("Ctrl+M")
         self.connect(magasin, QtCore.SIGNAL("triggered()"),\
                                             self.addstore)
         goto_.addAction(magasin)
         # Rapport periodique
-        rap_p = QtGui.QAction(_(u"Rapport periodique"), self)
+        rap_p = QtGui.QAction(_(u"Periodic report"), self)
         rap_p.setShortcut("Ctrl+T")
         self.connect(rap_p, QtCore.SIGNAL("triggered()"),\
                                             self.report_period)
         goto_.addAction(rap_p)
         # Rapport inventaire
-        rap_inv = QtGui.QAction(_(u"Inventaire"), self)
+        rap_inv = QtGui.QAction(_(u"Inventory"), self)
         rap_inv.setShortcut("Ctrl+I")
         self.connect(rap_inv, QtCore.SIGNAL("triggered()"),\
                                             self.goto_inventaire)

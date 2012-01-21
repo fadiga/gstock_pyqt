@@ -44,8 +44,9 @@ class RapportTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Type"), (u"Magasin No."), _(u"Produit"), \
-                       _(u"Nbre carton"), _(u"Remaining"), _(u"Date")]
+        self.header = [u" ", (u"Store No."), _(u"Product"), \
+                       _(u"Number of carton"), _(u"Remaining"), \
+                       _(u"Date")]
         self.set_data_for(main_date)
         self.refresh(True)
         self.setColumnWidth(0, 20)

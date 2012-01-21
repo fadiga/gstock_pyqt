@@ -20,7 +20,7 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self)
 
         self.resize(900, 650)
-        self.setWindowTitle(_(u"gestion de stock"))
+        self.setWindowTitle(_(u"Store Management"))
         self.setWindowIcon(QtGui.QIcon('images/mali.png'))
 
         self.toolbar = QtGui.QToolBar()
@@ -29,7 +29,7 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar.addSeparator()
         self.toolbar.addAction(_(u"Dashboard"), self.accueil)
         self.toolbar.addSeparator()
-        self.toolbar.addAction(_(u"Produits"), self.goto_produit)
+        self.toolbar.addAction(_(u"Products"), self.goto_produit)
         self.toolbar.addSeparator()
         self.toolbar.addAction(_(u"All reports"), \
                                                     self.goto_all_rapport)
@@ -51,7 +51,7 @@ class MainWindow(QtGui.QMainWindow):
         self.change_context(DashbordViewWidget)
 
     def goto_produit(self):
-        self.setWindowTitle(_(u"Produits"))
+        self.setWindowTitle(_(u"Products"))
         self.change_context(ProduitViewWidget)
 
     def goto_all_rapport(self):

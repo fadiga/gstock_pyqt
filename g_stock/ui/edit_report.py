@@ -6,7 +6,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from sqlalchemy import desc
 
-from common import F_Widget,F_BoxTitle, F_PageTitle, Button
+from common import F_Widget,F_BoxTitle, F_PageTitle, Button, FormatDate
 from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
@@ -16,7 +16,7 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
 
     def __init__(self, report, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
-        self.setWindowTitle(_(u"Edit"))
+        self.setWindowTitle(_(u"Edited"))
         self.title = F_PageTitle(_(u"Voulez-vous modification?"))
 
         self.op = report
@@ -25,8 +25,7 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         self.nbre_carton = QtGui.QLineEdit(str(self.op.nbr_carton))
         self.nbre_carton.setValidator(QtGui.QIntValidator())
 
-        self.date_ = QtGui.QDateTimeEdit(QtCore.QDate(self.op.date_rapp))
-        self.date_.setDisplayFormat("dd/MM/yyyy")
+        self.date_ = FormatDate(QtCore.QDate(self.op.date_rapp))
 
         self.time = QtGui.QDateTimeEdit(QtCore.QTime.currentTime())
         formbox = QtGui.QVBoxLayout()
@@ -56,9 +55,9 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
             self.box_prod.setCurrentIndex(2)
         editbox.addWidget(QtGui.QLabel((_(u"Type"))), 0, 0)
         editbox.addWidget(self.box_type, 1, 0)
-        editbox.addWidget(QtGui.QLabel((_(u"Magasin"))), 0, 1)
+        editbox.addWidget(QtGui.QLabel((_(u"Store"))), 0, 1)
         editbox.addWidget(self.box_mag, 1, 1)
-        editbox.addWidget(QtGui.QLabel((_(u"Produit"))), 0, 2)
+        editbox.addWidget(QtGui.QLabel((_(u"Product"))), 0, 2)
         editbox.addWidget(self.box_prod, 1, 2)
         editbox.addWidget(QtGui.QLabel((_(u"Nbre carton"))), 0, 3)
         editbox.addWidget(self.nbre_carton, 1, 3)
@@ -84,9 +83,9 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         report.magasin = ""
         report.produit = ""
         report.nbr_cartion = ""
-        session.add(report)
-        session.commit()
-        update_rapport(self.op)
+        #~ session.add(report)
+        #~ session.commit()
+        #~ update_rapport(self.op)
         self.cancel()
         raise_success(u"Confirmation", \
                         " ".join(["Ce rapport conserne le produit ", \

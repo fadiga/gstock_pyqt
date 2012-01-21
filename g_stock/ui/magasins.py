@@ -19,12 +19,12 @@ class MagasinViewWidget(F_Widget):
     def __init__(self, magasin="", parent=0, *args, **kwargs):
         super(MagasinViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
-        self.setWindowTitle(_(u"Magasins"))
+        self.setWindowTitle(_(u"Stores"))
         vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(F_PageTitle(_(u"Liste des magasins")))
+        vbox.addWidget(F_PageTitle(_(u"The list of stores")))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(_(u"Tableau magasin")))
+        tablebox.addWidget(F_BoxTitle(_(u"Tableau stores")))
         self.table_op = MagasinTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
@@ -34,7 +34,7 @@ class MagasinViewWidget(F_Widget):
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(_(u"Add opertion")))
 
-        editbox.addWidget(QtGui.QLabel((_(u"Nom du magasin"))), 0, 0)
+        editbox.addWidget(QtGui.QLabel((_(u"Store Name"))), 0, 0)
         editbox.addWidget(self.name, 1, 0)
         butt = Button(_(u"Save"))
         butt.clicked.connect(self.add_operation)
@@ -56,7 +56,7 @@ class MagasinViewWidget(F_Widget):
             self.refresh()
             raise_success(_(u"Confirmation"), _(u"Registered operation"))
         else:
-            raise_error(_("Erreur"), _(u"Donnez le nom du magasin"))
+            raise_error(_("Error"), _(u"Give the name of the store"))
         self.change_main_context(MagasinViewWidget)
 
 

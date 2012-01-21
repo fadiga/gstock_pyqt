@@ -25,9 +25,9 @@ class DashbordViewWidget(F_Widget):
         tablebox_dern_op = QtGui.QVBoxLayout()
 
         self.title = F_PageTitle(_("Dashboard"))
-        self.title_alert = F_BoxTitle(_(u"La liste des produits " \
-                                    u"dont le restant est < 100 cartons"))
-        self.title_dern_op = F_BoxTitle(_(u"Tableau de dernière operations"))
+        self.title_alert = F_BoxTitle(_(u"The list of products that the  " \
+                                        u"rest is <100 cartons"))
+        self.title_dern_op = F_BoxTitle(_(u"Table last operations"))
 
         self.table_alert = Alert_TableWidget(parent=self)
         self.table_dern_op = Dern_opTableWidget(parent=self)
@@ -37,7 +37,7 @@ class DashbordViewWidget(F_Widget):
         table_alert.addWidget(self.table_alert)
         tablebox_dern_op.addWidget(self.title_dern_op)
         tablebox_dern_op.addWidget(self.table_dern_op)
-        tab_widget = tabbox((table_alert, _(u"Alerte sur les produits")), \
+        tab_widget = tabbox((table_alert, _(u"Product warning")), \
                             (tablebox_dern_op,  _(u"The last operations")))
 
         vbox.addWidget(tab_widget)
@@ -49,7 +49,7 @@ class Alert_TableWidget(F_TableWidget):
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [_(u"Magasin"), _(u"Produit"), _(u"Quantite"), \
+        self.header = [_(u"Store"), _(u"Product"), _(u"Quantity"), \
                                       _(u"Remaining"), _(u"Date")]
         self.set_data_for()
         self.refresh(True)
@@ -68,7 +68,7 @@ class Dern_opTableWidget(F_TableWidget):
     def __init__(self, parent, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u" ", _(u"Magasin"), _(u"Produit"), _(u"Quantite"), \
+        self.header = [u" ", _(u"Store"), _(u"Product"), _(u"Quantity"), \
                                             _(u"Remaining"), _(u"Date")]
         self.set_data_for()
         self.refresh(True)

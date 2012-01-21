@@ -27,9 +27,8 @@ class G_reportViewWidget(F_Widget):
     def __init__(self, parent=0, *args, **kwargs):
         super(G_reportViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
-        self.setWindowTitle(_(u"Gestion des rapports"))
+        self.setWindowTitle(_(u"Management reports"))
         vbox = QtGui.QVBoxLayout()
-        #~ vbox.addWidget(F_PageTitle(u"Gestion des rapports"))
 
         tablebox = QtGui.QVBoxLayout()
         tablebox.addWidget(F_BoxTitle(_(u"Table rapports")))
@@ -72,9 +71,9 @@ class G_reportViewWidget(F_Widget):
 
         editbox.addWidget(QtGui.QLabel(_(u"Type")), 0, 0)
         editbox.addWidget(self.box_type, 1, 0)
-        editbox.addWidget(QtGui.QLabel(_(u"Magasin")), 0, 1)
+        editbox.addWidget(QtGui.QLabel(_(u"Store")), 0, 1)
         editbox.addWidget(self.box_mag, 1, 1)
-        editbox.addWidget(QtGui.QLabel(_(u"Produit")), 0, 2)
+        editbox.addWidget(QtGui.QLabel(_(u"Product")), 0, 2)
         editbox.addWidget(self.box_prod, 1, 2)
         editbox.addWidget(QtGui.QLabel((_(u"Nbre carton"))), 0, 3)
         editbox.addWidget(self.nbr_carton, 1, 3)
@@ -128,8 +127,8 @@ class MagasinTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u" ", _(u"Magasin"), _(u"Produit"), \
-                             _(u"Nbre carton"), _(u"Restant"), u" ", \
+        self.header = [u" ", _(u"Store"), _(u"Product"), \
+                             _(u"Number of carton"), _(u"Remaining"), u" ", \
                              _(u"Date"), _(u"Edit"), _(u"Delete")]
         self.set_data_for()
         self.refresh(True)

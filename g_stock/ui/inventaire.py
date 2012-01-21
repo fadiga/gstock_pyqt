@@ -22,7 +22,7 @@ class InventaireViewWidget(F_Widget):
 
         list_date = parent.list_
         self.table = InventaireTableWidget(list_date, parent=self)
-        self.title = F_PageTitle(_(u"Inventaire"))
+        self.title = F_PageTitle(_(u"Inventory"))
 
         if list_date:
             on, end = list_date
@@ -41,10 +41,10 @@ class InventaireViewWidget(F_Widget):
         gridbox.addWidget(self.Button, 2, 2)
         gridbox.setColumnStretch(3, 5)
         if list_date:
-            gridbox.addWidget(FormLabel(_("Les Rapports du") + on + _(" au ") + \
+            gridbox.addWidget(FormLabel(_("The Reports of:") + on + _(" au ") + \
                                                                 end ), 4, 3)
         else:
-            gridbox.addWidget(FormLabel(_("Les Rapports du:  ") + \
+            gridbox.addWidget(FormLabel(_("The Reports of:  ") + \
                                         self.on_date.text() + _(" au ") + \
                                         self.end_date.text()), 4, 3)
         vbox.addWidget(self.title)
@@ -69,8 +69,8 @@ class InventaireTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"Type"), _(u"Magasin"), _(u"Produit"), \
-                       _(u"Nombre de carton"), _(u"Remaining"), \
+        self.header = [_(u"Type"), _(u"Store"), _(u"Product"), \
+                       _(u"Number of carton "), _(u"Remaining"), \
                        _(u"Date")]
         try:
             self.on_date = self.format_date(list_date[0])

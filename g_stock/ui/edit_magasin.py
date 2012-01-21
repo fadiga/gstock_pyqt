@@ -14,18 +14,18 @@ from database import *
 class EditMagasinViewWidget(QtGui.QDialog, F_Widget):
     def __init__(self, magasin, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
-        self.setWindowTitle(u"Modification")
+        self.setWindowTitle(_(u"Change"))
 
         self.mag = magasin.name
         vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(F_BoxTitle(u"Voulez-vous modification?"))
+        vbox.addWidget(F_BoxTitle(_(u"Do you want to change?")))
         self.new_magasin = QtGui.QLineEdit(self.mag)
         editbox = QtGui.QGridLayout()
-        editbox.addWidget(QtGui.QLabel("Nom du magasin"), 0, 1)
+        editbox.addWidget(QtGui.QLabel(_("Store Name")), 0, 1)
         editbox.addWidget(self.new_magasin, 0, 2)
-        butt = Button(u"Enregistre la modification")
+        butt = Button(_(u"Records the change"))
         butt.clicked.connect(self.edit_mag)
-        cancel_but = Button(u"Cancel")
+        cancel_but = Button(_(u"Cancel"))
         cancel_but.clicked.connect(self.cancel)
         editbox.addWidget(butt, 2, 1)
         editbox.addWidget(cancel_but, 2, 2)
@@ -42,4 +42,4 @@ class EditMagasinViewWidget(QtGui.QDialog, F_Widget):
         session.add(magasin)
         session.commit()
         self.cancel()
-        raise_success(u"Confirmation", u"Le magasin à été modifier")
+        raise_success(_(u"Confirmation"), _(u"The store has been changing"))

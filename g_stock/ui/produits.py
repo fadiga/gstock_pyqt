@@ -18,12 +18,12 @@ class ProduitViewWidget(F_Widget):
     def __init__(self, produit="", parent=0, *args, **kwargs):
         super(ProduitViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
-        self.setWindowTitle((u"Produits"))
+        self.setWindowTitle((u"Products"))
         vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(F_PageTitle(u"La liste des produits"))
+        vbox.addWidget(F_PageTitle(_(u"The list of products")))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(u"Table produits"))
+        tablebox.addWidget(F_BoxTitle(_(u"Table products")))
         self.table_op = ProduitTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
@@ -33,13 +33,13 @@ class ProduitViewWidget(F_Widget):
 
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
-        formbox.addWidget(F_BoxTitle(u"Add produit"))
+        formbox.addWidget(F_BoxTitle(_(u"Add product")))
 
         editbox.addWidget(QtGui.QLabel((_(u"Designation"))), 0, 0)
         editbox.addWidget(self.libelle, 1, 0)
-        editbox.addWidget(QtGui.QLabel((_(u"Nbre de piece"))), 0, 1)
+        editbox.addWidget(QtGui.QLabel((_(u"Number of rooms"))), 0, 1)
         editbox.addWidget(self.nbre_piece, 1, 1)
-        butt = Button((u"Enregistrer"))
+        butt = Button(_(u"Save"))
         butt.clicked.connect(self.add_operation)
         editbox.addWidget(butt, 1, 2)
 
@@ -60,20 +60,20 @@ class ProduitViewWidget(F_Widget):
                 self.nbre_piece.clear()
                 self.refresh()
                 self.change_main_context(ProduitViewWidget)
-                raise_success(u"Confirmation", u"Le produit %s "
-                              u" à été bien enregistrer" % produit.libelle)
+                raise_success(_(u"Confirmation"), _(u"Le produit %s "
+                              u" à été bien enregistrer") % produit.libelle)
             else:
-                raise_error(u"error", \
-                            u"Donnez le nombre de pièce dans le carton")
+                raise_error(_(u"error"), \
+                            _(u"Give the room number in the box"))
         else:
-            raise_error(u"Error", u"Donnez le nom du produit")
+            raise_error(_(u"Error"), _(u"Give the name of the product"))
 
 
 class ProduitTableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-        self.header = [u"Designation", u"Nbre de pièce", u"Edit"]
+        self.header = [_(u"Designation"), _(u"Number of rooms"), _(u"Edit")]
         self.set_data_for()
         self.refresh(True)
 
