@@ -31,6 +31,7 @@ class AllreportsViewWidget(F_Widget, F_PeriodHolder):
         self.setLayout(vbox)
 
     def refresh(self):
+
         self.table.refresh()
 
     def change_period(self, main_date):
@@ -51,6 +52,7 @@ class RapportTableWidget(F_TableWidget):
 
     def refresh_period(self, main_date):
         """ """
+        self._reset()
         self.set_data_for(main_date)
         self.refresh()
 
@@ -64,7 +66,6 @@ class RapportTableWidget(F_TableWidget):
                         .filter(Rapport.date_rapp.__ge__(on)) \
                         .filter(Rapport.date_rapp.__le__(end)) \
                         .order_by(desc(Rapport.date_rapp)).all()]
-
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == _(u"input"):
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")

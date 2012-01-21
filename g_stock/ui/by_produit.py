@@ -3,7 +3,7 @@
 # maintainer: Fad
 
 from PyQt4 import QtGui
-from PyQt4 import QtCore
+from sqlalchemy import desc
 
 from database import *
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
@@ -20,9 +20,7 @@ class By_produitViewWidget(F_Widget, F_PeriodHolder):
         self.title = F_PageTitle(" ".join([u"Les rapports dont le produit: ", \
                                                         produit.libelle]))
         self.table = By_produitTableWidget(produit, parent=self, \
-                                                period=self.main_date)
-        # periods
-        period = ""
+                                           main_date=self.main_date)
 
         vbox = QtGui.QVBoxLayout()
         vbox.addWidget(self.title)
@@ -34,10 +32,13 @@ class By_produitViewWidget(F_Widget, F_PeriodHolder):
     def refresh(self):
         self.table.refresh()
 
+    def change_period(self, main_date):
+        self.table.refresh_period(main_date)
+
 
 class By_produitTableWidget(F_TableWidget):
 
-    def __init__(self, produit, parent, period, *args, **kwargs):
+    def __init__(self, produit, parent, main_date, *args, **kwargs):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
@@ -45,19 +46,24 @@ class By_produitTableWidget(F_TableWidget):
                        _(u"Nombre de carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.prod = produit
-        self.set_data_for(period)
+        self.set_data_for(main_date)
         self.refresh(True)
 
-    def refresh_period(self, period):
-        self.main_date = period
-        self.set_data_for(period)
+    def refresh_period(self, main_date):
+        self._reset()
+        self.set_data_for(main_date)
         self.refresh()
 
-    def set_data_for(self, period):
+    def set_data_for(self, main_date):
+
+        on , end = self.parent.on_date(),self.parent.end_date()
         self.data = [(rap.type_, rap.magasin, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                        for rap in session.query(Rapport)\
-                                .filter(Rapport.produit_id == self.prod.id)]
+                      for rap in session.query(Rapport)\
+                                .filter(Rapport.produit_id == self.prod.id)\
+                                .filter(Rapport.date_rapp.__ge__(on)) \
+                                .filter(Rapport.date_rapp.__le__(end)) \
+                                .order_by(desc(Rapport.date_rapp)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == _("input"):
