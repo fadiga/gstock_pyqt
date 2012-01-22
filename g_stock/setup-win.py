@@ -19,7 +19,7 @@ else:
     ZIPFILE = 'shared.lib'
     BUNDLES = 1
 
-setup(windows=[{'script': 'gmag.py', \
+setup(windows=[{'script': 'gstock.py', \
                 'icon_resources': [(0, 'images\\ap.ico')]}],
       options={'py2exe': {
                     'includes': ['sip'],
