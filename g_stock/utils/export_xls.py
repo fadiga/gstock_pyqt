@@ -9,7 +9,6 @@ from sqlalchemy import desc
 
 from database import *
 
-
 font_title = xlwt.Font()
 font_title.name = 'Times New Roman'
 font_title.bold = True
@@ -35,7 +34,7 @@ al1.horz = xlwt.Alignment.HORZ_RIGHT
 
 color = xlwt.Pattern()
 color.pattern = xlwt.Pattern.SOLID_PATTERN
-color.pattern_fore_colour = 23
+color.pattern_fore_colour = 22
 
 pat2 = xlwt.Pattern()
 pat2.pattern = xlwt.Pattern.SOLID_PATTERN
@@ -107,15 +106,12 @@ def write_xls(file_name):
             else:
                 style_row_table = style2
             sheet.write(rowx, 0, rap.type_, style_row_table)
-            sheet.write(rowx, 1, rap.produit.libelle, style_t_table)
-            sheet.write(rowx, 2, rap.nbr_carton, style_t_table)
-            sheet.write(rowx, 3, rap.restant, style_t_table)
+            sheet.write(rowx, 1, rap.produit.libelle, style_row_table)
+            sheet.write(rowx, 2, rap.nbr_carton, style_row_table)
+            sheet.write(rowx, 3, rap.restant, style_row_table)
             sheet.write(rowx, 4, rap.date_rapp.strftime(u'%x %Hh:%Mmn'), \
                                                             style_row_table)
             rowx += 1
-        sheet.write(rowx, 1, u"TOTAL", style_t_table)
-        sheet.write(rowx, 2, u"", style_t_table)
-        sheet.write(rowx, 3, "", style_t_table)
 
     book.save(file_name)
     return file_name
