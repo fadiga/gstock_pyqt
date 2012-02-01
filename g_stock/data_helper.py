@@ -91,13 +91,16 @@ def inventaire(on_date, end_date):
     reports = session.query(Rapport)\
                     .filter(Rapport.date_rapp.__ge__(on_date)) \
                     .filter(Rapport.date_rapp.__le__(end_date))
-    for mag in session.query(Magasin).all():
-        for prod in session.query(Produit).all():
-            p =reports.filter(Rapport.magasin_id == mag.id) \
-                        .filter(Rapport.produit_id == prod.id)\
+    magasins = session.query(Magasin).all()
+    produits = session.query(Produit).all()
+    for mag in magasins:
+        for prod in produits:
+            p =reports.filter(Rapport.magasin == mag) \
+                        .filter(Rapport.produit == prod)\
                         .order_by("-date_rapp")
             try:
                 list_rap.append(p[0])
             except:
                 pass
+
     return list_rap

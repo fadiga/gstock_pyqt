@@ -35,7 +35,7 @@ class DeleteViewWidget(QtGui.QDialog, F_Widget):
         Button_hbox = QtGui.QHBoxLayout()
 
         #Delete Button widget.
-        delete_but = Button(_(u"Delete operation"))
+        delete_but = Button(_(u"Deleted"))
         Button_hbox.addWidget(delete_but)
         delete_but.clicked.connect(self.delete)
         #Cancel Button widget.

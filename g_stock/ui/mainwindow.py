@@ -13,6 +13,7 @@ from produits import ProduitViewWidget
 from gestionreports import G_reportViewWidget
 from allreports import AllreportsViewWidget
 from menubar import MenuBar
+from statusbar import REDEStatusBar
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -37,10 +38,14 @@ class MainWindow(QtGui.QMainWindow):
         self.toolbar.addAction(_(u"Management reports"), \
                                                 self.goto_gestion_rapport)
 
+        self.toolbar.setStyleSheet("color: #201F3B")
         self.addToolBar(self.toolbar)
 
         self.menubar = MenuBar(self)
         self.setMenuBar(self.menubar)
+        self.statusbar = REDEStatusBar(self)
+        self.setStatusBar(self.statusbar)
+
         self.change_context(DashbordViewWidget)
 
     def goto_exit(self):
@@ -74,6 +79,7 @@ class MainWindow(QtGui.QMainWindow):
     def open_dialog(self, dialog, modal=False, *args, **kwargs):
         d = dialog(parent=self, *args, **kwargs)
         d.setModal(modal)
+        d.setWindowOpacity(0.97)
         d.exec_()
 
     def open_Dock(self, dock, modal=False, *args, **kwargs):

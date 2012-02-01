@@ -114,7 +114,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
         self.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.setFont(QtGui.QFont("Courier New", 10))
         # style au tr
-        self.setStyleSheet("color: #12103E;background-color:#F5F8FC")
+        self.setStyleSheet("color: #2C2C2C;")
         # enable sorting
         self.setSortingEnabled(True)
         self.setAlternatingRowColors(True)

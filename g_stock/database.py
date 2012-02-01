@@ -58,10 +58,6 @@ class Magasin(object):
         return (u"%(magasin)s %(adresse)s") \
                % {'magasin': self.name, 'adresse': self.adresse}
 
-    def report_magasin(self):
-        reports = session.query(Rapport).filter(Rapport.magasin==self).all()
-        return reports
-
 
 class Produit(object):
     def __init__(self, libelle, nbr_piece):
@@ -77,10 +73,6 @@ class Produit(object):
         return (u"%(libelle)s %(nbr_piece)s" % {'libelle': self.libelle,\
                                               'nbr_piece': self.nbr_piece})
 
-    def reports_produit(self):
-        """ """
-        reports = session.query(Rapport).filter(Rapport.produit==self)
-        return reports
 
 class Rapport(object):
     def __init__(self, type_, nbr_carton, date_rapp, remaining=0, \

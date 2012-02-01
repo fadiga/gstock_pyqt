@@ -52,6 +52,7 @@ def raise_error(title, message):
     box = QtGui.QMessageBox(QtGui.QMessageBox.Critical, title, \
                             message, QtGui.QMessageBox.Ok, \
                             parent=F_Window.window)
+    box.setWindowOpacity(0.9)
     box.exec_()
 
 
@@ -59,6 +60,7 @@ def raise_success(title, message):
     box = QtGui.QMessageBox(QtGui.QMessageBox.Information, title, \
                             message, QtGui.QMessageBox.Ok, \
                             parent=F_Window.window)
+    box.setWindowOpacity(0.9)
     box.exec_()
 
 
