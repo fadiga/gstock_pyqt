@@ -17,12 +17,9 @@ class By_periodViewWidget(F_Widget):
         super(By_periodViewWidget, self).__init__(parent=parent, *args, \
                                                                 **kwargs)
 
-        list_date = parent.list_
-        self.table = By_periodTableWidget(list_date, parent=self)
+        self.table = By_periodTableWidget(parent=self)
         self.title = F_PageTitle(_(u"Periodic report"))
 
-        if list_date:
-            on, end = list_date
         self.on_date = FormatDate(QtCore.QDate(date.today().year,01,01))
         self.end_date = FormatDate(QtCore.QDate.currentDate())
         self.Button = Button(_(u"OK"))
@@ -37,59 +34,54 @@ class By_periodViewWidget(F_Widget):
         gridbox.addWidget(FormLabel(""), 0, 3)
         gridbox.addWidget(self.Button, 2, 2)
         gridbox.setColumnStretch(3, 5)
-        if list_date:
-            gridbox.addWidget(FormLabel(_("Reports of ") + on + _(u" to ") + \
-                                                                end ), 4, 3)
-        else:
-            gridbox.addWidget(FormLabel(_("Reports of ") + \
-                                          self.on_date.text() + _(u" to ") + \
-                                          self.end_date.text()), 4, 3)
+
+        #~ gridbox.addWidget(FormLabel(_("Reports of ") + \
+                                          #~ self.on_date.text() + _(u" to ") + \
+                                          #~ self.end_date.text()), 4, 3)
         vbox.addWidget(self.title)
         vbox.addLayout(gridbox)
         vbox.addWidget(self.table)
         self.setLayout(vbox)
-
-    def refresh(self):
-        self.table.refresh()
-
-    def rapport_filter(self):
-        on_date = self.on_date.text()
-        end_date = self.end_date.text()
-        l_date = [on_date, end_date]
-        self.change_main_context(By_periodViewWidget, l_date)
-
-
-class By_periodTableWidget(F_TableWidget):
-    """ """
-
-    def __init__(self, list_date, parent, *args, **kwargs):
-
-        F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
-
-        self.header = [u" ", _(u"Store"), _(u"Product"), \
-                       _(u"Number of carton"), _(u"Remaining"), \
-                       _(u"Date")]
-        try:
-            self.on_date = self.format_date(list_date[0])
-            self.end_date = self.format_date(list_date[1])
-        except:
-            self.on_date = (date.today() - timedelta(365)).strftime("%Y-%m-%d")
-            self.end_date = date.today().strftime("%Y-%m-%d")
-        self.set_data_for()
-        self.refresh(True)
-
-    def refresh_period(self):
-        self.set_data_for()
-        self.refresh()
 
     def format_date(self, valeur):
         valeur = str(valeur)
         day, month, year = valeur.split('/')
         return '-'.join([year, month, day])
 
-    def set_data_for(self):
+    def refresh(self):
+        l_date = [self.format_date(self.on_date.text()), \
+                  self.format_date(self.end_date.text())]
+        self.table.refresh_period(l_date)
+
+    def rapport_filter(self):
+        self.refresh()
+
+
+class By_periodTableWidget(F_TableWidget):
+    """ """
+
+    def __init__(self, parent, *args, **kwargs):
+
+        F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
+
+        self.header = [u" ", _(u"Store"), _(u"Product"), \
+                       _(u"Number of carton"), _(u"Remaining"), \
+                       _(u"Date")]
+
+        on_date = (date.today() - timedelta(365)).strftime("%Y-%m-%d")
+        end_date = date.today().strftime("%Y-%M-%d")
+        self.set_data_for([on_date, end_date])
+        self.refresh(True)
+
+    def refresh_period(self, l_date):
+        self._reset()
+        self.set_data_for(l_date)
+        self.refresh()
+
+    def set_data_for(self, l_date):
+        on_date, end_date = l_date
         self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport)\
-                            .filter(Rapport.date_rapp.__ge__(self.on_date)) \
-                            .filter(Rapport.date_rapp.__le__(self.end_date))]
+                            .filter(Rapport.date_rapp.__ge__(on_date)) \
+                            .filter(Rapport.date_rapp.__le__(end_date))]

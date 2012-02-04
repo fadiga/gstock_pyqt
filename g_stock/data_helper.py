@@ -87,12 +87,12 @@ def update_rapport(report):
 
 def inventaire(on_date=None, end_date=None):
     """ """
-    list_rap = []
     reports = session.query(Rapport)
     if on_date != None:
         reports = reports.filter(Rapport.date_rapp.__ge__(on_date)) \
                          .filter(Rapport.date_rapp.__le__(end_date))
 
+    list_rap = []
     for mag in session.query(Magasin).all():
         for prod in session.query(Produit).all():
             p =reports.filter(Rapport.magasin == mag) \

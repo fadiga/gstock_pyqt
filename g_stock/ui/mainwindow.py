@@ -67,10 +67,9 @@ class MainWindow(QtGui.QMainWindow):
         self.setWindowTitle(_(u"Management Reports"))
         self.change_context(G_reportViewWidget)
 
-    def change_context(self, context_widget, list_=[], *args, **kwargs):
+    def change_context(self, context_widget, *args, **kwargs):
 
         # instanciate context
-        self.list_ = list_
         self.view_widget = context_widget(parent=self, *args, **kwargs)
 
         # attach context to window
