@@ -38,7 +38,7 @@ class EditMagasinViewWidget(QtGui.QDialog, F_Widget):
 
     def edit_mag(self):
         magasin = session.query(Magasin).filter(Magasin.name==self.mag).all()[0]
-        magasin.name = str(self.new_magasin.text())
+        magasin.name = unicode(self.new_magasin.text())
         session.add(magasin)
         session.commit()
         self.cancel()

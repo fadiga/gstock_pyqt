@@ -71,9 +71,6 @@ class EtatTableWidget(F_TableWidget):
                      for op in inventaire()]
 
 
-
-
-
 class Alert_TableWidget(F_TableWidget):
 
     def __init__(self, parent, *args, **kwargs):

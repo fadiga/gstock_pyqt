@@ -43,7 +43,7 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
                          .filter(Produit.libelle==self.prod.libelle) \
                          .filter(Produit.nbr_piece==self.prod.nbr_piece)\
                          .all()[0]
-        produit.libelle = str(self.new_produit.text())
+        produit.libelle = unicode(self.new_produit.text())
         produit.nbr_piece = int(self.new_nbr_piece.text())
         session.add(produit)
         session.commit()
