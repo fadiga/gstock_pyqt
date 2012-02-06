@@ -64,13 +64,11 @@ class By_periodTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [u" ", _(u"Store"), _(u"Product"), \
+        self.header = [_(u"Type"), _(u"Store"), _(u"Product"), \
                        _(u"Number of carton"), _(u"Remaining"), \
                        _(u"Date")]
 
-        on_date = (date.today() - timedelta(365)).strftime("%Y-%m-%d")
-        end_date = date.today().strftime("%Y-%M-%d")
-        self.set_data_for([on_date, end_date])
+        self.set_data_for()
         self.refresh(True)
 
     def refresh_period(self, l_date):
@@ -78,10 +76,10 @@ class By_periodTableWidget(F_TableWidget):
         self.set_data_for(l_date)
         self.refresh()
 
-    def set_data_for(self, l_date):
-        on_date, end_date = l_date
-        self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
+    def set_data_for(self,  *args):
+        if args:
+            self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton,
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport)\
-                            .filter(Rapport.date_rapp.__ge__(on_date)) \
-                            .filter(Rapport.date_rapp.__le__(end_date))]
+                            .filter(Rapport.date_rapp.__ge__(args[0][0])) \
+                            .filter(Rapport.date_rapp.__le__(args[0][1]))]

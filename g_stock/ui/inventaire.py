@@ -67,9 +67,7 @@ class InventaireTableWidget(F_TableWidget):
                        _(u"Number of carton "), _(u"Remaining"), \
                        _(u"Date")]
 
-        on_date = (date.today() - timedelta(365)).strftime("%Y-%m-%d")
-        end_date = date.today().strftime("%Y-%M-%d")
-        self.set_data_for([on_date, end_date])
+        self.set_data_for()
         self.refresh(True)
 
     def refresh_period(self, l_date):
@@ -77,8 +75,10 @@ class InventaireTableWidget(F_TableWidget):
         self.set_data_for(l_date)
         self.refresh()
 
-    def set_data_for(self, l_date):
-        reports = inventaire(l_date[0], l_date[1])
-        self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton, \
-                      rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                      for rap in reports]
+    def set_data_for(self, *args):
+        print args
+        if args:
+            reports = inventaire(args[0][0], args[0][1])
+            self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton,
+                          rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
+                          for rap in reports]

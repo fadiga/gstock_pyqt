@@ -25,8 +25,8 @@ class MagasinViewWidget(F_Widget):
 
         tablebox = QtGui.QVBoxLayout()
         tablebox.addWidget(F_BoxTitle(_(u"Table stores")))
-        self.table_op = MagasinTableWidget(parent=self)
-        tablebox.addWidget(self.table_op)
+        self.stori_table = MagasinTableWidget(parent=self)
+        tablebox.addWidget(self.stori_table)
 
         self.name = QtGui.QLineEdit()
 
@@ -53,11 +53,10 @@ class MagasinViewWidget(F_Widget):
             session.add(magasin)
             session.commit()
             self.name.clear()
-            self.table_op.refresh_()
+            self.stori_table.refresh_()
             raise_success(_(u"Confirmation"), _(u"Registered operation"))
         else:
             raise_error(_("Error"), _(u"Give the name of the store"))
-        self.change_main_context(MagasinViewWidget)
 
 
 class MagasinTableWidget(F_TableWidget):
