@@ -47,11 +47,10 @@ class G_reportViewWidget(F_Widget):
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(_(u"add report")))
 
-        self.liste_type = [_(u"input"), _(u"inout")]
         #Combobox widget
         self.box_type = QtGui.QComboBox()
-        for index in self.liste_type:
-            self.box_type.addItem(u'%(type)s' % {'type': index})
+        self.box_type.addItem(_(u"input"))
+        self.box_type.addItem(_(u"inout"))
         #Combobox widget
         self.liste_magasin = session.query(Magasin)\
                                     .order_by(desc(Magasin.id)).all()
@@ -93,15 +92,15 @@ class G_reportViewWidget(F_Widget):
 
     def add_operation(self):
         ''' add operation '''
-        type_ = self.liste_type[self.box_type.currentIndex()]
+        type_ = self.box_type.currentIndex()
         magasin = self.liste_magasin[self.box_mag.currentIndex()]
         produit = self.liste_produit[self.box_prod.currentIndex()]
         nbr_carton = self.nbr_carton.text()
         date_ = self.date_.text()
         day, month, year = date_.split('/')
         dt = datetime.now()
-        datetime_ = datetime(int(year), int(month), int(day), dt.hour, \
-                                    dt.minute, dt.second, dt.microsecond)
+        datetime_ = datetime(int(year), int(month), int(day), int(dt.hour),
+                             int(dt.minute), int(dt.second), int(dt.microsecond))
 
         if unicode(self.nbr_carton.text()) != "":
             r = remaining(type_,  nbr_carton, magasin.id, produit.id)

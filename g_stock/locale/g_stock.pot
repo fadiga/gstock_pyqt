@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: g_stock 0.1\n"
 "Report-Msgid-Bugs-To: bugs@yeleman.com\n"
-"POT-Creation-Date: 2012-01-31 20:22+0000\n"
+"POT-Creation-Date: 2012-02-04 20:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:73
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:71
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:71
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:90
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:120
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:38
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:50
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:156
@@ -42,7 +42,7 @@ msgstr ""
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:71
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:69
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:69
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:88
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:118
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:37
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:50
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:154
@@ -61,19 +61,20 @@ msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:47
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:45
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:52
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:71
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:67
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:62
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:82
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:101
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:60
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:76
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:129
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:72
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:66
 msgid "Product"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:48
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:46
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:70
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:68
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:46
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:62
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:130
@@ -82,25 +83,27 @@ msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:48
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:46
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:70
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:68
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:46
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:53
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:72
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:62
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:83
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:102
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:130
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:73
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:67
 msgid "Remaining"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/allreports.py:49
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_magasin.py:47
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:71
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_produit.py:47
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:53
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:72
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:63
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:83
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:102
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:64
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:80
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:131
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:74
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:68
 msgid "Date"
 msgstr ""
 
@@ -110,44 +113,33 @@ msgid "The reports of the store: %s"
 msgstr ""
 
 #. Rapport periodique
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:22
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:21
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:45
 msgid "Periodic report"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:28
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:25
 msgid "OK"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:33
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:36
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:30
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:33
 msgid "On date"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:35
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:38
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:32
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:35
 msgid "End date"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:41
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:45
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:45
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:48
-msgid " to "
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:41
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:44
-msgid "Reports of "
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:69
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:52
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:71
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/by_period.py:67
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:62
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:82
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:101
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:58
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:74
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:129
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:72
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:66
 msgid "Store"
 msgstr ""
 
@@ -168,36 +160,45 @@ msgstr ""
 msgid "TOTAL"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:27
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:28
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/mainwindow.py:31
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/mainwindow.py:55
 msgid "Dashboard"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:28
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:30
 msgid "The list of products that the  rest is <100 cartons"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:30
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:32
 msgid "Table last operations"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:40
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:34
+msgid "Les stocks actual"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:49
+msgid "Etat"
+msgstr ""
+
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:50
 msgid "Product warning"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:41
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:51
 msgid "The last operations"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:52
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:71
-msgid "Quantity"
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:70
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:92
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:112
+msgid "%x %Hh:%Mmn"
 msgstr ""
 
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:62
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:82
-msgid "%x %Hh:%Mmn"
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/dashboard.py:101
+msgid "Quantity"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/deleteview.py:18
@@ -290,7 +291,7 @@ msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/edit_report.py:56
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:72
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:72
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:66
 msgid "Type"
 msgstr ""
 
@@ -319,7 +320,7 @@ msgid "add report"
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/gestionreports.py:78
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:73
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:67
 msgid "Number of carton "
 msgstr ""
 
@@ -349,17 +350,9 @@ msgid "Edit"
 msgstr ""
 
 #. Rapport inventaire
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:25
+#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:24
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/menubar.py:51
 msgid "Inventory"
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:44
-msgid "The Reports of: "
-msgstr ""
-
-#: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/inventaire.py:47
-msgid "The Reports of:  "
 msgstr ""
 
 #: /home/fad/projets/pyqt/gstock_pyqt/g_stock/ui/magasins.py:22

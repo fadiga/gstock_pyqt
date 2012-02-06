@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import mapper, relationship
 from sqlalchemy import Table, Column, Integer, String, \
-                       MetaData, ForeignKey, Date, DateTime, Unicode
+                       MetaData, ForeignKey, DateTime, Unicode
 
 DB_FILE = 'gstock.db'
 
@@ -46,7 +46,7 @@ metadata.create_all(engine)
 
 
 class Magasin(object):
-    def __init__(self, name, adresse=""):
+    def __init__(self, name, adresse=None):
         self.name = name
         self.adresse = adresse
 
