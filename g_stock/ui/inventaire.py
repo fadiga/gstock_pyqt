@@ -76,7 +76,7 @@ class InventaireTableWidget(F_TableWidget):
         self.refresh()
 
     def set_data_for(self, *args):
-        print args
+        
         if args:
             reports = inventaire(args[0][0], args[0][1])
             self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton,

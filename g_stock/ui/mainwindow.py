@@ -82,6 +82,6 @@ class MainWindow(QtGui.QMainWindow):
         d.exec_()
 
     def open_Dock(self, dock, modal=False, *args, **kwargs):
-        d = dialog(parent=self, *args, **kwargs)
+        d = dock(parent=self, *args, **kwargs)
         d.setModal(modal)
         d.exec_()

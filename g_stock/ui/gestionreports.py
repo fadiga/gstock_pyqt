@@ -47,10 +47,12 @@ class G_reportViewWidget(F_Widget):
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(_(u"add report")))
 
+        self.liste_type = [_(u"input"), _(u"inout")]
         #Combobox widget
         self.box_type = QtGui.QComboBox()
-        self.box_type.addItem(_(u"input"))
-        self.box_type.addItem(_(u"inout"))
+        for index in self.liste_type:
+            self.box_type.addItem(u'%(type)s' % {'type': index})
+
         #Combobox widget
         self.liste_magasin = session.query(Magasin)\
                                     .order_by(desc(Magasin.id)).all()
@@ -92,7 +94,7 @@ class G_reportViewWidget(F_Widget):
 
     def add_operation(self):
         ''' add operation '''
-        type_ = self.box_type.currentIndex()
+        type_ = self.liste_type[self.box_type.currentIndex()]
         magasin = self.liste_magasin[self.box_mag.currentIndex()]
         produit = self.liste_produit[self.box_prod.currentIndex()]
         nbr_carton = self.nbr_carton.text()
