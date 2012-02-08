@@ -62,7 +62,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         goto_.addAction(rap_inv)
 
         # Faire la commande
-        comm = QtGui.QAction(_(u"Inventory"), self)
+        comm = QtGui.QAction(_(u"Commande"), self)
         comm.setShortcut("Ctrl+C")
         self.connect(comm, QtCore.SIGNAL("triggered()"),
                                             self.goto_commande)

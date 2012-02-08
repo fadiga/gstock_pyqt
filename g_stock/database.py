@@ -51,12 +51,10 @@ class Magasin(object):
         self.adresse = adresse
 
     def __repr__(self):
-        return (u"Magasin (%(magasin)s %(adresse)s)") %\
-                {'magasin': self.name, 'adresse': self.adresse}
+        return (u"Magasin (%(magasin)s)") % {'magasin': self.name}
 
     def __unicode__(self):
-        return (u"%(magasin)s %(adresse)s") \
-               % {'magasin': self.name, 'adresse': self.adresse}
+        return (u"%(magasin)s") % {'magasin': self.name}
 
 
 class Produit(object):
@@ -70,7 +68,7 @@ class Produit(object):
                                             'nbr_piece': self.nbr_piece})
 
     def __unicode__(self):
-        return (u"%(libelle)s %(nbr_piece)s" % {'libelle': self.libelle,\
+        return (u"%(libelle)s (%(nbr_piece)sp/c)" % {'libelle': self.libelle,\
                                               'nbr_piece': self.nbr_piece})
 
 
