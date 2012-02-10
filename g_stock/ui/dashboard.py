@@ -7,7 +7,7 @@ from sqlalchemy import desc
 
 from util import get_temp_filename, formatted_number
 from database import Rapport, session
-from data_helper import alerte_report, inventaire
+from data_helper import alerte_report, last_mouvement_report
 from tabpane import tabbox
 from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle
 
@@ -68,7 +68,7 @@ class EtatTableWidget(F_TableWidget):
         """ """
         self.data = [(op.magasin, op.produit, formatted_number(op.restant),
                       op.date_rapp.strftime(_(u'%x %Hh:%Mmn')))
-                     for op in inventaire()]
+                     for op in last_mouvement_report()]
 
 
 class Alert_TableWidget(F_TableWidget):

@@ -3,11 +3,10 @@
 # maintainer: rgaudin
 
 from PyQt4 import QtGui, QtCore
-import thread
 import time
 from datetime import datetime
 
-class REDEStatusBar(QtGui.QStatusBar):
+class GStatusBar(QtGui.QStatusBar):
 
     def __init__(self, parent):
 

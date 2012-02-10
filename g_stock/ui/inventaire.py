@@ -10,8 +10,7 @@ from PyQt4 import QtCore
 from database import *
 from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
                                                     Button, FormatDate
-
-from data_helper import last_rapport, inventaire
+from data_helper import last_mouvement_report
 
 
 class InventaireViewWidget(F_Widget):
@@ -45,7 +44,7 @@ class InventaireViewWidget(F_Widget):
     def format_date(self, valeur):
         valeur = str(valeur)
         day, month, year = valeur.split('/')
-        return '-'.join([year, month, day])
+        return '-'.join([year, month, day+1])
 
     def refresh(self):
         l_date = [self.format_date(self.on_date.text()), \
@@ -78,7 +77,7 @@ class InventaireTableWidget(F_TableWidget):
     def set_data_for(self, *args):
         
         if args:
-            reports = inventaire(args[0][0], args[0][1])
+            reports = last_mouvement_report(args[0][0], args[0][1])
             self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton,
                           rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                           for rap in reports]

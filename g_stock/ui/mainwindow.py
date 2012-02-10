@@ -13,7 +13,7 @@ from produits import ProduitViewWidget
 from gestionreports import G_reportViewWidget
 from allreports import AllreportsViewWidget
 from menubar import MenuBar
-from statusbar import REDEStatusBar
+from statusbar import GStatusBar
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -43,7 +43,7 @@ class MainWindow(QtGui.QMainWindow):
 
         self.menubar = MenuBar(self)
         self.setMenuBar(self.menubar)
-        self.statusbar = REDEStatusBar(self)
+        self.statusbar = GStatusBar(self)
         self.setStatusBar(self.statusbar)
 
         self.change_context(DashbordViewWidget)

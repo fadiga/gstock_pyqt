@@ -7,6 +7,7 @@ from sqlalchemy import desc
 
 from database import *
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
+from data_helper import last_mouvement_report
 
 
 class By_produitViewWidget(F_Widget, F_PeriodHolder):
@@ -57,13 +58,11 @@ class By_produitTableWidget(F_TableWidget):
     def set_data_for(self, main_date):
 
         on , end = self.parent.on_date(),self.parent.end_date()
+
+        rapports = last_mouvement_report(on, end, product=self.prod)
         self.data = [(rap.type_, rap.magasin, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                      for rap in session.query(Rapport)\
-                                .filter(Rapport.produit_id == self.prod.id)\
-                                .filter(Rapport.date_rapp.__ge__(on)) \
-                                .filter(Rapport.date_rapp.__le__(end)) \
-                                .order_by(desc(Rapport.date_rapp)).all()]
+                      for rap in rapports]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == _("input"):

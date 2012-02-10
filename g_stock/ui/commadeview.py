@@ -13,8 +13,6 @@ from database import session, Produit
 from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
                         F_BoxTitle, Button, FormatDate, IntLineEdit
 
-from data_helper import last_rapport, inventaire
-
 
 class CommandeViewWidget(F_Widget):
 
