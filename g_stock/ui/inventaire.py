@@ -8,8 +8,8 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 from database import *
-from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
-                                                    Button, FormatDate
+from common import (F_Widget, F_TableWidget, F_PageTitle,
+                    FormLabel, Button_export, Button, FormatDate)
 from data_helper import last_mouvement_report, format_date
 
 
@@ -26,7 +26,7 @@ class InventaireViewWidget(F_Widget):
         self.end_date = FormatDate(QtCore.QDate.currentDate())
         self.Button = Button(u"Ok")
         self.Button.clicked.connect(self.rapport_filter)
-        self.Button_export = Button(_(u"Export xls"))
+        self.Button_export = Button_export(_(u"Export xls"))
         self.Button_export.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
         # Grid
@@ -67,6 +67,18 @@ class InventaireTableWidget(F_TableWidget):
         self.set_data_for()
         self.refresh(True)
 
+    def extend_rows(self):
+
+        nb_rows = self.rowCount()
+        self.setRowCount(nb_rows + 1)
+        self.setSpan(nb_rows, 0, 1, 3)
+        self.button = Button_export(_("Exporter"))
+        self.button.released.connect(self.export_data)
+        self.setCellWidget(nb_rows, 3, self.button)
+
+    def export_data():
+        print "export ok"
+        
     def refresh_period(self, l_date):
         self._reset()
         self.set_data_for(l_date)

@@ -11,7 +11,7 @@ from PyQt4.QtCore import SIGNAL, Qt, QDate
 
 from database import session, Produit
 from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
-                        F_BoxTitle, Button, FormatDate, IntLineEdit
+                        F_BoxTitle, Button_export, FormatDate, IntLineEdit
 
 
 class CommandeViewWidget(F_Widget):
@@ -27,7 +27,7 @@ class CommandeViewWidget(F_Widget):
         vbox = QVBoxLayout()
 
         self.table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.afficherButton = Button(u"Afficher la commande")
+        self.afficherButton = Button_export(u"Afficher la commande")
         self.connect(self.afficherButton, SIGNAL('clicked()'), self.clicSelection)
         # Grid
         gridbox = QGridLayout()
@@ -66,6 +66,18 @@ class CommandeTableWidget(F_TableWidget):
 
         self.set_data_for()
         self.refresh(True)
+
+    def extend_rows(self):
+
+        nb_rows = self.rowCount()
+        self.setRowCount(nb_rows + 1)
+        self.setSpan(nb_rows, 0, 1, 3)
+        self.button = Button_export(_("Exporter"))
+        self.button.released.connect(self.export_data)
+        self.setCellWidget(nb_rows, 3, self.button)
+
+    def export_data():
+        print "export ok"
 
     def _item_for_data(self, row, column, data, context=None):
         if column != 0:

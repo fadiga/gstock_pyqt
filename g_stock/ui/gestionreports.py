@@ -9,8 +9,8 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle, \
-                                                    Button, FormatDate
+from common import (F_Widget, F_PageTitle, F_TableWidget, 
+                    F_BoxTitle, Button_save, FormatDate)
 from util import raise_success, raise_error, formatted_number
 from magasins import MagasinViewWidget
 from produits import ProduitViewWidget
@@ -80,7 +80,7 @@ class G_reportViewWidget(F_Widget):
         editbox.addWidget(self.nbr_carton, 1, 3)
         editbox.addWidget(QtGui.QLabel((_(u"Date"))), 0, 4)
         editbox.addWidget(self.date_, 1, 4)
-        butt = Button(_(u"Save"))
+        butt = Button_save(_(u"Save"))
         butt.clicked.connect(self.add_operation)
         editbox.addWidget(butt, 1, 5)
 

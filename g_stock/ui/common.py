@@ -44,6 +44,24 @@ class Button(QtGui.QCommandLinkButton):
         self.setCheckable(True)
 
 
+class Button_save(QtGui.QCommandLinkButton):
+
+    def __init__(self, *args, **kwargs):
+        super(Button_save, self).__init__(*args, **kwargs)
+        self.setAutoDefault(True)
+        self.setCheckable(True)
+        self.setIcon(QtGui.QIcon.fromTheme('save', QtGui.QIcon('images/save.png')))
+
+
+class Button_export(QtGui.QCommandLinkButton):
+
+    def __init__(self, *args, **kwargs):
+        super(Button_export, self).__init__(*args, **kwargs)
+        self.setAutoDefault(True)
+        self.setIcon(QtGui.QIcon.fromTheme('xls', QtGui.QIcon('images/xls.png')))
+        self.setCheckable(True)
+
+
 class FormatDate(QtGui.QDateTimeEdit):
 
     def __init__(self, *args, **kwargs):
