@@ -9,6 +9,7 @@ from PyQt4 import QtCore
 from database import *
 from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
                                                     Button, FormatDate
+from data_helper import format_date
 
 
 class By_periodViewWidget(F_Widget):
@@ -43,14 +44,9 @@ class By_periodViewWidget(F_Widget):
         vbox.addWidget(self.table)
         self.setLayout(vbox)
 
-    def format_date(self, valeur):
-        valeur = str(valeur)
-        day, month, year = valeur.split('/')
-        return '-'.join([year, month, day])
-
     def refresh(self):
-        l_date = [self.format_date(self.on_date.text()), \
-                  self.format_date(self.end_date.text())]
+        l_date = [format_date(self.on_date.text()), \
+                  format_date(self.end_date.text())]
         self.table.refresh_period(l_date)
 
     def rapport_filter(self):

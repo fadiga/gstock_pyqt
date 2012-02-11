@@ -96,8 +96,8 @@ def last_mouvement_report(*args, **kargs):
 
     reports = report_periodic(on_date, end_date)
 
-    product = session.query(Produit).all()
-    store = session.query(Magasin).all()
+    product = session.query(Produit).order_by('libelle').all()
+    store = session.query(Magasin).order_by('name').all()
 
     if "product" in kargs.keys():
         product = [kargs["product"]]
@@ -113,10 +113,9 @@ def last_mouvement_report(*args, **kargs):
                        .order_by(desc(Rapport.date_rapp))
             try:
                 list_rap.append(p[0])
-            except:
+            except IndexError:
                 pass
     return list_rap
-
 
 
 def report_periodic(on_date=None, end_date=None):
@@ -126,3 +125,9 @@ def report_periodic(on_date=None, end_date=None):
         reports = reports.filter(Rapport.date_rapp.__ge__(on_date)) \
                          .filter(Rapport.date_rapp.__le__(end_date))    
     return reports
+
+
+def format_date(dat):
+    dat = str(dat)
+    day, month, year = dat.split('/')
+    return '-'.join([year, month, day])

@@ -10,7 +10,7 @@ from PyQt4 import QtCore
 from database import *
 from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
                                                     Button, FormatDate
-from data_helper import last_mouvement_report
+from data_helper import last_mouvement_report, format_date
 
 
 class InventaireViewWidget(F_Widget):
@@ -26,6 +26,8 @@ class InventaireViewWidget(F_Widget):
         self.end_date = FormatDate(QtCore.QDate.currentDate())
         self.Button = Button(u"Ok")
         self.Button.clicked.connect(self.rapport_filter)
+        self.Button_export = Button(_(u"Export xls"))
+        self.Button_export.clicked.connect(self.rapport_filter)
         vbox = QtGui.QVBoxLayout()
         # Grid
         gridbox = QtGui.QGridLayout()
@@ -36,19 +38,15 @@ class InventaireViewWidget(F_Widget):
         gridbox.addWidget(FormLabel(""), 0, 3)
         gridbox.addWidget(self.Button, 2, 2)
         gridbox.setColumnStretch(3, 5)
+        gridbox.addWidget(self.Button_export, 2, 6)
         vbox.addWidget(self.title)
         vbox.addLayout(gridbox)
         vbox.addWidget(self.table)
         self.setLayout(vbox)
 
-    def format_date(self, valeur):
-        valeur = str(valeur)
-        day, month, year = valeur.split('/')
-        return '-'.join([year, month, day+1])
-
     def refresh(self):
-        l_date = [self.format_date(self.on_date.text()), \
-                  self.format_date(self.end_date.text())]
+        l_date = [format_date(self.on_date.text()), \
+                  format_date(self.end_date.text())]
         self.table.refresh_period(l_date)
 
     def rapport_filter(self):

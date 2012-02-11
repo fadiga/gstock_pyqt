@@ -6,7 +6,6 @@ from PyQt4 import QtGui
 from sqlalchemy import desc
 
 from database import Rapport, session
-from util import formatted_number
 from common import F_Widget, F_TableWidget, F_PeriodHolder, F_PageTitle
 from by_magasin import By_magasinViewWidget
 from by_produit import By_produitViewWidget
@@ -49,6 +48,8 @@ class RapportTableWidget(F_TableWidget):
                        _(u"Number of carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.set_data_for(main_date)
+        self.setDisplayTotal(True, column_totals={4: None}, \
+                             label=_(u"TOTALS"))
         self.refresh(True)
         self.setColumnWidth(0, 20)
 
@@ -62,10 +63,9 @@ class RapportTableWidget(F_TableWidget):
         on , end = self.parent.on_date(),self.parent.end_date()
         rapports = last_mouvement_report(on, end)
         self.data = [(rap.type_, rap.magasin, rap.produit, \
-                        formatted_number(rap.nbr_carton), \
-                        formatted_number(rap.restant), \
-                        rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
-                        for rap in rapports]
+                     rap.nbr_carton, rap.restant,
+                     rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
+                     for rap in rapports]
                         
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == _(u"input"):

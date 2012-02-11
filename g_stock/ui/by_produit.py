@@ -48,6 +48,8 @@ class By_produitTableWidget(F_TableWidget):
                        _(u"Date")]
         self.prod = produit
         self.set_data_for(main_date)
+        self.setDisplayTotal(True, column_totals={3: None}, \
+                             label=_(u"TOTALS"))
         self.refresh(True)
 
     def refresh_period(self, main_date):
