@@ -43,12 +43,13 @@ class By_magasinTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [u" ", _(u"Product"), \
+        self.header = [_(u"Product"), \
                        _(u"Number of carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.mag = magasin
         self.set_data_for(main_date)
-        self.setDisplayTotal(True, column_totals={3: None}, \
+
+        self.setDisplayTotal(True, column_totals={2: None}, \
                              label=_(u"TOTALS"))
         self.refresh(True)
 
@@ -62,21 +63,12 @@ class By_magasinTableWidget(F_TableWidget):
         on , end = self.parent.on_date(),self.parent.end_date()
         rapports = last_mouvement_report(on, end, store=self.mag)
 
-        self.data = [(rap.type_, rap.produit, rap.nbr_carton, \
+        self.data = [(rap.produit, rap.nbr_carton, \
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                       for rap in rapports]
 
-    def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == _("input"):
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
-        if column == 0 and self.data[row][0] == _("inout"):
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
-        return super(By_magasinTableWidget, self)\
-                                            ._item_for_data(row, column, \
-                                                        data, context)
-
     def click_item(self, row, column, *args):
-        produit_column = 1
+        produit_column = 0
         if column == produit_column:
             from by_produit import By_produitViewWidget
             self.parent.change_main_context(By_produitViewWidget, \

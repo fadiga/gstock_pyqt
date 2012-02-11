@@ -130,7 +130,7 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
         self.horizontalHeader().setStretchLastSection(True)
         self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
-        self.setFont(QtGui.QFont("Courier New", 10))
+        self.setFont(QtGui.QFont("Times New Roman", 11))
         # style au tr
         self.setStyleSheet("color: #2C2C2C;")
         # enable sorting

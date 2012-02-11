@@ -44,14 +44,15 @@ class RapportTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [u" ", (u"Store No."), _(u"Product"), \
+        self.header = [(u"Store No."), _(u"Product"), \
                        _(u"Number of carton"), _(u"Remaining"), \
                        _(u"Date")]
         self.set_data_for(main_date)
-        self.setDisplayTotal(True, column_totals={4: None}, \
+
+        self.setDisplayTotal(True, column_totals={3: None}, \
                              label=_(u"TOTALS"))
         self.refresh(True)
-        self.setColumnWidth(0, 20)
+        # self.setColumnWidth(0, 20)
 
     def refresh_period(self, main_date):
         """ """
@@ -62,23 +63,14 @@ class RapportTableWidget(F_TableWidget):
     def set_data_for(self, main_date):
         on , end = self.parent.on_date(),self.parent.end_date()
         rapports = last_mouvement_report(on, end)
-        self.data = [(rap.type_, rap.magasin, rap.produit, \
+        self.data = [(rap.magasin, rap.produit, \
                      rap.nbr_carton, rap.restant,
                      rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                      for rap in rapports]
-                        
-    def _item_for_data(self, row, column, data, context=None):
-        if column == 0 and self.data[row][0] == _(u"input"):
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
-        if column == 0 and self.data[row][0] == _(u"inout"):
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
-        return super(RapportTableWidget, self)\
-                                            ._item_for_data(row, column,
-                                                            data, context)
 
     def click_item(self, row, column, *args):
-        magsin_column = 1
-        produit_column = 2
+        magsin_column = 0
+        produit_column = 1
         if column == magsin_column:
             self.parent.change_main_context(By_magasinViewWidget,
                                     magasin=self.data[row][magsin_column])
