@@ -19,28 +19,27 @@ def last_rapport(magasin_id, produit_id):
 
 
 def alerte_report():
-    """ """
-    list_alert = []
-    for mag in session.query(Magasin):
-        for prod in session.query(Produit):
-            f = last_rapport(mag.id, prod.id)
-            if f:
-                if f.restant <= 100:
-                    list_alert.append(f)
+    """ Return la liste des produits inferieur à 30 0"""
+
+    list_alert = [last_rapport(mag.id, prod.id)
+                  for prod in session.query(Produit)
+                  for mag in session.query(Magasin)
+                  if last_rapport(mag.id, prod.id) != None
+                  and last_rapport(mag.id, prod.id).restant <= 30]
     return list_alert
 
 
 def remaining(type_, nbr_carton, magasin, produit):
     """ Calculation of remaining. """
+
     previous_rapp = ""
     previous_rapp = last_rapport(magasin, produit)
     if type_ == _(u"inout"):
         try:
             restant = int(previous_rapp.restant) - int(nbr_carton)
             if restant < 0:
-                return [None, _(u"You can not do this because") + \
-                                    str(previous_rapp.restant) + " < " \
-                                    + str(nbr_carton)]
+                return [None, _(u"You can not do this because") +
+                        str(previous_rapp.restant) + " < " + str(nbr_carton)]
             return [restant, u""]
         except AttributeError:
             return [None, _(u"There were no entry for this product ")]
@@ -86,11 +85,11 @@ def update_rapport(report):
 
 
 def last_mouvement_report(*args, **kargs):
-    """ 
+    """
     prams: on_date, end_date, Magasin, Produit"""
     try:
-        on_date=args[0]
-        end_date=args[1]
+        on_date = args[0]
+        end_date = args[1]
     except IndexError:
         on_date = end_date = None
 
@@ -123,7 +122,7 @@ def report_periodic(on_date=None, end_date=None):
     reports = session.query(Rapport)
     if on_date != None:
         reports = reports.filter(Rapport.date_rapp.__ge__(on_date)) \
-                         .filter(Rapport.date_rapp.__le__(end_date))    
+                         .filter(Rapport.date_rapp.__le__(end_date))
     return reports
 
 

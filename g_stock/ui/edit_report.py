@@ -6,7 +6,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from sqlalchemy import desc
 
-from common import F_Widget,F_BoxTitle, F_PageTitle, Button, FormatDate
+from common import F_Widget, F_BoxTitle, F_PageTitle, Button, FormatDate
 from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
@@ -31,7 +31,6 @@ class EditReportViewWidget(QtGui.QDialog, F_Widget):
         formbox = QtGui.QVBoxLayout()
         editbox = QtGui.QGridLayout()
         formbox.addWidget(F_BoxTitle(_(u"Edit report")))
-
         #Combobox widget
         self.box_type = QtGui.QComboBox()
         self.box_type.addItem(_(u"input"))

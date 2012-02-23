@@ -69,10 +69,10 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
         goto_.addAction(comm)
         #Menu Aide
         help_ = self.addMenu(_(u"help"))
-        help_.addAction(QtGui.QIcon('images/help.png'), 
-                                    _("help"), self.goto_help)
-        help_.addAction(QtGui.QIcon('images/about.png'), 
-                                    _(u"About"), self.goto_about)
+        help_.addAction(QtGui.QIcon('images/help.png'), _("help"),
+                                    self.goto_help)
+        help_.addAction(QtGui.QIcon('images/about.png'), _(u"About"),
+                                    self.goto_about)
 
     #Inventaire
     def goto_inventaire(self):
@@ -99,14 +99,14 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     #Aide
     def goto_help(self):
         mbox = QtGui.QMessageBox.about(self, _(u"help"),
-                                             _(u"Besoin d'aide"))
+                                       _(u"Besoin d'aide"))
 
     #About
     def goto_about(self):
-        mbox = QtGui.QMessageBox.about(self, _(u"About"), 
-                                 _(u"G_stock gestion de stock\n\n" 
-                                    "Developpeur: Ibrahima Fadiga,\n\n"
-                                    u"© 2011 fad service s.à.r.l\n" 
-                                    u"Bamako (Mali)\n" 
-                                    u"Tel: (223) 76 43 38 90\n" 
-                                    u"E-mail: ibfadiga@gmail.com"))
+        mbox = QtGui.QMessageBox.about(self, _(u"About"),
+                                       _(u"G_stock gestion de stock\n\n"
+                                         u"Developpeur: Ibrahima Fadiga,\n\n"
+                                         u"© 2011 fad service s.à.r.l\n"
+                                         u"Bamako(Mali)\n"
+                                         u"Tel: (223)76 43 38 90\n"
+                                         u"E-mail: ibfadiga@gmail.com"))

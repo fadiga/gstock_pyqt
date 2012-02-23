@@ -7,8 +7,8 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 from database import *
-from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
-                                                    Button, FormatDate
+from common import (F_Widget, F_TableWidget, F_PageTitle,
+                    FormLabel,  Button, FormatDate)
 from data_helper import format_date
 
 
@@ -21,7 +21,7 @@ class By_periodViewWidget(F_Widget):
         self.table = By_periodTableWidget(parent=self)
         self.title = F_PageTitle(_(u"Periodic report"))
 
-        self.on_date = FormatDate(QtCore.QDate(date.today().year,01,01))
+        self.on_date = FormatDate(QtCore.QDate(date.today().year, 01, 01))
         self.end_date = FormatDate(QtCore.QDate.currentDate())
         self.Button = Button(_(u"OK"))
         self.Button.clicked.connect(self.rapport_filter)
@@ -37,8 +37,8 @@ class By_periodViewWidget(F_Widget):
         gridbox.setColumnStretch(3, 5)
 
         #~ gridbox.addWidget(FormLabel(_("Reports of ") + \
-                                          #~ self.on_date.text() + _(u" to ") + \
-                                          #~ self.end_date.text()), 4, 3)
+                                    #~ self.on_date.text() + _(u" to ") + \
+                                    #~ self.end_date.text()), 4, 3)
         vbox.addWidget(self.title)
         vbox.addLayout(gridbox)
         vbox.addWidget(self.table)
@@ -72,10 +72,21 @@ class By_periodTableWidget(F_TableWidget):
         self.set_data_for(l_date)
         self.refresh()
 
-    def set_data_for(self,  *args):
+    def set_data_for(self, *args):
         if args:
             self.data = [(rap.type_, rap.magasin, rap.produit, rap.nbr_carton,
                       rap.restant, rap.date_rapp.strftime(u'%x %Hh:%Mmn'))
                         for rap in session.query(Rapport)\
                             .filter(Rapport.date_rapp.__ge__(args[0][0])) \
                             .filter(Rapport.date_rapp.__le__(args[0][1]))]
+
+
+    def _item_for_data(self, row, column, data, context=None):
+        if column == 0 and self.data[row][0] == _("input"):
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"),
+                                                      u"")
+        if column == 0 and self.data[row][0] == _("inout"):
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"),
+                                                      u"")
+        return super(By_periodTableWidget, self)._item_for_data(row, column,
+                                                              data, context)

@@ -9,6 +9,7 @@ from util import raise_error, raise_success
 from data_helper import update_rapport
 from database import *
 
+
 class EditProduitViewWidget(QtGui.QDialog, F_Widget):
     def __init__(self, produit, parent, *args, **kwargs):
         QtGui.QDialog.__init__(self, parent, *args, **kwargs)
@@ -40,8 +41,8 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
 
     def edit_prod(self):
         produit = session.query(Produit)\
-                         .filter(Produit.libelle==self.prod.libelle) \
-                         .filter(Produit.nbr_piece==self.prod.nbr_piece)\
+                         .filter(Produit.libelle == self.prod.libelle) \
+                         .filter(Produit.nbr_piece == self.prod.nbr_piece)\
                          .all()[0]
         produit.libelle = unicode(self.new_produit.text())
         produit.nbr_piece = int(self.new_nbr_piece.text())

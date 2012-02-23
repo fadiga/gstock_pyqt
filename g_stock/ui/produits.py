@@ -9,21 +9,23 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import F_Widget, F_PageTitle, F_TableWidget, F_BoxTitle, Button_save
+from common import (F_Widget, F_PageTitle, F_TableWidget,
+                    F_BoxTitle, Button_save)
 from util import raise_success, raise_error
 from edit_produit import EditProduitViewWidget
+
 
 class ProduitViewWidget(F_Widget):
 
     def __init__(self, produit="", parent=0, *args, **kwargs):
         super(ProduitViewWidget, self).__init__(parent=parent,\
                                                         *args, **kwargs)
-        self.setWindowTitle((u"Products"))
+        self.setWindowTitle(_(u"Products"))
         vbox = QtGui.QVBoxLayout()
         vbox.addWidget(F_PageTitle(_(u"The list of products")))
 
         tablebox = QtGui.QVBoxLayout()
-        tablebox.addWidget(F_BoxTitle(_(u"Table products")))
+        tablebox.addWidget(F_PageTitle(_(u"Table products")))
         self.table_op = ProduitTableWidget(parent=self)
         tablebox.addWidget(self.table_op)
 
@@ -93,12 +95,14 @@ class ProduitTableWidget(F_TableWidget):
         return super(ProduitTableWidget, self)\
                                             ._item_for_data(row, column, \
                                                         data, context)
+
     def click_item(self, row, column, *args):
         modified_column = 2
         if column == modified_column:
             self.open_dialog(EditProduitViewWidget, modal=True, \
-                                produit=session.query(Produit) \
-                                .filter(Produit.libelle==self.data[row][0]).all()[0])
+                             produit=session.query(Produit) \
+                            .filter(Produit.libelle == self.data[row][0])
+                                                         .all()[0])
             self.parent.change_main_context(ProduitViewWidget)
         else:
             return

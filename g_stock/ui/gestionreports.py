@@ -9,7 +9,7 @@ from sqlalchemy import desc
 from PyQt4 import QtGui, QtCore
 
 from database import *
-from common import (F_Widget, F_PageTitle, F_TableWidget, 
+from common import (F_Widget, F_PageTitle, F_TableWidget,
                     F_BoxTitle, Button_save, FormatDate)
 from util import raise_success, raise_error, formatted_number
 from magasins import MagasinViewWidget
@@ -52,7 +52,6 @@ class G_reportViewWidget(F_Widget):
         self.box_type = QtGui.QComboBox()
         for index in self.liste_type:
             self.box_type.addItem(u'%(type)s' % {'type': index})
-
         #Combobox widget
         self.liste_magasin = session.query(Magasin)\
                                     .order_by(desc(Magasin.id)).all()
@@ -101,8 +100,9 @@ class G_reportViewWidget(F_Widget):
         date_ = self.date_.text()
         day, month, year = date_.split('/')
         dt = datetime.now()
-        datetime_ = datetime(int(year), int(month), int(day), int(dt.hour),
-                             int(dt.minute), int(dt.second), int(dt.microsecond))
+        datetime_ = datetime(int(year), int(month), int(day),
+                             int(dt.hour), int(dt.minute), int(dt.second),
+                             int(dt.microsecond))
 
         if unicode(self.nbr_carton.text()) != "":
             r = remaining(type_,  nbr_carton, magasin.id, produit.id)
@@ -153,11 +153,14 @@ class MagasinTableWidget(F_TableWidget):
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 0 and self.data[row][0] == _("input"):
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"), u"")
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/In.png"),
+                                                      u"")
         if column == 0 and self.data[row][0] == _("inout"):
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"), u"")
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/Out.png"),
+                                                      u"")
         if column == 7:
-            return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"), u"")
+            return QtGui.QTableWidgetItem(QtGui.QIcon("images/pencil.png"),
+                                                      u"")
         if column == 8:
             return QtGui.QTableWidgetItem(QtGui.QIcon("images/del.png"), u"")
         return super(MagasinTableWidget, self)\

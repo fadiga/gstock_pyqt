@@ -50,7 +50,8 @@ class Button_save(QtGui.QCommandLinkButton):
         super(Button_save, self).__init__(*args, **kwargs)
         self.setAutoDefault(True)
         self.setCheckable(True)
-        self.setIcon(QtGui.QIcon.fromTheme('save', QtGui.QIcon('images/save.png')))
+        self.setIcon(QtGui.QIcon.fromTheme('save',
+                                           QtGui.QIcon('images/save.png')))
 
 
 class Button_export(QtGui.QCommandLinkButton):
@@ -58,7 +59,8 @@ class Button_export(QtGui.QCommandLinkButton):
     def __init__(self, *args, **kwargs):
         super(Button_export, self).__init__(*args, **kwargs)
         self.setAutoDefault(True)
-        self.setIcon(QtGui.QIcon.fromTheme('xls', QtGui.QIcon('images/xls.png')))
+        self.setIcon(QtGui.QIcon.fromTheme('xls',
+                                           QtGui.QIcon('images/xls.png')))
         self.setCheckable(True)
 
 
@@ -237,29 +239,6 @@ class F_TableWidget(QtGui.QTableWidget, F_Widget):
                 item = QtGui.QTableWidgetItem(self._format_for_table(total))
                 self.setItem(row_num, index, item)
 
-    def _display_total_row(self, row_num=None):
-        ''' adds the total row at end of table '''
-
-        # display total row at end of table
-        if self._display_total:
-
-            if not row_num:
-                row_num = self.data.__len__()
-
-            # spans columns up to first data one
-            # add label inside
-            label_item = QtGui.QTableWidgetItem(u"%s" % self._total_label)
-            label_item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
-            self.setItem(row_num, 0, label_item)
-            self.setSpan(row_num, 0, 1, self._column_totals.keys()[0])
-            # calculate total for each total column
-            # if desired
-            for index, total in self._column_totals.items():
-                if not total:
-                    total = sum([data[index] for data in self.data])
-                item = QtGui.QTableWidgetItem(self._format_for_table(total))
-                self.setItem(row_num, index, item)
-
     def setDisplayTotal(self, display=False, column_totals={}, label=None):
         """ adds an additional row at end of table
 
@@ -300,7 +279,7 @@ class F_PeriodHolder(object):
         self.periods_bar = self.gen_bar_for(self.main_date)
 
     def gen_bar_for(self, main_date):
-        return F_PeriodTabBar(parent=self, main_date=self.main_date )
+        return F_PeriodTabBar(parent=self, main_date=self.main_date)
 
     def change_period(self, main_date):
         self.main_date = main_date
@@ -312,10 +291,10 @@ class F_PeriodHolder(object):
         self._main_date = value
 
     def on_date(self):
-        return date(self._main_date.year,01,01)
+        return date(self._main_date.year, 01, 01)
 
     def end_date(self):
-        return date(self._main_date.year,12,31)
+        return date(self._main_date.year, 12, 31)
 
     main_date = property(getmain_date, setmain_date)
 

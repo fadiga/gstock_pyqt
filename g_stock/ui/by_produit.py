@@ -18,6 +18,8 @@ class By_produitViewWidget(F_Widget, F_PeriodHolder):
                                                                 **kwargs)
         F_PeriodHolder.__init__(self, *args, **kwargs)
 
+        self.setWindowTitle(_(u"By product"))
+
         self.title = F_PageTitle(_(u"The reports of the product: %s") % \
                                                         produit.libelle)
         self.table = By_produitTableWidget(produit, parent=self, \
@@ -43,8 +45,7 @@ class By_produitTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [_(u"store"), \
-                       _(u"Number of carton"), _(u"Remaining"), \
+        self.header = [_(u"Store"), _(u"Quantity"), _(u"Remaining"),
                        _(u"Date")]
         self.prod = produit
         self.set_data_for(main_date)
@@ -60,7 +61,7 @@ class By_produitTableWidget(F_TableWidget):
 
     def set_data_for(self, main_date):
 
-        on , end = self.parent.on_date(),self.parent.end_date()
+        on, end = self.parent.on_date(), self.parent.end_date()
 
         rapports = last_mouvement_report(on, end, product=self.prod)
         self.data = [(rap.magasin, rap.nbr_carton, \

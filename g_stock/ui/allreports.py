@@ -44,8 +44,8 @@ class RapportTableWidget(F_TableWidget):
 
         F_TableWidget.__init__(self, parent=parent, *args, **kwargs)
 
-        self.header = [(u"Store No."), _(u"Product"), \
-                       _(u"Number of carton"), _(u"Remaining"), \
+        self.header = [_(u"Store"), _(u"Product"), \
+                       _(u"Quantity"), _(u"Remaining"), \
                        _(u"Date")]
         self.set_data_for(main_date)
 
@@ -61,7 +61,7 @@ class RapportTableWidget(F_TableWidget):
         self.refresh()
 
     def set_data_for(self, main_date):
-        on , end = self.parent.on_date(),self.parent.end_date()
+        on, end = self.parent.on_date(), self.parent.end_date()
         rapports = last_mouvement_report(on, end)
         self.data = [(rap.magasin, rap.produit, \
                      rap.nbr_carton, rap.restant,

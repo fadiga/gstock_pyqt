@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # encoding=utf-8
-# maintainer: rgaudin
+# maintainer: fadiga
 
-from PyQt4 import QtGui, QtCore
 import time
 from datetime import datetime
+
+from PyQt4 import QtGui, QtCore
+
 
 class GStatusBar(QtGui.QStatusBar):
 

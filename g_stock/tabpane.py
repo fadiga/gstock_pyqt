@@ -3,7 +3,7 @@
 # maintainer: Fad
 
 from PyQt4 import QtGui
-from ui.common import TabPane,Qt
+from ui.common import TabPane, Qt
 
 
 def tabbox(*args):
