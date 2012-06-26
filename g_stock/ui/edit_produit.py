@@ -44,9 +44,25 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
                          .filter(Produit.libelle == self.prod.libelle) \
                          .filter(Produit.nbr_piece == self.prod.nbr_piece)\
                          .all()[0]
-        produit.libelle = unicode(self.new_produit.text())
-        produit.nbr_piece = int(self.new_nbr_piece.text())
-        session.add(produit)
-        session.commit()
-        self.cancel()
-        raise_success(_(u"Confirmation"), _(u"The product has been changing"))
+        lib = unicode(self.new_produit.text())
+        nbr = self.new_nbr_piece.text()
+        if lib != "":
+            if unicode(nbr) != "":
+                is_double = session.query(Produit)\
+                          .filter(Produit.libelle==lib).all() == []
+                if is_double:
+                    produit = Produit(lib, int(nbr))
+                    session.add(produit)
+                    session.commit()
+                    self.new_produit.clear()
+                    self.new_nbr_piece.clear()
+                    raise_success(_(u"Confirmation"), _(u"The product has been changing"))
+                    self.cancel()
+                else:
+                    raise_error(_(u"error"), \
+                                _(u"Ce produit existe déjà"))
+            else:
+                raise_error(_(u"error"), \
+                            _(u"Give the room number in the box"))
+        else:
+            raise_error(_(u"Error"), _(u"Give the name of the product"))

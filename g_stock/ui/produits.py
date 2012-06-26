@@ -52,17 +52,24 @@ class ProduitViewWidget(F_Widget):
 
     def add_operation(self):
         ''' add operation '''
-        if unicode(self.libelle.text()) != "":
-            if unicode(self.nbre_piece.text()) != "":
-                produit = Produit(unicode(self.libelle.text()), \
-                                  int(self.nbre_piece.text()))
-                session.add(produit)
-                session.commit()
-                self.libelle.clear()
-                self.nbre_piece.clear()
-                self.table_op.refresh_()
-                raise_success(_(u"Confirmation"), _(u"The product %s "
-                              u" was recorded") % produit.libelle)
+        lib = unicode(self.libelle.text())
+        nbr = self.nbre_piece.text()
+        if lib != "":
+            if unicode(nbr) != "":
+                is_double = session.query(Produit)\
+                          .filter(Produit.libelle==lib).all() == []
+                if is_double:
+                    produit = Produit(lib, int(nbr))
+                    session.add(produit)
+                    session.commit()
+                    self.libelle.clear()
+                    self.nbre_piece.clear()
+                    self.table_op.refresh_()
+                    raise_success(_(u"Confirmation"), _(u"The product %s "
+                                  u" was recorded") % produit.libelle)
+                else:
+                    raise_error(_(u"error"), \
+                                _(u"Ce produit existe déjà"))
             else:
                 raise_error(_(u"error"), \
                             _(u"Give the room number in the box"))

@@ -62,6 +62,11 @@ class Produit(object):
         self.nbr_piece = nbr_piece
         self.libelle = libelle
 
+    def commit(self):
+        print "kkkkk"
+
+        super(Produit, self).commit()
+
     def __repr__(self):
         return (u"Produit(%(libelle)s %(nbr_piece)s)" % \
                                             {'libelle': self.libelle,\
