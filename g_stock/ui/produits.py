@@ -3,10 +3,8 @@
 #maintainer: Fad
 
 
-from datetime import datetime
-
-from sqlalchemy import desc
-from PyQt4 import QtGui, QtCore
+from sqlalchemy import asc
+from PyQt4 import QtGui
 
 from database import *
 from common import (F_Widget, F_PageTitle, F_TableWidget,
@@ -94,7 +92,7 @@ class ProduitTableWidget(F_TableWidget):
     def set_data_for(self):
         self.data = [(prod.libelle, prod.nbr_piece, "") \
                                     for prod in session.query(Produit).\
-                                        order_by(desc(Produit.id)).all()]
+                                        order_by(asc(Produit.libelle)).all()]
 
     def _item_for_data(self, row, column, data, context=None):
         if column == 2:

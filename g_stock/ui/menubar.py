@@ -104,7 +104,7 @@ class MenuBar(QtGui.QMenuBar, F_Widget):
     #About
     def goto_about(self):
         mbox = QtGui.QMessageBox.about(self, _(u"About"),
-                                       _(u"G_stock gestion de stock\n\n"
+                                       _(u"G_stock gestion de stock\nV.0.2\n"
                                          u"Developpeur: Ibrahima Fadiga,\n\n"
                                          u"© 2011 fad service s.à.r.l\n"
                                          u"Bamako(Mali)\n"

@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 # maintainer: Fad
 
-from datetime import date, timedelta
 
-from PyQt4.QtGui import (QVBoxLayout, QWidget, QApplication, QLineEdit,
-                         QPushButton, QAbstractItemView, QGridLayout,
-                         QCheckBox)
-from PyQt4.QtGui import QListView, QStringListModel, QMessageBox
+from sqlalchemy import asc
+
+from PyQt4.QtGui import (QVBoxLayout, QAbstractItemView,
+                         QGridLayout, QCheckBox)
 from PyQt4.QtCore import SIGNAL, Qt, QDate
 
 from database import session, Produit
+
 from common import F_Widget, F_TableWidget, F_PageTitle, FormLabel, \
                         F_BoxTitle, Button_export, FormatDate, IntLineEdit
 from utils.exports import export_command_as_excel
@@ -88,4 +88,5 @@ class CommandeTableWidget(F_TableWidget):
     def set_data_for(self, *args):
 
         self.data = [("", "", prod.libelle)
-                    for prod in session.query(Produit).all()]
+                    for prod in session.query(Produit)\
+                                       .order_by(asc(Produit.libelle)).all()]

@@ -54,8 +54,6 @@ class EditProduitViewWidget(QtGui.QDialog, F_Widget):
                     produit = Produit(lib, int(nbr))
                     session.add(produit)
                     session.commit()
-                    self.new_produit.clear()
-                    self.new_nbr_piece.clear()
                     raise_success(_(u"Confirmation"), _(u"The product has been changing"))
                     self.cancel()
                 else:
